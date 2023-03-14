@@ -51,6 +51,7 @@ body {
     border-radius: 5px;
 }
 
+
 .row {
     display: flex;
     align-items: center;
@@ -111,6 +112,7 @@ header{
 
 .reviews p{
     margin-left: 10px;
+    margin-top: 5px;
 }
 
 
@@ -164,12 +166,17 @@ header{
     margin: 20px 0 0 0;
 }
 
+.mnozstvo{
+    display: flex;
+}
+
 .amount{
-    padding: 10px 30px;
+    padding: 10px 10px;
     border: none;
     background: none;
     cursor: pointer;
 }
+
 
 .main_product h2 {
     color: #F40D0A;
@@ -227,6 +234,13 @@ a {
 .row2 h4, .row2 p{
     text-align: center;
 }
+
+#footer{
+    max-width: 1325px;
+    margin:auto;
+}
+
+
 
 
 @media screen and (max-width: 500px) {
