@@ -177,8 +177,7 @@ header{
     cursor: pointer;
 }
 
-
-.main_product h2 {
+.col2 h2 {
     color: #F40D0A;
     margin: 5px 0;
     font-size: 30px;
@@ -186,7 +185,7 @@ header{
 }
 
 .add{
-    margin: 0;
+    margin: 15px 0 0 0;
     padding: 0;
     display: flex;
 }
@@ -215,13 +214,19 @@ a {
     background: #ff9800;
 }
 
-.heart{
-    margin-left: 10px;
-    cursor: pointer;
-}
 
 .fav_product{
-    margin: 50px 0;
+    margin: 20px 0;
+    color: black;
+    font-size: 30px;
+    font-weight: bolder;
+
+}
+
+.title{
+    font-size: 30px;
+    font-weight: bolder;
+    margin-bottom: 30px;
 }
 
 .row2{
