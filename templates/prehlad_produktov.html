@@ -1,103 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>E-Shop</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../styles/reg_log_style.css">
+  <link rel="stylesheet" href="../styles/produkty.css">
+
+
 </head>
-<body>
-  <div class="container">
-    <h1 class="text-center mb-4">Prehľad produktov</h1>
-    <!-- Search Bar -->
-    <div class="row justify-content-start mb-4">
-      <div class="col-md-6">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search">
-          <div class="input-group-append">
-            <button type="button" class="btn btn-primary">Search</button>
-          </div>
-        </div>
+<body class="container">
+  <h1 class="text-center mb-4">Products</h1>
+  <header>
+    <div class="row mb-4">
+      <div class="col-md-5 nav-item justify-content-start">
+          <p>LOGO<p>
       </div>
-    </div>
-    <section class="bg-success">
-    <!-- Filter Buttons -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-md-6">
-        <div class="btn-group w-100" role="group">
-            <div class="form-group col-md-5">
-                <label for="cost">Cena</label>
-                <input type="range" class="form-control-range" id="cost" name="cost" min="0" max="1000" step="10">
-            </div>
-            <div class="form-group col-md-5">
-            <label for="brand">značka</label>
-            <select class="form-control" id="brand" name="brand">
-                <option value="">značka</option>
-                <option value="nike">Nike</option>
-                <option value="adidas">Adidas</option>
-                <option value="puma">Puma</option>
-            </select>
-            </div>
-            <div class="form-group col-md-5">
-                <label for="size">veľkosť:</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="size" id="size-s" value="s">
-                  <label class="form-check-label" for="size-s">
-                    S
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="size" id="size-m" value="m">
-                  <label class="form-check-label" for="size-m">
-                    M
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="size" id="size-l" value="l">
-                  <label class="form-check-label" for="size-l">
-                    L
-                  </label>
-                </div>
-              </div>
-        </div>
+      <div class="col mb-1 col-md-4 mb-lg-0">
+      
       </div>
-    </div>
-    </section>
-    <!-- Products Table/List -->
-    <section>
-    <div class="row">
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
-          <div class="card-body">
-            <h5 class="card-title">Product 1</h5>
-            <p class="card-text">Description 1</p>
-            <h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
-            <button type="button" class="btn btn-primary btn-block">Detail</button>
-          </div>
-        </div>
+      <div class="col mb-lg-0 nav-item justify-content-end">
+      <a href="kosik.html"> <img src="../images/basket_icon.png" alt="nákupný košík" width="16" height="16" title="nákupný košík"><strong>  Košík</strong></a>        
       </div>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
-          <div class="card-body">
-            <h5 class="card-title">Product 2</h5>
-            <p class="card-text">Description 2</p>
-            <h6 class="card-subtitle mb-2 text-muted">$20.00</h6>
-            <button type="button" class="btn btn-primary btn-block">Detail</button>
-          </div>
-        </div>
+      <div class="col nav-item justify-content-end">
+        <a href="#"><strong>Prihlásenie</strong></a>
       </div>
-      <div class="col-md-4 mb-4">
-        <div class="card">
-          <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
-          <div class="card-body">
-            <h5 class="card-title">Product 3</h5>
-            <p class="card-text">Description 3</p>
-            <h6 class="card-subtitle mb-2 text-muted">$30.00</h6>
-            <button type="button" class="btn btn-primary btn-block">Detail</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div> 
+  </header>
+	<div>
+	  <section class="searchOptions justify-content-center sectionfilter">
+		<a href="products.html"><span style="white-space: nowrap">Top</span></a>
+		<a href="products.html"><span style="white-space: nowrap">Najpredávanejšie</span></a>
+		<a href="products.html"><span style="white-space: nowrap">Najdrahšie</span></a>
+		<a href="products.html"><span style="white-space: nowrap">Najlacnejšie</span></a>
+		<a href="products.html"><span style="white-space: nowrap">Top podľa recenzií</span></a>
+	  </section>  
+	  
+	  <section>
+	  <!-- Filter Buttons -->
+	  <div class="row justify-content-center mb-4">
+		<div class="col col-md-6">
+		  <div class="btn-group w-100" role="group">
+		      <div class="col form-group col-md-4">
+		          <label for="cost"><strong>Price</strong></label>
+		          <input type="range" class="form-control-range" id="cost" name="cost" min="0" max="1000" step="10">
+		      </div>
+		      <div class="col form-group col-md-4">
+		      <label for="brand"><strong>Brand</strong></label>
+		      <select class="form-control" id="brand" name="brand">
+		          <option value="nike">Nike</option>
+		          <option value="adidas">Adidas</option>
+		          <option value="puma">Puma</option>
+		      </select>
+		      </div>
+		      <div class="col col-mb-2 form-group">
+		          <label for="size"><strong>Size</strong></label>
+		          <div class="form-check">
+		            <input class="form-check-input" type="radio" name="size" id="size-s" value="s">
+		            <label class="form-check-label" for="size-s">
+		              S
+		            </label>
+		          </div>
+		          <div class="form-check">
+		            <input class="form-check-input" type="radio" name="size" id="size-m" value="m">
+		            <label class="form-check-label" for="size-m">
+		              M
+		            </label>
+		          </div>
+		          <div class="form-check">
+		            <input class="form-check-input" type="radio" name="size" id="size-l" value="l">
+		            <label class="form-check-label" for="size-l">
+		              L
+		            </label>
+		          </div>
+		        </div>
+		  </div>
+		  <div class="row justify-content-center">
+		    <div class="input-group">
+		      <input type="text" class="form-control" placeholder="Search">
+		      <div class="input-group-append">
+		        <img src="../images/search_icon.jpeg" alt="Image icon" width="37" height="37">
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	  </div>
+	  </section>
+	  <!-- Products Table/List -->
+	  <section>
+	  <div class="row">
+		<div class="col-md-4 mb-4">
+		  <div class="card">
+		    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
+		    <div class="card-body">
+		      <h5 class="card-title">Product 1</h5>
+		      <h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
+		      <button type="button" class="btn btn-primary btn-block">add to basket</button>
+		    </div>
+		  </div>
+		</div>
+		<div class="col-md-4 mb-4">
+		  <div class="card">
+		    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
+		    <div class="card-body">
+		      <h5 class="card-title">Product 2</h5>
+		      <h6 class="card-subtitle mb-2 text-muted">$20.00</h6>
+		      <button type="button" class="btn btn-primary btn-block">add to basket</button>
+		    </div>
+		  </div>
+		</div>
+		<div class="col-md-4 mb-4">
+		  <div class="card">
+		    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
+		    <div class="card-body">
+		      <h5 class="card-title">Product 3</h5>
+		      <h6 class="card-subtitle mb-2 text-muted">$30.00</h6>
+		      <button type="button" class="btn btn-primary btn-block">add to basket</button>
+		    </div>
+		  </div>
+		</div>
+	  </div>
+	  <div class="row">
+		<div class="col-md-4 mb-4">
+		  <div class="card">
+		    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
+		    <div class="card-body">
+		      <h5 class="card-title">Product 4</h5>
+		      <h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
+		      <button type="button" class="btn btn-primary btn-block">add to basket</button>
+		    </div>
+		  </div>
+		</div>
+		<div class="col-md-4 mb-4">
+		  <div class="card">
+		    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
+		    <div class="card-body">
+		      <h5 class="card-title">Product 5</h5>
+		      <h6 class="card-subtitle mb-2 text-muted">$20.00</h6>
+		      <button type="button" class="btn btn-primary btn-block">add to basket</button>
+		    </div>
+		  </div>
+		</div>
+		<div class="col-md-4 mb-4">
+		  <div class="card">
+		    <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
+		    <div class="card-body">
+		      <h5 class="card-title">Product 6</h5>
+		      <h6 class="card-subtitle mb-2 text-muted">$30.00</h6>
+		      <button type="button" class="btn btn-primary btn-block">add to basket</button>
+		    </div>
+		  </div>
+		</div>
+	  </div>
+	  </section>
+
+	  <div class="row justify-content-center mb-4">
+		<div class="col-auto">
+		  <a class="page-link" href="#" tabindex="-1" aria-disabled="true"><</a>
+		</div>
+		<div class="col-auto">
+		  <a class="page-link" href="#">></a>
+		</div>
+	  </div>
+	<div>
+
+</body>
+
+</html>
+
+

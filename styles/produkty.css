@@ -1,0 +1,22 @@
+body 
+{
+	font-size: 20px;
+}
+
+.class
+{
+	display: block;
+	color: #00ff00;
+}
+.sectionfilter
+{
+	text-align: center;
+	padding: 25px;
+}
+
+section a
+{
+	color: white;
+	font-size: 30px;
+	padding: 10px;
+}
