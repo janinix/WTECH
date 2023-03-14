@@ -20,13 +20,33 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+.nav-links{
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color:black;
+}
+
+.nav-links:hover{
+    color:  #ff5722;
+}
+
+.nav-items{
+    margin-right: 50px;
+}
+
+
 .row {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
 }
 
+header{
+    max-width: 1325px;
+    margin:auto;
+}
 
 .main_product {
     max-width: 1325px;
@@ -38,7 +58,7 @@ body {
 
 .small_fotos_row {
     display: flex;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
 }
 
 .col1 .main_foto {
@@ -129,7 +149,7 @@ body {
 }
 
 .amount{
-    padding: 10px 10px;
+    padding: 10px 30px;
     border: none;
     background: none;
     cursor: pointer;
@@ -201,14 +221,14 @@ a {
 
     .row, .row2{
         flex-direction: column;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        /*word-wrap: break-word;*/
+        /*overflow-wrap: break-word;*/
     }
 
-    .col1, .col2{
-        flex-basis: 100%;
-        text-align: left;
-    }
+    /*.col1, .col2{*/
+    /*    flex-basis: 100%;*/
+    /*    text-align: left;*/
+    /*}*/
 
     .col1{
         max-width: 240px;
