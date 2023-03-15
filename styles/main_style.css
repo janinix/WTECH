@@ -29,6 +29,13 @@ body {
     margin: -80px 0 -80px 0;
 }
 
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 .nav-links{
     font-size: 20px;
     text-transform: uppercase;
@@ -55,4 +62,9 @@ header{
 #footer{
     max-width: 1325px;
     margin:auto;
+    margin-top: 40px;
+}
+
+.bestsellers {
+    margin-top: 35px;
 }
