@@ -47,16 +47,35 @@ body {
     color:  #ff5722;
 }
 
-.nav-items{
-    margin-right: 30px;
-    margin-left: 20px;
-    padding: 0 15px 0 15px;
+header .col a{
+    background: #ffffff;
     border-radius: 5px;
 }
 
 header{
     max-width: 1325px;
     margin:auto;
+}
+
+#myCarousel{
+    margin: auto;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    max-width: 1325px;
+    border-radius: 5px;
+}
+
+.carousel-item{
+    padding-bottom: 125px;
+}
+
+.btn{
+    background: #ff5722;
+    border: #ff5722;
+}
+
+.btn:hover{
+    background: #ff9800;
 }
 
 #footer{
@@ -67,4 +86,8 @@ header{
 
 .bestsellers {
     margin-top: 35px;
+}
+
+.card{
+    margin-top: 20px;
 }
