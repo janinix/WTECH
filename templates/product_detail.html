@@ -2,39 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Product detail</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../styles/prod_det_style.css">
+    <link rel="stylesheet" href="../styles/footer.css">
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg justify-content-around">
-        <div class="container d-flex justify-content-around">
-          <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-8">
-                  <li class="nav-item nav-items bg-light">
-                    <a class="nav-link nav-links" href="#">športová výživa</a>
-                  </li>
-                  <li class="nav-item nav-items bg-light">
-                    <a class="nav-link nav-links" href="#">športové oblečenie</a>
-                  </li>
-                  <li class="nav-item nav-items bg-light">
-                    <a class="nav-link nav-links" href="#">príslušenstvo</a>
-                  </li>
-                  <li class="nav-item nav-items bg-light">
-                    <a class="nav-link nav-links" href="#">zdravé potraviny</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+      <nav class="navbar header1 navbar-light fw-bold navbar-expand-md nav-gradient justify-content-center">
+        <div class="container">
+          <a href="./templates/main_page.html" class="navbar-brand"><img src="../images/logo_black.png" alt="" width="250" height=""></a>
+          <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+                  aria-label="Expand navigation">
+            <span class="navbar-toggler-icon "><i class="fa fa-bars fs-1"></i></span>
+          </button>
+          <div class="collapse navbar-collapse text-center " id="nav">
+            <ul class="navbar-nav ms-auto links-font ">
+              <li class="nav-item">
+                <a href="./register.html" class="nav-link fs-2">Registrácia</a>
+              </li>
+              <li class="nav-item">
+                <a href="./login.html" class="nav-link fs-2">Prihlásenie</a>
+              </li>
+              <li class="nav-item">
+                <a href="./kosik_prehlad.html" class="nav-link">
+                  <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
-    </header>
+
+      <header>
+        <div class="container justify-content-around">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+            <div class="col text-center mb-2 mb-lg-8">
+              <a class="nav-link nav-links" href="./prehlad_produktov.html">športová výživa</a>
+            </div>
+            <div class="col text-center mb-2 mb-lg-8">
+              <a class="nav-link nav-links" href="./prehlad_produktov.html">športové oblečenie</a>
+            </div>
+            <div class="col text-center mb-2 mb-lg-8">
+              <a class="nav-link nav-links" href="./prehlad_produktov.html">príslušenstvo</a>
+            </div>
+            <div class="col text-center mb-2 mb-lg-8">
+              <a class="nav-link nav-links" href="./prehlad_produktov.html">zdravé potraviny</a>
+            </div>
+          </div>
+        </div>
+      </header>
 
       <div class="main_product">
         <div class="row">
@@ -60,11 +79,11 @@
           </div>
           <div class="col2">
             <div class="reviews">
-              <img src="../images/star.jpg" width="4%">
-              <img src="../images/star.jpg" width="4%">
-              <img src="../images/star.jpg" width="4%">
-              <img src="../images/star.jpg" width="4%">
-              <img src="../images/star.jpg" width="4%">
+              <i class="fa-solid fa fa-star fs-2"></i>
+              <i class="fa-solid fa fa-star fs-2"></i>
+              <i class="fa-solid fa fa-star fs-2"></i>
+              <i class="fa-solid fa fa-star fs-2"></i>
+              <i class="fa-solid fa fa-star fs-2"></i>
               <p>98% (298) </p>
             </div>
             <h1 class="text">
@@ -91,16 +110,16 @@
                   <option value="3">Banán</option>
                 </select>
               </div>
-              <div class="mnozstvo">
+              <div>
                 <p>množstvo:</p>
-                <div class="col-2  d-flex flex-wrap mt-md-3">
-                  <div>
+                <div class="col-2  d-flex flex-wrap">
+                  <div class="mnozstvo">
                     <button class="amount">
-                      <i class="fa-sharp fa fa-plus fs-1 "></i>
+                      <i class="fa-sharp fa fa-plus fs-0 "></i>
                     </button>
-                    <span class="bg-secondary p-2 ">1</span>
+                    <span class="bg-secondary p-2">1</span>
                     <button class="amount">
-                      <i class="fa-sharp fa fa-minus fs-1 "></i>
+                      <i class="fa-sharp fa fa-minus fs-0 "></i>
                     </button>
                   </div>
                 </div>
@@ -120,7 +139,9 @@
 
         </div>
 
-        <div class="container">
+        <hr class="bg-dark border-2 border-top border-dark">
+
+        <div class="fav_product">
           <h2 class="title">
             Zákazníci tiež zakúpili
           </h2>
@@ -158,10 +179,33 @@
 
       </div>
 
-
-    <footer>
-
-    </footer>
+      <section id="footer" data-bs-toggle="animation" data-animation-reset="true" data-animation="fade-in">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6">
+            <div class="col text-center mb-2 mb-lg-0">
+              <a class="footer_link" href="#"><i class="fa fa-facebook fa-lg "></i> FITShop</a>
+            </div>
+            <div class="col text-center mb-2 mb-lg-0">
+              <a class="footer_link" href="#"><i class="fa fa-instagram fa-lg "></i> FITShop</a>
+            </div>
+            <div class="col text-center mb-2 mb-lg-0">
+              <i class="fa fa-phone fa-lg " aria-hidden="true"></i> 0954235214
+            </div>
+            <div class="col text-center mb-2 mb-lg-0">
+              <i class="fa fa-envelope fa-lg "></i> fitshop@gmail.com
+            </div>
+            <div class="col text-center mb-2 mb-lg-0">
+              <i class="fa fa-snapchat fa-lg "></i> Fitshop
+            </div>
+            <div class="col text-center">
+              <address>Adresa: Staré Grunty C7</address>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <small class="text-dark">&copy; Copyright 2023, FITShop</small>
+        </div>
+      </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>

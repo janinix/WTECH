@@ -1,13 +1,16 @@
-body 
-{
+body{
+    background-image: linear-gradient(to left,#ff5722,#ff9800);
+    margin: 10px;
+	padding: 10px;
 	font-size: 20px;
 }
 
-.class
-{
-	display: block;
-	color: #00ff00;
+
+
+.main_content{
+    margin-top: 250px;
 }
+
 .sectionfilter
 {
 	text-align: center;
@@ -19,4 +22,48 @@ section a
 	color: white;
 	font-size: 30px;
 	padding: 10px;
+}
+
+.selection_link{
+	color: black;
+}
+a:hover{
+	background-color: #ff5722;
+}
+
+nav{
+	border: 3px solid black;
+	border-radius: 10px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.filters{
+	border: 3px solid black;
+	border-radius: 10px;
+	padding-top: 10x;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.paging_lr{
+	border: 2px solid grey;
+	border-radius: 10px;
+	margin: 0px;
+	margin-top: 0px;
+	padding: 0px;
+}
+
+.products_list{
+	border: 3px solid grey;
+	border-radius: 10px;
+	padding: 5px;
+}
+
+.keep_distance{
+	padding: 5px;
+}
+
+a.my-link:focus {
+	color: red;
 }
