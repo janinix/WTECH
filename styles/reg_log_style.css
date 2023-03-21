@@ -1,6 +1,6 @@
 body{
     background-image: linear-gradient(to left,#ff5722,#ff9800);
-    margin-top: 10%;
+    
     
 }
 
@@ -91,5 +91,8 @@ input{
     .carousel{
     
     height: 150px;
-}
+    }
+    .main_content{
+    margin-top: 0px;
+    }
 }
