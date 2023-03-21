@@ -1,89 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin stránka</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../styles/admin.css">
+	<link rel="stylesheet" href="../styles/footer.css">
 </head>
+
 <body>
-  <div class="container mt-5">
-    <h1>Užívatelia</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Meno</th>
-          <th>Heslo</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>John Doe</td>
-          <td>heslo123</td>
-          <td>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#editUserModal">Edit</button>
-            <button class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jane Smith</td>
-          <td>abc123</td>
-          <td>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#editUserModal">Edit</button>
-            <button class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
-  <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editUserModalLabel">Upraviť uživateľa</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="editUserId">ID:</label>
-              <input type="text" class="form-control" id="editUserId" value="1" readonly>
-            </div>
-            <div class="form-group">
-              <label for="editUserName">Meno:</label>
-              <input type="text" class="form-control" id="editUserName" value="John Doe">
-            </div>
-            <div class="form-group">
-              <label for="editUserPassword">Heslo:</label>
-              <input type="password" class="form-control" id="editUserPassword" value="password123">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
-          <button type="button" class="btn btn-primary">Uložiť zmeny</button>
-        </div>
-      </div>
-    </div>
-  </div>
+	<nav class="navbar header1 navbar-light fw-bold navbar-expand-md nav-gradient justify-content-end">
+		<div class="container">
+			<a href="./templates/main_page.html" class="navbar-brand"><img src="../images/logo_black.png" alt=""
+					width="250" height=""></a>
+			<button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+				aria-label="Expand navigation">
+				<span class="navbar-toggler-icon "><i class="fa fa-bars fs-1"></i></span>
+			</button>
+			<div class="collapse navbar-collapse text-center " id="nav">
+				<ul class="navbar-nav ms-auto links-font ">
+					<li class="nav-item">
+						<a href="./register.html" class="nav-link fs-2">Registrácia</a>
+					</li>
+					<li class="nav-item">
+						<a href="./login.html" class="nav-link fs-2">Prihlásenie</a>
+					</li>
+					<li class="nav-item">
+						<a href="./kosik_prehlad.html" class="nav-link">
+							<i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
-    integrity="sha384-S3c9M4oJ8fztR6Jo+YPlUoqw2UOUp6UJZcV7/CWyjKEDaV7dX1vJ0fhsbASqlDk"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
-    integrity="sha384-gsO6Z+e6U1dcDAjx9XDRS+YYydhFl6gGKjzEJq4zQUbGZVD+vaZxJcZ9XnCmY/qy"
-    crossorigin="anonymous"></script>
-    
+	<section>
+		<div class="container-fluid mt-5 bg-light sectionpm">
+			<h1 class="text-center mb-4">Admin Dashboard</h1>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Meno</th>
+							<th scope="col">Heslo</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>John</td>
+							<td>Doe</td>
+							<td>
+								<button class="btn btn-primary btn-sm">Upraviť</button>
+								<button class="btn btn-danger btn-sm">Vymazať</button>
+							</td>
+						</tr>
+						<!-- More product rows can be added here -->
+					</tbody>
+				</table>
+			</div>
+
+			<button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#addProductForm"
+				aria-expanded="false" aria-controls="addProductForm">
+				Pridaj/Spravuj uživateľa
+			</button>
+
+			<div class="collapse mt-4 bg-light" id="addProductForm">
+				<form>
+					<div class="mb-3">
+						<label for="productName" class="form-label">Meno</label>
+						<input type="text" class="form-control" id="productName">
+					</div>
+					<div class="mb-3">
+						<label for="productPrice" class="form-label">Heslo</label>
+						<input type="number" class="form-control" id="productPrice" step="0.01">
+					</div>
+					<button type="submit" class="btn btn-primary">Uložiť</button>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<footer id="footer" data-bs-toggle="animation" data-animation-reset="true" data-animation="fade-in">
+		<div class="container footer_pm">
+			<div class="row row-cols-1 row-cols-md-3 row-cols-lg-6">
+				<div class="col text-center mb-2 mb-lg-0">
+					<a class="footer_link" href="#"><i class="fa fa-facebook fa-lg "></i> FITShop</a>
+				</div>
+				<div class="col text-center mb-2 mb-lg-0">
+					<a class="footer_link" href="#"><i class="fa fa-instagram fa-lg "></i> FITShop</a>
+				</div>
+				<div class="col text-center mb-2 mb-lg-0">
+					<i class="fa fa-phone fa-lg " aria-hidden="true"></i> 0954235214
+				</div>
+				<div class="col text-center mb-2 mb-lg-0">
+					<i class="fa fa-envelope fa-lg "></i>fitshop@gmail.com
+				</div>
+				<div class="col text-center mb-2 mb-lg-0">
+					<i class="fa fa-snapchat fa-lg "></i>Fitshopp
+				</div>
+				<div class="col text-center">
+					<address>Adresa: Staré Grunty C7</address>
+				</div>
+			</div>
+		</div>
+		<div class="text-center">
+			<small class="text-dark">&copy; Copyright 2023, FITShop</small>
+		</div>
+	</footer>
+
+
+
 </body>
-</html>
- 
 
+</html>
