@@ -58,3 +58,10 @@ body {
     margin-top: 20px;
     background: #f7f7f7;
 }
+
+@media screen and (max-width: 500px) {
+    .row{
+        flex-direction: column;
+    }
+
+}
