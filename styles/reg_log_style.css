@@ -77,6 +77,11 @@ input{
 .carousel-item{
     margin-top: 5rem;
 }
+@media screen and (max-width: 1424px) {
+    .main_content{
+    margin-top: 50px;
+    }
+}
 
 @media screen and (max-width: 770px) {
   .register_right{
