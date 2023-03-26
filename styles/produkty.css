@@ -1,21 +1,12 @@
 body{
     background-image: linear-gradient(to left,#ff5722,#ff9800);
     
-    
+    font-size: 20px;
 }
-
-.main_content{
-    margin-top: 250px;
-}
-
 .sectionfilter
 {
 	text-align: center;
 	padding: 25px;
-}
-
-.selection_link{
-	color: black;
 }
 
 .filters{

@@ -17,10 +17,11 @@
 
 <body class="container-fluid">
 
+	<!-- základná navigácia -->
 	<nav class="navbar header1 navbar-light fw-bold navbar-expand-lg nav-gradient justify-content-end">
 		<div class="container">
-			<a href="./templates/main_page.html" class="navbar-brand"><img src="../images/logo_black.png" alt=""
-					width="250" height=""></a>
+			<a href="./main_page.html" class="navbar-brand"><img src="../images/logo_black.png" alt="" width="250"
+					height=""></a>
 			<button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
 				aria-label="Expand navigation">
 				<span class="navbar-toggler-icon "><i class="fa fa-bars fs-1"></i></span>
@@ -43,6 +44,7 @@
 		</div>
 	</nav>
 
+	<!-- header pre selectovanie typov... -->
 	<header>
 		<div class="container justify-content-around">
 			<div class="row row-cols-1 row-cols-lg-2 row-cols-lg-4">
@@ -62,134 +64,147 @@
 		</div>
 	</header>
 
+	<!-- Táto sekcia je hlavná sekcia, obsahuje filtre a carty s produktami -->
+	<section class="filters bg-light container-fluid mt-3">
+		<!-- Filtre -->
+		<div class="mb-5">
+			<div class="row justify-content-center mt-3 gy-2">
+				<div class="col-auto">
+					<label for="cost" class="mb-2"><strong>Cena</strong></label>
+					<input type="range" class="form-range" id="cost" name="cost" min="0" max="1000" step="10">
+				</div>
+			</div>
+			<div class="row justify-content-center mt-3 gy-2">
+				<div class="col-auto">
+					<label for="brand" class="mb-2"><strong>Kategória</strong></label>
+					<select class="form-select" id="brand" name="znacka">
+						<option value="w1">Whey</option>
+						<option value="w2">Whey2</option>
+						<option value="we3">Whey3</option>
+					</select>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-3 gy-2">
+				<div class="col-auto justify-content-center mt-3 gy-2 d-flex flex-column">
+					<label for="size" class="mb-2"><strong>Značka</strong></label>
+					<div class="btn-group" role="group" aria-label="Váha">
+						<input class="btn-check" type="radio" name="size" id="size-s" value="s" autocomplete="off">
+						<label class="btn btn-outline-secondary" for="size-s">Whey</label>
 
-	<section class="filters bg-light container-fluid">
-		<div class="row justify-content-center">
-			<div class="col-lg-6 offset-lg-2">
-				<form class="row gy-2 gx-3 align-items-center keep_distance">
-					<div class="col-auto">
-						<label for="cost" class="form-label"><strong>Cena</strong></label>
-						<input type="range" class="form-range" id="cost" name="cost" min="0" max="1000" step="10">
+						<input class="btn-check" type="radio" name="size" id="size-m" value="m" autocomplete="off">
+						<label class="btn btn-outline-secondary" for="size-m">EX4</label>
+
+						<input class="btn-check" type="radio" name="size" id="size-l" value="l" autocomplete="off">
+						<label class="btn btn-outline-secondary" for="size-l">EY5</label>
 					</div>
-					<div class="col-auto keep_distance">
-						<label for="brand" class="form-label"><strong>Kategória</strong></label>
-						<select class="form-select" id="brand" name="znacka">
-							<option value="w1">Whey</option>
-							<option value="w2">Whey2</option>
-							<option value="we3">Whey3</option>
-						</select>
-					</div>
-					<div class="col-auto keep_distance">
-						<label for="size" class="form-label"><strong>Váha</strong></label>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="size" id="size-s" value="s">
-							<label class="form-check-label" for="size-s">2Kg</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="size" id="size-m" value="m">
-							<label class="form-check-label" for="size-m">3Kg</label>
-						</div>
-						<div class="form-check form-check-inline">
-							<input class="form-check-input" type="radio" name="size" id="size-l" value="l">
-							<label class="form-check-label" for="size-l">5Kg</label>
+				</div>
+			</div>
+			<div class="row justify-content-center mt-4 mb-3 gy-2">
+				<div class="col-auto">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Hľadať...">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-outline-secondary">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
 						</div>
 					</div>
-					<div class="row-auto col-lg-7 keep_distance">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search">
-							<div class="input-group-append">
-								<button type="submit" class="btn btn-outline-secondary">
-									<i class="fa fa-search" aria-hidden="true"></i>
-								</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="bg-light products_list container-fluid">
+			<!-- List produktov -->
+			<div class="row">
+				<div class="col-lg-4 mb-4">
+					<div class="card">
+						<a href="./product_detail.html">
+							<img class="card-img-top" src="../images/img1.png" alt="Product Image" width="280"
+								height="330"></a>
+						<div class="card-body d-flex justify-content-between align-items-center">
+							<div>
+								<h5 class="card-title">Product 1</h5>
+								<h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
+							</div>
+							<button type="button" class="btn btn-danger">do košíka</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="card">
+						<a href="./product_detail.html">
+							<img class="card-img-top" src="../images/img1.png" alt="Product Image" width="280"
+								height="330"></a>
+						<div class="card-body d-flex justify-content-between align-items-center">
+							<div>
+								<h5 class="card-title">Product 2</h5>
+								<h6 class="card-subtitle mb-2 text-muted">$11.00</h6>
+							</div>
+							<button type="button" class="btn btn-danger">do košíka</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-4">
+					<div class="card">
+						<a href="./product_detail.html">
+							<img class="card-img-top" src="../images/img1.png" alt="Product Image" width="280"
+								height="330"></a>
+						<div class="card-body d-flex justify-content-between align-items-center">
+							<div>
+								<h5 class="card-title">Product 3</h5>
+								<h6 class="card-subtitle mb-2 text-muted">$20.00</h6>
+							</div>
+							<button type="button" class="btn btn-danger">do košíka</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4 mb-4">
+						<div class="card">
+							<a href="./product_detail.html">
+								<img class="card-img-top" src="../images/img1.png" alt="Product Image" width="280"
+									height="330"></a>
+							<div class="card-body d-flex justify-content-between align-items-center">
+								<div>
+									<h5 class="card-title">Product 4</h5>
+									<h6 class="card-subtitle mb-2 text-muted">$13.00</h6>
+								</div>
+								<button type="button" class="btn btn-danger">do košíka</button>
 							</div>
 						</div>
 					</div>
-				</form>
-			</div>
-		</div>
+					<div class="col-lg-4 mb-4">
+						<div class="card">
+							<a href="./product_detail.html">
+								<img class="card-img-top" src="../images/img1.png" alt="Product Image" width="280"
+									height="330"></a>
+							<div class="card-body d-flex justify-content-between align-items-center">
+								<div>
+									<h5 class="card-title">Long product</h5>
+									<h6 class="card-subtitle mb-2 text-muted">$10444.00</h6>
+								</div>
+								<button type="button" class="btn btn-danger">do košíka</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- Stránkovanie  << >>  -->
+					<div class="row justify-content-center mb-4 paging_lr container-fluid">
+						<div class="col-auto">
+							<a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
+						</div>
+						<div class="col-auto">
+							<a class="page-link" href="#">&raquo;</a>
+						</div>
+					</div>
+
+				</div>
 	</section>
 
-
-	<div class="bg-light products_list container-fluid">
-		<!-- Products Table/List -->
-		<div class="row">
-			<div class="col-lg-4 mb-4">
-				<div class="card">
-					<a href="./product_detail.html">
-					<img class="card-img-top" src="../images/img1.png" alt="Product Image" width="280" height="330"></a>
-					<div class="card-body">
-						<h5 class="card-title">Product 1</h5>
-						<h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
-						<button type="button" class="btn btn-danger btn-block">do košíka</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 mb-4">
-				<div class="card">
-					<a href="./product_detail.html">
-					<img class="card-img-top" src="../images/img2.png" alt="Product Image" width="280" height="330"></a>
-					<div class="card-body">
-						<h5 class="card-title">Product 2</h5>
-						<h6 class="card-subtitle mb-2 text-muted">$20.00</h6>
-						<button type="button" class="btn btn-danger btn-block">do košíka</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 mb-4">
-				<div class="card">
-					<a href="./product_detail.html">
-					<img class="card-img-top" src="../images/img3.png" alt="Product Image" width="280" height="330"></a>
-					<div class="card-body">
-						<h5 class="card-title">Product 3</h5>
-						<h6 class="card-subtitle mb-2 text-muted">$30.00</h6>
-						<button type="button" class="btn btn-danger btn-block">do košíka</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-4 mb-4">
-				<div class="card">
-					<a href="./product_detail.html">
-					<img class="card-img-top" src="../images/img4.png" alt="Product Image" width="280" height="330"></a>
-					<div class="card-body">
-						<h5 class="card-title">Product 4</h5>
-						<h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
-						<button type="button" class="btn btn-danger btn-block">do košíka</button>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 mb-4">
-				<div class="card">
-					<a href="./product_detail.html">
-					<img class="card-img-top" src="../images/protein1.jpg" alt="Product Image" width="280" height="330"></a>
-					<div class="card-body">
-						<h5 class="card-title">Product 5</h5>
-						<h6 class="card-subtitle mb-2 text-muted">$20.00</h6>
-						<button type="button" class="btn btn-danger btn-block">do košíka</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		</section>
-
-		<section>
-			<div class="row justify-content-center mb-4 paging_lr container-fluid">
-				<div class="col-auto">
-					<a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-				</div>
-				<div class="col-auto">
-					<a class="page-link" href="#">&raquo;</a>
-				</div>
-			</div>
-		</section>
-	</div>
-	
-
-
-	<footer id="footer" data-bs-toggle="animation" data-animation-reset="true" data-animation="fade-in">
+	<!-- Základná footer -->
+	<footer id="footer" class="mt-5 text-center ">
 		<div class="container footer_pm">
-			<div class="row row-cols-1 row-cols-lg-3 row-cols-lg-6">
+			<div class="row row-cols-1 row-cols-md-3 row-cols-lg-6">
 				<div class="col text-center mb-2 mb-lg-0">
 					<a class="footer_link" href="./main_page.html"><i class="fa fa-facebook fa-lg "></i> FITShop</a>
 				</div>
