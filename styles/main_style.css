@@ -6,14 +6,9 @@ body {
     margin-bottom: 20px;
 }
 
-.container img{
-    margin: -80px 0 -80px 0;
-}
-
 .container-fluid {
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
 }
 
 .nav-links{
@@ -38,7 +33,7 @@ body {
 }
 
 .carousel-item{
-    padding-bottom: 65px;
+    padding-bottom: 70px;
 }
 
 .btn{
@@ -51,7 +46,7 @@ body {
 }
 
 .bestsellers {
-    margin-top: 35px;
+    margin-top: 10px;
 }
 
 .card{

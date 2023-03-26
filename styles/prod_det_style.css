@@ -6,10 +6,6 @@ body {
     margin-bottom: 20px;
 }
 
-.container img{
-    margin: -80px 0 -80px 0;
-}
-
 .nav-links{
     font-size: 20px;
     font-weight: 800;
@@ -39,21 +35,19 @@ body {
     padding-top: 50px;
 }
 
-.small_photo {
-    flex-basis: 80%;
-    cursor: pointer;
-}
-
+/*lava cast - fotky*/
 .col1{
     flex-basis: 40%;
     min-width: 250px;
     text-align: center;
 }
 
+/*prava cast - text, tlacidla*/
 .col2{
     flex-basis: 60%;
 }
 
+/*recenzie v podobe hviezdiciek nad nadpisom*/
 .reviews{
     display: flex;
     margin-top: 10px;
@@ -89,7 +83,7 @@ body {
     margin-top: 20px;
 }
 
-.stock_info p{
+.stock_info{
     display: inline-block;
     border: #45FF22;
     border-radius: 1px;
@@ -114,7 +108,7 @@ body {
 }
 
 .options p{
-    margin: 20px 0 0 0;
+    margin-top: 20px;
 }
 
 .mnozstvo{
@@ -127,6 +121,7 @@ body {
     cursor: pointer;
 }
 
+/*cena*/
 .col2 h2 {
     color: #F40D0A;
     margin-top: 5px;
@@ -159,6 +154,7 @@ a {
     background: #ff9800;
 }
 
+/*sekcia oblucenych produktov*/
 .fav_product{
     margin-top: 20px;
     color: black;
@@ -166,12 +162,14 @@ a {
     font-weight: bold;
 }
 
+/*nazov sekcie*/
 .title{
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 30px;
 }
 
+/*jednotlive oblubene produkty*/
 .row2{
     margin-left: 60px;
     display: flex;
@@ -194,7 +192,7 @@ a {
     color:#ffffff;
 }
 
-#pills-home-tab:hover, #pills-profile-tab:hover, #pills-contact-tab:hover{
+#pills-info-tab:hover, #pills-description-tab:hover, #pills-reviews-tab:hover{
     background: #ff9800;
     color: #ffffff;
 }
@@ -204,6 +202,7 @@ a {
     margin-left: 15px;
 }
 
+/*recenzie v spodnej casti stranky*/
 .all_reviews{
     display: flex;
 }
