@@ -55,3 +55,9 @@ header .col a{
 .footer_pm{
 	margin-top: 30px;
 }
+
+img{
+	max-width: 100%;
+	max-height: auto;
+}
+
