@@ -1,0 +1,240 @@
+body {
+    background-image: linear-gradient(to left, #ff5722, #ff9800);
+}
+
+.container{
+    margin-bottom: 20px;
+}
+
+.nav-links{
+    font-size: 20px;
+    font-weight: 800;
+    color:black;
+    background: #f7f7f7;
+    border-radius: 5px;
+}
+
+.nav-links:hover{
+    color:  #ff5722;
+}
+
+.main_product {
+    max-width: 1325px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 20px;
+    background: #f7f7f7;
+    border-radius: 5px;
+}
+
+.small_photo_row {
+    display: flex;
+}
+
+.main_photo {
+    padding-top: 50px;
+}
+
+/*lava cast - fotky*/
+.col1{
+    flex-basis: 40%;
+    min-width: 250px;
+    text-align: center;
+}
+
+/*prava cast - text, tlacidla*/
+.col2{
+    flex-basis: 60%;
+}
+
+/*recenzie v podobe hviezdiciek nad nadpisom*/
+.reviews{
+    display: flex;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.reviews p{
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+
+.col2 h1 {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 25px;
+    margin: 10px 0;
+}
+
+.col2 h3{
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.col2 h3 a{
+    color: black;
+    font-weight: bolder;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.text{
+    margin-top: 20px;
+}
+
+.stock_info{
+    display: inline-block;
+    border: #45FF22;
+    border-radius: 1px;
+    background: #45FF22;
+    color: black;
+    margin: 20px 0 0 0;
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.options{
+    display: flex;
+    font-size: 16px;
+}
+
+.options select {
+    padding: 5px 40px;
+}
+
+.variations{
+    margin-right: 40px;
+}
+
+.options p{
+    margin-top: 20px;
+}
+
+.mnozstvo{
+    display: flex;
+}
+
+.amount{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/*cena*/
+.col2 h2 {
+    color: #F40D0A;
+    margin-top: 5px;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.add{
+    margin-top: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #ff9800;
+}
+
+
+.btn {
+    font-weight: bold;
+    background: #FC4B05;
+    color: #ffffff;
+    font-size: 22px;
+    padding: 10px 30px;
+    border-radius: 1px;
+    transition: background 0.5s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ff9800;
+}
+
+/*sekcia oblucenych produktov*/
+.fav_product{
+    margin-top: 20px;
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+/*nazov sekcie*/
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/*jednotlive oblubene produkty*/
+.row2{
+    margin-left: 60px;
+    display: flex;
+    text-align: center;
+}
+
+.row2 h4, .row2 p{
+    text-align: center;
+}
+
+.links{
+    color:black;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #ff9800;
+    color:#ffffff;
+}
+
+#pills-info-tab:hover, #pills-description-tab:hover, #pills-reviews-tab:hover{
+    background: #ff9800;
+    color: #ffffff;
+}
+
+.tab-content p{
+    padding-bottom: 15px;
+    margin-left: 15px;
+}
+
+/*recenzie v spodnej casti stranky*/
+.all_reviews{
+    display: flex;
+}
+
+.stars{
+    padding-bottom: 10px;
+}
+
+.all_reviews h3, .all_reviews p{
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.all_reviews h3{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 500px) {
+    .row, .col1{
+        flex-direction: column;
+    }
+
+    .main_product{
+        overflow: hidden;
+    }
+
+    .row2{
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .options{
+        flex-direction: column;
+    }
+}

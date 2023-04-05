@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*Route::get('/', function () {
+    return view('home.main_page');
+});*/
+
+
+
+//route::get('/',[HomeController::class,"main_page"]);
 Route::get('/', function () {
-    return view('welcome');
+    return view('main_page');
+});
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/register', function () {
+    return view('register');
+});
+Route::get('/kosik_zhrnutie', function () {
+    return view('kosik_zhrnutie');
+});
+Route::get('/kosik_doprava_platba', function () {
+    return view('kosik_doprava_platba');
+});
+Route::get('/kosik_prehlad', function () {
+    return view('kosik_prehlad');
+});
+Route::get('/product_detail', function () {
+    return view('product_detail');
+});
+Route::get('/prehlad_produktov', function () {
+    return view('prehlad_produktov');
 });
