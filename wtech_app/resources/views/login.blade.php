@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,6 +90,12 @@
                 </div>
 
             </section>
+
+            @if($message = Session::get('success'))
+            <div class="alert alert-info">
+                {{ $message }}
+            </div>
+            @endif
             <!-- sekcia formularu pre prihlasenie -->
             <section class="col-md-5 col-11  register_right text-center">
                 <h2>Prihlásenie tu</h2>
@@ -96,11 +103,11 @@
                     <div class="col-10 offset-1 register_form d-inline-block">
                         
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" placeholder="Používatelské meno">
+                            <input type="text" name="username" class="form-control" placeholder="Používatelské meno">
                         </div>
                         
                         <div class="form-group mt-3 ">
-                            <input type="password" class="form-control " placeholder="Heslo">
+                            <input type="password" name="password" class="form-control " placeholder="Heslo">
                         </div>
                         <div class="row buttons mb-4">
                             <div class="col-6 btn_sign_in float-start">

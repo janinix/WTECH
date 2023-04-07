@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LogRegConstroller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,12 +23,14 @@ use App\Http\Controllers\HomeController;
 Route::get('/', function () {
     return view('main_page');
 });
-Route::get('/login', function () {
-    return view('login');
+Route::controller(LogRegConstroller::class)->group(function(){
+    Route::get('login','index')->name('login');
+    Route::get('register','register')->name('register');
+    Route::get('logout','logout')->name('logout');
+    Route::post('validate_registration', 'validate_registration')->name('sample.validate_registration');
+    Route::post('validate_login', 'validate_login')->name('sample.validate_login');
 });
-Route::get('/register', function () {
-    return view('register');
-});
+
 Route::get('/kosik_zhrnutie', function () {
     return view('kosik_zhrnutie');
 });

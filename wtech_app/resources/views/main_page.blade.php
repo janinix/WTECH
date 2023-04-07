@@ -24,6 +24,7 @@
             </button>
             <div class="collapse navbar-collapse text-center " id="nav">
                 <ul class="navbar-nav ms-auto links-font ">
+                    @guest
                     <li class="nav-item">
                         <a href="register" class="nav-link fs-2">Registrácia</a>
                     </li>
@@ -35,27 +36,40 @@
                             <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
                         </a>
                     </li>
+                    @else
+                    <li class="nav-item">
+                        <a href="{{ logout }}" class="nav-link">
+                            Odhlásenie
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="kosik_prehlad" class="nav-link">
+                            <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    @endguest
                 </ul>
             </div>
         </div>
     </nav>
-        <!-- kategórie-->
-        <section class="container categories justify-content-around">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-                <div class="col text-center mb-2 mb-lg-8">
-                    <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">športová výživa</a>
-                </div>
-                <div class="col text-center mb-2 mb-lg-8">
-                    <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">športové oblečenie</a>
-                </div>
-                <div class="col text-center mb-2 mb-lg-8">
-                    <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">príslušenstvo</a>
-                </div>
-                <div class="col text-center mb-2 mb-lg-8">
-                    <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">zdravé potraviny</a>
-                </div>
+    <!-- kategórie-->
+    
+    <section class="container categories justify-content-around">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+            <div class="col text-center mb-2 mb-lg-8">
+                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">športová výživa</a>
             </div>
-        </section>
+            <div class="col text-center mb-2 mb-lg-8">
+                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">športové oblečenie</a>
+            </div>
+            <div class="col text-center mb-2 mb-lg-8">
+                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">príslušenstvo</a>
+            </div>
+            <div class="col text-center mb-2 mb-lg-8">
+                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">zdravé potraviny</a>
+            </div>
+        </div>
+    </section>
 
     <!--  carousel - banner s výhodami pre nakupujúcich-->
     <section class="justify-content-center text-center">

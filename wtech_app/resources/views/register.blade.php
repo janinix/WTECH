@@ -87,32 +87,46 @@
             <section class="col-md-5 col-11  register_right text-center">
                 <h2>Registrácia tu</h2>
                 <div class="row">
-                    <div class="col-10 offset-1 register_form d-inline-block">
+                    <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('sample.validate_registration') }}" method="POST">
+                        @csrf
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" placeholder="Meno a priezvisko">
+                            <input type="text" name="name" class="form-control" placeholder="Meno a priezvisko">
+                            @if($errors->has('name'))
+							    <span class="text-danger">{{ $errors->first('name') }}</span>
+						    @endif
+                        </div>
+                        
+                        <div class="form-group mt-3">
+                            <input type="text" name="username" class="form-control" placeholder="Používatelské meno">
+                            @if($errors->has('username'))
+							    <span class="text-danger">{{ $errors->first('username') }}</span>
+						    @endif
                         </div>
                         <div class="form-group mt-3">
-                            <input type="text" class="form-control" placeholder="Používatelské meno">
-                        </div>
-                        <div class="form-group mt-3">
-                            <input type="email" class="form-control" placeholder="E-mail">
+                            <input type="text" name="email" class="form-control" placeholder="E-mail">
+                            @if($errors->has('email'))
+							    <span class="text-danger">{{ $errors->first('email') }}</span>
+						    @endif
                         </div>
                         <div class="form-group mt-3 ">
-                            <input type="password" class="form-control " placeholder="Heslo">
+                            <input type="password" name="password" class="form-control " placeholder="Heslo">
+                            @if($errors->has('password'))
+							    <span class="text-danger">{{ $errors->first('password') }}</span>
+						    @endif
                         </div>
                         <div class="row buttons mb-4">
                             <div class="col-6 btn_sign_in float-start">
-                                <p class="have_account mt-2">Už máte profil?</p>
+                                <p class="have_account mt-2 text-light">Už máte profil?</p>
                                 <a href="login" class="btn btn-primary">Prihlásenie</a>
                             </div>
                             <div class="col-6 btn_register float-end">
                                 <p class="have_account invisible mt-2">Registrácia</p>
-                                <a href="/" class="btn btn-primary">Registrácia</a>
+                                <button  class="btn btn-primary" type="submit">Registrácia</button>
                             </div>
                     
                         </div>
                     
-                    </div>
+                    </form>
                 </div>
                 
             </section>
