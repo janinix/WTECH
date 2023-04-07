@@ -38,7 +38,7 @@
                     </li>
                     @else
                     <li class="nav-item">
-                        <a href="{{ logout }}" class="nav-link">
+                        <a href="logout " class="nav-link fs-2">
                             Odhlásenie
                         </a>
                     </li>
@@ -53,7 +53,21 @@
         </div>
     </nav>
     <!-- kategórie-->
-    
+     @if($message = Session::get('successReg'))
+        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
+            {{ $message }}
+            <button type="button" class="close float-end">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @elseif($message = Session::get('successLog'))
+        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
+            {{ $message }}
+            <button type="button" class="close float-end">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <section class="container categories justify-content-around">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
             <div class="col text-center mb-2 mb-lg-8">
@@ -184,7 +198,11 @@
             <small class="text-dark">&copy; Copyright 2023, FITShop</small>
         </div>
     </footer>
-
+    <script>
+        document.querySelector('.alert .close').addEventListener('click', function() {
+            document.querySelector('.alert').style.display = 'none';
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>

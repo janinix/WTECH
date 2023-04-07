@@ -19,6 +19,10 @@ class LogRegConstroller extends Controller
     function register(){
         return view('register');
     }
+    function login(){
+        return view('login');
+    }
+    
 
     function validate_registration(Request $request)
     {
@@ -38,10 +42,31 @@ class LogRegConstroller extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        return redirect('/')->with('success', 'Registrácia úspešná');
+        return redirect('/')->with('successReg', 'Registrácia úspešná');
     }
 
-    function login(){
-        
+    function validate_login(Request $request)
+    {
+        $request->validate([
+            'username' =>  'required',
+            'password'  =>  'required'
+        ]);
+
+        $credentials = $request->only('username', 'password');
+
+        if(Auth::attempt($credentials))
+        {
+            return redirect('/')->with('successLog', 'Prihlásenie uspešné !');;
+        }
+
+        return redirect('login')->with('success', 'Zlé prihlasovacie údaje !');
+    }
+
+    function logout(){
+        Session::flush();
+
+        Auth::logout();
+
+        return Redirect('login');
     }
 }

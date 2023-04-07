@@ -91,23 +91,25 @@
 
             </section>
 
-            @if($message = Session::get('success'))
-            <div class="alert alert-info">
-                {{ $message }}
-            </div>
-            @endif
+           
             <!-- sekcia formularu pre prihlasenie -->
             <section class="col-md-5 col-11  register_right text-center">
                 <h2>Prihlásenie tu</h2>
                 <div class="row">
-                    <div class="col-10 offset-1 register_form d-inline-block">
-                        
+                    <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('sample.validate_login') }}" method="POST">
+                        @csrf
                         <div class="form-group mt-3">
                             <input type="text" name="username" class="form-control" placeholder="Používatelské meno">
+                            @if($errors->has('username'))
+							    <span class="text-danger">{{ $errors->first('username') }}</span>
+						    @endif
                         </div>
                         
                         <div class="form-group mt-3 ">
                             <input type="password" name="password" class="form-control " placeholder="Heslo">
+                            @if($errors->has('password'))
+							    <span class="text-danger">{{ $errors->first('password') }}</span>
+						    @endif
                         </div>
                         <div class="row buttons mb-4">
                             <div class="col-6 btn_sign_in float-start">
@@ -116,12 +118,12 @@
                             </div>
                             <div class="col-6 btn_register float-end">
                                 <p class="have_account invisible mt-2">Prihlásenie</p>
-                                <a href="/" class="btn btn-primary">Prihlásenie</a>
+                                <button  class="btn btn-primary" type="submit">Prihlásenie</button>
                             </div>
 
                         </div>
 
-                    </div>
+                    </form>
                 </div>
 
             </section>
