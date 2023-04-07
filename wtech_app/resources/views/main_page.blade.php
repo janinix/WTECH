@@ -38,6 +38,11 @@
                     </li>
                     @else
                     <li class="nav-item">
+                        <a href="#" class="nav-link fs-2">
+                            {{ Auth::user()->name }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="logout " class="nav-link fs-2">
                             Odhlásenie
                         </a>

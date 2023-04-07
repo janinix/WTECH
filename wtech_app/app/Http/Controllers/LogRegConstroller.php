@@ -22,6 +22,14 @@ class LogRegConstroller extends Controller
     function login(){
         return view('login');
     }
+
+    function admin_pouzivatelia(){
+        return view('admin_pouzivatelia');
+    }
+    function admin_produkty(){
+        return view('admin_produkty');
+    }
+    
     
 
     function validate_registration(Request $request)
@@ -56,9 +64,14 @@ class LogRegConstroller extends Controller
 
         if(Auth::attempt($credentials))
         {
-            return redirect('/')->with('successLog', 'Prihlásenie uspešné !');;
+            if($credentials['username']=='admin' and $credentials['password']=='admin1'){
+                return redirect('admin_pouzivatelia');
+            }
+            else {
+                return redirect('/')->with('successLog', 'Prihlásenie uspešné !');;
+            }
+            
         }
-
         return redirect('login')->with('success', 'Zlé prihlasovacie údaje !');
     }
 
