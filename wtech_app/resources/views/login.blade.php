@@ -40,6 +40,14 @@
             </div>
         </div>
     </nav>
+    @if($message = Session::get('successReg'))
+        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
+            {{ $message }}
+            <button type="button" class="close float-end">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="container-fluid main_content">
         <div class="row">
             <!-- Lava cast stranky kde je carousel v ktotom sa premietaju vyhody clenstva -->
@@ -96,7 +104,7 @@
             <section class="col-md-5 col-11  register_right text-center">
                 <h2>Prihlásenie tu</h2>
                 <div class="row">
-                    <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('sample.validate_login') }}" method="POST">
+                    <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('validate_login') }}" method="POST">
                         @csrf
                         <div class="form-group mt-3">
                             <input type="text" name="username" class="form-control" placeholder="Používatelské meno">
@@ -156,7 +164,11 @@
             <small class="text-dark">&copy; Copyright 2023, FITShop</small>
         </div>
     </footer>
-
+    <script>
+        document.querySelector('.alert .close').addEventListener('click', function() {
+            document.querySelector('.alert').style.display = 'none';
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>

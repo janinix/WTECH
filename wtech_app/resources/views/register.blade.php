@@ -87,7 +87,7 @@
             <section class="col-md-5 col-11  register_right text-center">
                 <h2>Registrácia tu</h2>
                 <div class="row">
-                    <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('sample.validate_registration') }}" method="POST">
+                    <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('validate_registration') }}" method="POST">
                         @csrf
                         <div class="form-group mt-3">
                             <input type="text" name="name" class="form-control" placeholder="Meno a priezvisko">

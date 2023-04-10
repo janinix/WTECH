@@ -50,7 +50,7 @@ class LogRegConstroller extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        return redirect('/')->with('successReg', 'Registrácia úspešná');
+        return redirect('login')->with('successReg', 'Registrácia úspešná');
     }
 
     function validate_login(Request $request)

@@ -39,7 +39,7 @@
                     @else
                     <li class="nav-item">
                         <a href="#" class="nav-link fs-2">
-                            {{ Auth::user()->name }}
+                            {{ Auth::user()->username }}
                         </a>
                     </li>
                     <li class="nav-item">
@@ -58,14 +58,8 @@
         </div>
     </nav>
     <!-- kategórie-->
-     @if($message = Session::get('successReg'))
-        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
-            {{ $message }}
-            <button type="button" class="close float-end">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @elseif($message = Session::get('successLog'))
+     
+    @if($message = Session::get('successLog'))
         <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
             {{ $message }}
             <button type="button" class="close float-end">

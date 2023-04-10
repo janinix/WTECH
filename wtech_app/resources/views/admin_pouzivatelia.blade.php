@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +22,7 @@
 
 	<nav class="navbar header1 navbar-light fw-bold navbar-expand-md nav-gradient justify-content-end">
 		<div class="container">
-			<a href="./templates/main_page.html" class="navbar-brand"><img src="../images/logo_black.png" alt=""
+			<a href="/" class="navbar-brand"><img src="../images/logo_black.png" alt=""
 					width="250" height=""></a>
 			<button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
 				aria-label="Expand navigation">
@@ -39,6 +41,15 @@
 		</div>
 	</nav>
 
+	@if($message = Session::get('successDelUser'))
+        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
+            {{ $message }}
+            <button type="button" class="close float-end">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
 	<section>
 		<div class="container-fluid mt-5 bg-light sectionpm">
 			<h1 class="text-center mb-4">Admin Dashboard</h1>
@@ -46,23 +57,35 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
+							<th scope="col">ID</th>
 							<th scope="col">Meno</th>
-							<th scope="col">Heslo</th>
+							<th scope="col">Používatelské meno</th>
+							<th scope="col">Email</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>John</td>
-							<td>Doe</td>
-							<td>
-								<button class="btn btn-primary btn-sm">Upraviť</button>
-								<button class="btn btn-danger btn-sm">Vymazať</button>
-							</td>
-						</tr>
-						<!-- More product rows can be added here -->
-					</tbody>
+					
+					@php
+					$users = DB::table('users')->select('id', 'name', 'username', 'email')->get();
+					@endphp
+					
+					@foreach ($users as $user)
+						@if ($user->name != 'admin')
+							<tr>
+								<th scope='row'>{{ $user->id }}</th>
+								<td>{{ $user->name }}</td>
+								<td>{{ $user->username }}</td>
+								<td>{{ $user->email }}</td>
+								<td>
+									<form method='POST' action="{{ route('delete_user', $user->id) }}">
+										@csrf
+										@method('DELETE')
+										<input type='hidden' name='user' value='{{ json_encode($user) }}'>
+										<button type='submit' class='btn btn-danger btn-sm'>Delete</button>
+									</form>
+								</td>
+							</tr>
+						@endif
+					@endforeach
 				</table>
 			</div>
 
@@ -115,8 +138,11 @@
 		</div>
 	</footer>
 
-
-
+	<script>
+        document.querySelector('.alert .close').addEventListener('click', function() {
+            document.querySelector('.alert').style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>

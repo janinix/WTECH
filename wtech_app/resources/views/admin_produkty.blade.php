@@ -20,7 +20,7 @@
 
     <nav class="navbar header1 navbar-light fw-bold navbar-expand-md nav-gradient justify-content-end">
         <div class="container">
-            <a href="./templates/main_page.html" class="navbar-brand"><img src="../images/logo_black.png" alt=""
+            <a href="/" class="navbar-brand"><img src="../images/logo_black.png" alt=""
                     width="250" height=""></a>
             <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
                 aria-label="Expand navigation">
@@ -40,7 +40,14 @@
             </div>
         </div>
     </nav>
-
+    @if($message = Session::get('successDelProd'))
+        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
+            {{ $message }}
+            <button type="button" class="close float-end">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <section>
         <div class="container mt-5 bg-light sectionpm">
             <h1 class="text-center mb-4">Admin Dashboard</h1>
@@ -131,7 +138,11 @@
     </footer>
 
 
-
+    <script>
+        document.querySelector('.alert .close').addEventListener('click', function() {
+            document.querySelector('.alert').style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>
