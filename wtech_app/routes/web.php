@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogRegConstroller;
 use App\Http\Controllers\DeleteController;
+use App\Http\Controllers\CreateItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,7 @@ Route::controller(LogRegConstroller::class)->group(function(){
 
 Route::delete('delete_user/{user_id}', [DeleteController::class, 'delete_user'])->name('delete_user');
 
+Route::post('create_item', [CreateItemController::class, 'create_item'])->name('create_item');
 
 Route::get('/kosik_zhrnutie', function () {
     return view('kosik_zhrnutie');

@@ -89,24 +89,6 @@
 				</table>
 			</div>
 
-			<button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#addProductForm"
-				aria-expanded="false" aria-controls="addProductForm">
-				Pridaj/Spravuj uživateľa
-			</button>
-
-			<div class="collapse mt-4 bg-light" id="addProductForm">
-				<form>
-					<div class="mb-3">
-						<label for="productName" class="form-label">Meno</label>
-						<input type="text" class="form-control" id="productName">
-					</div>
-					<div class="mb-3">
-						<label for="productPrice" class="form-label">Heslo</label>
-						<input type="number" class="form-control" id="productPrice" step="0.01">
-					</div>
-					<button type="submit" class="btn btn-primary">Uložiť</button>
-				</form>
-			</div>
 		</div>
 	</section>
 
