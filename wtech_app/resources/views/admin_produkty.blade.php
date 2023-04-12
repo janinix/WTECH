@@ -99,7 +99,7 @@
 
                     <div class="form-group">
                         <label for="rating">Rating</label>
-                        <input type="number" name="rating" id="rating" class="form-control" required>
+                        <input type="number" name="rating" id="rating" class="form-control" placeholder="Max 5" required>
                     </div>
 
                     <div class="form-group">
@@ -119,19 +119,19 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea name="description" id="description" class="form-control" required></textarea>
+                        <textarea name="description" id="description" class="form-control"  required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="image1">Image1</label>
-                        <input type="text" name="image1" id="image1" class="form-control" required>
+                        <input type="text" name="image1" id="image1" class="form-control" placeholder="../images/nazov_foto.png" required>
                     </div>
                     <div class="form-group">
                         <label for="image2">Image2</label>
-                        <input type="text" name="image2" id="image" class="form-control" required>
+                        <input type="text" name="image2" id="image" class="form-control" placeholder="../images/nazov_foto.png" required>
                     </div>
                     <div class="form-group">
                         <label for="image3">Image3</label>
-                        <input type="text" name="image3" id="image3" class="form-control" >
+                        <input type="text" name="image3" id="image3" class="form-control" placeholder="../images/nazov_foto.png" >
                     </div>
                     <!--
                     <div class="form-group">
