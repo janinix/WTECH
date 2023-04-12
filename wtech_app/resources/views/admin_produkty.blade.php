@@ -104,17 +104,22 @@
 
                     <div class="form-group">
                         <label for="category1">Category 1</label>
-                        <input type="text" name="category1" id="category1" class="form-control" required>
+                        <input type="text" name="category1" id="category1" class="form-control" placeholder="Typ na e-shope" required>
                     </div>
 
                     <div class="form-group">
                         <label for="category2">Category 2</label>
-                        <input type="text" name="category2" id="category2" class="form-control">
+                        <input type="text" name="category2" id="category2" class="form-control" placeholder="Značka">
                     </div>
-
+                    
                     <div class="form-group">
                         <label for="category3">Category 3</label>
-                        <input type="text" name="category3" id="category3" class="form-control">
+                        <input type="text" name="category3" id="category3" class="form-control" placeholder="Typ">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="category3">Category 4</label>
+                        <input type="text" name="category4" id="category4" class="form-control" placeholder="Ľubovolné">
                     </div>
 
                     <div class="form-group">

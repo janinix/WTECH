@@ -16,11 +16,12 @@ class CreateItemController extends Controller
             'rating' => 'required|integer',
             'category1' => 'required|max:255',
             'category2' => 'required|max:255',
-            'category3' => 'required|max:255',
+            'category3' => 'max:255',
+            'category4' => 'max:255',
             'description' => 'required',
             'image1' => 'required|max:255',
             'image2' => 'required|max:255',
-            'image3' => 'required|max:255',
+            'image3' => 'max:255',
         ]);
 
         DB::table('product')->insert([
@@ -30,6 +31,7 @@ class CreateItemController extends Controller
             'category1' => $validatedData['category1'],
             'category2' => $validatedData['category2'],
             'category3' => $validatedData['category3'],
+            'category4' => $validatedData['category4'],
             'description' => $validatedData['description'],
             'image1' => $validatedData['image1'],
             'image2' => $validatedData['image2'],
