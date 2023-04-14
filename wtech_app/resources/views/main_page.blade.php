@@ -58,7 +58,7 @@
         </div>
     </nav>
     <!-- kategórie-->
-     
+
     @if($message = Session::get('successLog'))
         <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
             {{ $message }}
@@ -144,35 +144,35 @@
                         <div class="card">
                             <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product1_1.png" alt="Product Image"></a>
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">Whey Protein</h5>
+                                <h5 class="card-title font-weight-bold">Gold Standard Whey 100%</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">25.00€</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product14_1.png" alt="Product Image"></a>
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold">Zero Syrup</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">10.00€</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product4_1.png" alt="Product Image"></a>
+                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product23_1.png" alt="Product Image"></a>
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">Whey Protein</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">20.00€</h6>
+                                <h5 class="card-title font-weight-bold">GymBeam shaker</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">3.00€</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product10_1.png" alt="Product Image"></a>
+                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product28_1.png" alt="Product Image"></a>
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">Whey Protein</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">30.00€</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product16_1.png" alt="Product Image"></a>
-                            <div class="card-body">
-                                <h5 class="card-title">Whey Protein</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">20.00€</h6>
+                                <h5 class="card-title">GymBeam flavor drops</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">5.00€</h6>
                             </div>
                         </div>
                     </div>
