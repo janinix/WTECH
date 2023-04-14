@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogRegConstroller;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\CreateItemController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,6 +38,13 @@ Route::controller(LogRegConstroller::class)->group(function(){
 Route::delete('delete_user/{user_id}', [DeleteController::class, 'delete_user'])->name('delete_user');
 
 Route::post('create_item', [CreateItemController::class, 'create_item'])->name('create_item');
+
+Route::post('product_vyziva', [ProductController::class, 'product_vyziva'])->name('product_vyziva');
+Route::post('product_oblecenie', [ProductController::class, 'product_oblecenie'])->name('product_oblecenie');
+Route::post('product_potraviny', [ProductController::class, 'product_potraviny'])->name('product_potraviny');
+Route::post('product_prislusenstvo', [ProductController::class, 'product_prislusenstvo'])->name('product_prislusenstvo');
+Route::post('/product_detail/{id}', [ProductController::class, 'product_detail'])->name('product_detail');
+
 
 Route::get('/kosik_zhrnutie', function () {
     return view('kosik_zhrnutie');

@@ -69,18 +69,31 @@
     @endif
     <section class="container categories justify-content-around">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-            <div class="col text-center mb-2 mb-lg-8">
-                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">športová výživa</a>
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_vyziva') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">športová výživa</button>
+                </form>
             </div>
-            <div class="col text-center mb-2 mb-lg-8">
-                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">športové oblečenie</a>
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_oblecenie') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">športová oblečenie</button>
+                </form>
             </div>
-            <div class="col text-center mb-2 mb-lg-8">
-                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">príslušenstvo</a>
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_prislusenstvo') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">prislušenstvo</button>
+                </form>
             </div>
-            <div class="col text-center mb-2 mb-lg-8">
-                <a class="nav-link nav-links text-uppercase" href="prehlad_produktov">zdravé potraviny</a>
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_potraviny') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">potraviny</button>
+                </form>
             </div>
+            
         </div>
     </section>
 
@@ -138,7 +151,7 @@
                     </div>
                     <div class="col">
                         <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/img2.png" alt="Product Image"></a>
+                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product4_1.png" alt="Product Image"></a>
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">Whey Protein</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">20.00€</h6>
@@ -147,7 +160,7 @@
                     </div>
                     <div class="col">
                         <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/img3.png" alt="Product Image"></a>
+                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product10_1.png" alt="Product Image"></a>
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">Whey Protein</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">30.00€</h6>
@@ -156,7 +169,7 @@
                     </div>
                     <div class="col">
                         <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/img2.png" alt="Product Image"></a>
+                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product16_1.png" alt="Product Image"></a>
                             <div class="card-body">
                                 <h5 class="card-title">Whey Protein</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">20.00€</h6>

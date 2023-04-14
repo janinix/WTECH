@@ -13,10 +13,34 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/produkty.css">
 	<link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/pagination.css">
 </head>
 
 <body class="container">
-
+	@php
+		$value_filter = Session::get('vyziva')
+	@endphp
+	@if($message = Session::get('vyziva'))
+        @php
+			$products = DB::table('product')->select('id', 'name','price','image1')->where('category1','vyziva')->paginate(6);
+		@endphp
+	@elseif($message = Session::get('oblecenie'))
+		@php
+			$products = DB::table('product')->select('id', 'name','price','image1')->where('category1','oblecenie')->paginate(6);
+		@endphp
+	@elseif($message = Session::get('prislusenstvo'))
+		@php
+			$products = DB::table('product')->select('id', 'name','price','image1')->where('category1','prislusenstvo')->paginate(6);
+		@endphp
+	@elseif($message = Session::get('potraviny'))
+		@php
+			$products = DB::table('product')->select('id', 'name','price','image1')->where('category1','potraviny')->paginate(6);
+		@endphp
+	@else
+		@php
+			$products = DB::table('product')->select('id', 'name','price','image1')->paginate(6);
+		@endphp
+	@endif
 	<!-- základná navigácia -->
 	<nav class="navbar navbar-light fw-bold navbar-expand-md">
         <div class="container">
@@ -43,25 +67,35 @@
         </div>
     </nav>
 
-	<!-- header pre selectovanie typov... -->
-	<header>
-		<div class="container justify-content-around">
-			<div class="row row-cols-1 row-cols-lg-2 row-cols-lg-4">
-				<div class="col text-center mb-2 mb-lg-8">
-					<a class="nav-link nav-links" href="prehlad_produktov">športová výživa</a>
-				</div>
-				<div class="col text-center mb-2 mb-lg-8">
-					<a class="nav-link nav-links" href="prehlad_produktov">športové oblečenie</a>
-				</div>
-				<div class="col text-center mb-2 mb-lg-8">
-					<a class="nav-link nav-links" href="prehlad_produktov">príslušenstvo</a>
-				</div>
-				<div class="col text-center mb-2 mb-lg-8">
-					<a class="nav-link nav-links" href="prehlad_produktov">zdravé potraviny</a>
-				</div>
-			</div>
-		</div>
-	</header>
+	<!-- section pre selectovanie typov... -->
+	<section class="container categories justify-content-around">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_vyziva') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">športová výživa</button>
+                </form>
+            </div>
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_oblecenie') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">športová oblečenie</button>
+                </form>
+            </div>
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_prislusenstvo') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">prislušenstvo</button>
+                </form>
+            </div>
+            <div class="col-3 text-center mb-2 mb-lg-8">
+                <form action="{{ route('product_potraviny') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="nav-link nav-links text-uppercase">potraviny</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
 	<!-- Táto sekcia je hlavná sekcia, obsahuje filtre a carty s produktami -->
 	<section class="filters bg-light container-fluid mt-3">
@@ -78,8 +112,8 @@
 					<label for="brand" class="mb-2"><strong>Kategória</strong></label>
 					<select class="form-select" id="brand" name="znacka">
 						<option value="w1">Whey</option>
-						<option value="w2">Whey2</option>
-						<option value="we3">Whey3</option>
+						<option value="w2">Beef</option>
+						<option value="we3">Vegan</option>
 					</select>
 				</div>
 			</div>
@@ -88,13 +122,13 @@
 					<label for="size" class="mb-2"><strong>Značka</strong></label>
 					<div class="btn-group" role="group" aria-label="Váha">
 						<input class="btn-check" type="radio" name="size" id="size-s" value="s" autocomplete="off">
-						<label class="btn btn-outline-secondary" for="size-s">Whey</label>
+						<label class="btn btn-outline-secondary" for="size-s">Gymbeam</label>
 
 						<input class="btn-check" type="radio" name="size" id="size-m" value="m" autocomplete="off">
-						<label class="btn btn-outline-secondary" for="size-m">EX4</label>
+						<label class="btn btn-outline-secondary" for="size-m">Biotech</label>
 
 						<input class="btn-check" type="radio" name="size" id="size-l" value="l" autocomplete="off">
-						<label class="btn btn-outline-secondary" for="size-l">EY5</label>
+						<label class="btn btn-outline-secondary" for="size-l">GN</label>
 					</div>
 				</div>
 			</div>
@@ -114,85 +148,30 @@
 
 		<div class="bg-light products_list container-fluid">
 			<!-- List produktov -->
+			
 			<div class="row">
-				<div class="col-lg-4 mb-4">
-					<div class="card">
-						<a href="product_detail">
-							<img class="card-img-top" src="../images/img1.png" alt="Product Image"></a>
-						<div class="card-body d-flex justify-content-between align-items-center">
-							<div>
-								<h5 class="card-title">Product 1</h5>
-								<h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
-							</div>
-							<button type="button" class="btn btn-danger">do košíka</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-4">
-					<div class="card">
-						<a href="product_detail">
-							<img class="card-img-top" src="../images/img1.png" alt="Product Image"></a>
-						<div class="card-body d-flex justify-content-between align-items-center">
-							<div>
-								<h5 class="card-title">Product 2</h5>
-								<h6 class="card-subtitle mb-2 text-muted">$11.00</h6>
-							</div>
-							<button type="button" class="btn btn-danger">do košíka</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 mb-4">
-					<div class="card">
-						<a href="product_detail">
-							<img class="card-img-top" src="../images/img1.png" alt="Product Image"></a>
-						<div class="card-body d-flex justify-content-between align-items-center">
-							<div>
-								<h5 class="card-title">Product 3</h5>
-								<h6 class="card-subtitle mb-2 text-muted">$20.00</h6>
-							</div>
-							<button type="button" class="btn btn-danger">do košíka</button>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-4 mb-4">
+				@foreach($products as $product )
+					<div class="offset-1 col-10 offset-md-0 col-md-6 col-lg-4  mb-4">
 						<div class="card">
-							<a href="product_detail">
-								<img class="card-img-top" src="../images/img1.png" alt="Product Image"></a>
+							<form method='POST' action="{{ route('product_detail', $product->id) }}">
+								@csrf
+								<button type="submit">
+									<img class="card-img-top" src= {{ $product->image1}} height="380px" alt="Product Image">
+								</button>		
+							</form>
+							
 							<div class="card-body d-flex justify-content-between align-items-center">
 								<div>
-									<h5 class="card-title">Product 4</h5>
-									<h6 class="card-subtitle mb-2 text-muted">$13.00</h6>
+									<h5 class="card-title">{{$product->name}}</h5>
+									<h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
 								</div>
 								<button type="button" class="btn btn-danger">do košíka</button>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 mb-4">
-						<div class="card">
-							<a href="product_detail">
-								<img class="card-img-top" src="../images/img1.png" alt="Product Image"></a>
-							<div class="card-body d-flex justify-content-between align-items-center">
-								<div>
-									<h5 class="card-title">Long product</h5>
-									<h6 class="card-subtitle mb-2 text-muted">$10444.00</h6>
-								</div>
-								<button type="button" class="btn btn-danger">do košíka</button>
-							</div>
-						</div>
-					</div>
-
-					<!-- Stránkovanie  << >>  -->
-					<div class="row justify-content-center mb-4 paging_lr container-fluid">
-						<div class="col-auto">
-							<a class="page-link" href="#" tabindex="-1" aria-disabled="true">&laquo;</a>
-						</div>
-						<div class="col-auto">
-							<a class="page-link" href="#">&raquo;</a>
-						</div>
-					</div>
-
-				</div>
+				@endforeach
+				{{ $products->links() }}
+			</div>
 	</section>
 
 	<!-- Základná footer -->

@@ -1,5 +1,11 @@
 body {
     background-image: linear-gradient(to left, #ff5722, #ff9800);
+    overflow: hidden;
+}
+
+button{
+    width: 100%;
+    border-radius: 10px;
 }
 
 .container{

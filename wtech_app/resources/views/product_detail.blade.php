@@ -53,27 +53,30 @@
             </div>
           </div>
         </div>
-
+      @if($message = Session::get('detail'))
+        @php
+			    $product = DB::table('product')->select('id', 'name','price','image1','image2','image3','rating','description','category2','category1')->where('id',$message)->first();
+		    @endphp
+      @endif
       <section class="main_product">
         <div class="row">
           <!-- lava cast - obrazky-->
           <section class="col1">
             <div class="main_photo">
-              <img src="/images/img1.png">
+              <img src= {{ $product->image1 }}>
             </div>
             <div class="small_photo_row">
-              <div class="small_photo">
-                <img src="../images/img2.png" width="80%">
-              </div>
-              <div class="small_photo">
-                <img src="../images/img3.png" width="80%">
-              </div>
-              <div class="small_photo">
-                <img src="../images/img4.png" width="80%">
-              </div>
-              <div class="small_photo">
-                <img src="../images/img1.png" width="75%">
-              </div>
+              @if($product->image2 !=null)
+                <div class="small_photo">
+                  <img src="{{ $product->image2 }}" width="80%">
+                </div>
+              @endif
+              @if($product->image3 !=null)
+                <div class="small_photo">
+                  <img src="{{ $product->image3 }}" width="80%">
+                </div>
+              @endif
+              
             </div>
 
           </section>
@@ -81,35 +84,58 @@
           <section class="col2">
             <!-- recenzie nad nadpisom-->
             <div class="reviews">
-              <i class="fa-solid fa fa-star fs-2"></i>
-              <i class="fa-solid fa fa-star fs-2"></i>
-              <i class="fa-solid fa fa-star fs-2"></i>
-              <i class="fa-solid fa fa-star fs-2"></i>
-              <i class="fa-solid fa fa-star fs-2"></i>
-              <p>98% (298) </p>
+              @for($i = 0; $i < $product->rating; $i++)
+                <i class="fa-solid fa fa-star fs-2"></i>
+            @endfor
+              
+              <p>(298) </p>
             </div>
             <h1 class="text">
-              Proteín 100% Whey Gold Standard
+              {{$product->name}}
             </h1>
             <h3>
-              Výrobca: <a href="#">Optimum Nutrition</a>
+              Výrobca: <a href="#">{{$product->category2}}</a>
             </h3>
             <p class="text">
-              <strong>Proteín 100 % Whey Gold Standard</strong> obsahuje funkčnú kombináciu srvátkového izolátu, koncentrátu a hydrolyzátu.
-              Má priaznivé aminokyselinové spektrum, vyniká rýchlou vstrebateľnosťou a navyše sa pýši dokonale vyladenou chuťou.
-              To je len niekoľko z mnohých dôvodov, prečo patrí medzi najpredávanejšie proteíny na svete.
+              {{$product->description}}
             </p>
             <p class="stock_info">Skladom v predajni</p>
             <div class="options">
               <!-- vyber z prichuti-->
               <div class="variations">
-                <p>príchuť:</p>
-                <select  name="príchuť">
-                  <option value="0">príchuť</option>
-                  <option value="1">Čokoláda</option>
-                  <option value="2">Vanilka</option>
-                  <option value="3">Banán</option>
-                </select>
+                @if($product->category1 =='vyziva')
+                  <p>príchuť:</p>
+                  <select  name="príchuť">
+                    <option value="0">príchuť</option>
+                    <option value="1">Čokoláda</option>
+                    <option value="2">Vanilka</option>
+                    <option value="3">Banán</option>
+                  </select>
+                @elseif($product->category1 =='oblecenie')
+                  <p>velkosť:</p>
+                  <select  name="velkost">
+                    <option value="0">S</option>
+                    <option value="1">M</option>
+                    <option value="2">L</option>
+                    <option value="3">XL</option>
+                  </select>
+                @elseif($product->category1 =='potraviny')
+                  <p>hmotnosť v gramoch:</p>
+                  <select  name="potraviny">
+                    <option value="0">250</option>
+                    <option value="1">500</option>
+                    <option value="2">750</option>
+                    <option value="3">1000</option>
+                  </select>
+                @elseif($product->category1 =='prislusenstvo')
+                  <p>farba:</p>
+                  <select  name="prislusenstvo">
+                    <option value="0">červená</option>
+                    <option value="1">čierna</option>
+                    <option value="2">modrá</option>
+                  </select>
+                @endif
+                
               </div>
               <div>
                 <p>množstvo:</p>
@@ -143,41 +169,33 @@
         </div>
 
         <hr class="bg-dark border-2 border-top border-dark">
-
+        @php
+          $random_products = DB::table('product')
+                      ->select('id', 'name', 'price', 'image2')
+                      ->inRandomOrder()
+                      ->take(4)
+                      ->get();
+        @endphp
         <section class="fav_product">
           <h2 class="title">
             Zákazníci tiež zakúpili
           </h2>
           <!--prehlad najcastejsie zakupenych produktov-->
-          <div class="row2">
-            <div class="col3">
-              <a href="product_detail"><img src="../images/img1.png" width="80%"></a>
-              <h4>
-                Whey Protein
-              </h4>
-              <p>49.90€</p>
-            </div>
-            <div class="col3">
-              <a href="product_detail"><img src="../images/img1.png" width="80%"></a>
-              <h4>
-                Whey Protein
-              </h4>
-              <p>49.90€</p>
-            </div>
-            <div class="col3">
-              <a href="product_detail"><img src="../images/img1.png" width="80%"></a>
-              <h4>
-                Whey Protein
-              </h4>
-              <p>49.90€</p>
-            </div>
-            <div class="col3">
-              <a href="product_detail"><img src="../images/img1.png" width="80%"></a>
-              <h4>
-                Whey Protein
-              </h4>
-              <p>49.90€</p>
-            </div>
+          <div class="row">
+            @foreach($random_products as $random_product)
+              <div class="col-10  offset-1 offset-sm-0 col-sm-6 col-md-3">
+                <form method='POST' action="{{ route('product_detail', $product->id) }}">
+                  @csrf
+                  <button type="submit">
+                    <img class="card-img-top" src= {{ $random_product->image2}} height="90px" alt="Product Image">
+                  </button>		
+							</form>
+                <h4>
+                 {{$random_product->name}}
+                </h4>
+                <p>{{$random_product->price}}€</p>
+              </div>
+            @endforeach
           </div>
         </section>
 

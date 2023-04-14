@@ -1,6 +1,10 @@
 body {
     background-image: linear-gradient(to left, #ff5722, #ff9800);
 }
+button{
+	
+	border: 0;
+}
 
 .container{
     margin-bottom: 20px;

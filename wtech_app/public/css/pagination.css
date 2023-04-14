@@ -1,0 +1,16 @@
+
+
+.hidden{
+    display: flex;
+    justify-content: space-between;
+    
+}
+nav[role="navigation"]{
+     display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 80%;
+}
+
+nav[role="navigation"] svg{
+    display: none;
+}

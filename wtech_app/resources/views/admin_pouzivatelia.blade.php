@@ -16,6 +16,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="css/admin.css">
 	<link rel="stylesheet" href="css/footer.css">
+	<link rel="stylesheet" href="css/pagination.css">
 </head>
 
 <body>
@@ -65,7 +66,7 @@
 					</thead>
 					
 					@php
-					$users = DB::table('users')->select('id', 'name', 'username', 'email')->get();
+					$users = DB::table('users')->select('id', 'name', 'username', 'email')->paginate(1);
 					@endphp
 					
 					@foreach ($users as $user)
@@ -87,6 +88,7 @@
 						@endif
 					@endforeach
 				</table>
+				{{ $users->links() }}
 			</div>
 
 		</div>
