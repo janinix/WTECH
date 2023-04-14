@@ -1,6 +1,6 @@
 body {
     background-image: linear-gradient(to left, #ff5722, #ff9800);
-    overflow: hidden;
+    overflow-X: hidden;
 }
 
 button{
