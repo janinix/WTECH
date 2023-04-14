@@ -62,7 +62,7 @@
     @if($message = Session::get('successLog'))
         <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
             {{ $message }}
-            <button type="button" class="close float-end">
+            <button type="button" class="close float-end close_button">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
