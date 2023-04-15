@@ -134,48 +134,49 @@
             </button>
         </div>
         </div>
-
+        <form action="{{ route('product_vyhladavanie') }}" method="POST">
+            @csrf
+            <div class="row justify-content-center mt-4 mb-3 gy-2">
+                <div class="col-auto">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Hľadať...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <!-- prehlad bestsellerov - 4 produkty-->
         <div class="row bestsellers">
             <h2><strong>BESTSELLERY</strong></h2>
             <section class="products_list container-fluid">
                 <div class="row bestsellers">
-                    <div class="col">
-                        <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product1_1.png" alt="Product Image"></a>
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold">Gold Standard Whey 100%</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">25.00€</h6>
+                    @php
+                        $product_ids = [2, 14, 11, 5];
+                        $best_products = DB::table('product')
+                            ->select('id', 'name', 'price', 'image1')
+                            ->whereIn('id', $product_ids)
+                            ->get();
+                    @endphp
+                    @foreach($best_products as $best_product )
+                        <div class="col">
+                            <div class="card">
+                                <form method='POST' action="{{ route('product_detail', $best_product->id) }}">
+                                    @csrf
+                                    <button type="submit">
+                                        <img class="card-img-top" src= {{ $best_product->image1}}  alt="Product Image">
+                                    </button>		
+                                </form>
+                                <div class="card-body">
+                                    <h5 class="card-title font-weight-bold">{{$best_product->name}}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{{$best_product->price}}€</h6>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product14_1.png" alt="Product Image"></a>
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold">Zero Syrup</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">10.00€</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product23_1.png" alt="Product Image"></a>
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold">GymBeam shaker</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">3.00€</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <a href="product_detail"><img class="card-img-top img-fluid" src="../images/product28_1.png" alt="Product Image"></a>
-                            <div class="card-body">
-                                <h5 class="card-title">GymBeam flavor drops</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">5.00€</h6>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </section>
         </div>

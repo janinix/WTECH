@@ -1,3 +1,6 @@
+@php
+  use Illuminate\Support\Facades\Cache;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,9 +58,15 @@
         </div>
       @if($message = Session::get('detail'))
         @php
-			    $product = DB::table('product')->select('id', 'name','price','image1','image2','image3','rating','description','category2','category1')->where('id',$message)->first();
+          $product = DB::table('product')->select('id', 'name','price','image1','image2','image3','rating','description','category2','category1')->where('id',$message)->first();
+          Cache::put('product', $product, 10 * 10);
 		    @endphp
       @endif
+      
+      @php
+        $product = Cache::get('product');
+      @endphp
+      
       <section class="main_product">
         <div class="row">
           <!-- lava cast - obrazky-->
@@ -184,7 +193,7 @@
           <div class="row">
             @foreach($random_products as $random_product)
               <div class="col-10  offset-1 offset-sm-0 col-sm-6 col-md-3">
-                <form method='POST' action="{{ route('product_detail', $product->id) }}">
+                <form method='POST' action="{{ route('product_detail', $random_product->id) }}">
                   @csrf
                   <button type="submit">
                     <img class="card-img-top" src= {{ $random_product->image2}} height="90px" alt="Product Image">

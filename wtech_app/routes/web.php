@@ -43,6 +43,7 @@ Route::post('product_vyziva', [ProductController::class, 'product_vyziva'])->nam
 Route::post('product_oblecenie', [ProductController::class, 'product_oblecenie'])->name('product_oblecenie');
 Route::post('product_potraviny', [ProductController::class, 'product_potraviny'])->name('product_potraviny');
 Route::post('product_prislusenstvo', [ProductController::class, 'product_prislusenstvo'])->name('product_prislusenstvo');
+Route::post('product_vyhladavanie', [ProductController::class, 'product_vyhladavanie'])->name('product_vyhladavanie');
 Route::post('/product_detail/{id}', [ProductController::class, 'product_detail'])->name('product_detail');
 
 
