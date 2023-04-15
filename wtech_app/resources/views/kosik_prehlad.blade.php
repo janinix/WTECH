@@ -78,81 +78,49 @@
                 </div>
             </div>
         </section>
-        <!-- zobrazenie produktu v kosiku-->
-        <div class="container border border-dark mt-5 kosik_container_product">
-            <div class="row ">
-                <div class="col-2 d-none d-sm-block ">
-                    <img src="../images/protein1.jpg" alt="" srcset="">
-                </div>
-                <div class="col-3 mt-sm-3"><h5 class=" fs-5">100% Whey protein...</h5><h5 class="text-success fs-6">Skladom v predajni</h5> </div>
+        @php
+			$basket_items = DB::table('product')->select('name', 'price', 'description')->get();
+		@endphp
+        @foreach ($basket_items as $product)
+            <div class="container border border-dark mt-5 kosik_container_product">
+                <div class="row ">
+                    <div class="col-2 d-none d-sm-block ">
+                        <img src="{{ $product->image1 }}" alt="" srcset="">
+                    </div>
+                    <div class="col-3 mt-sm-3">
+                        <h5 class=" fs-5">{{ $product->name }}</h5>
+                    <h5 class="text-success fs-6">{{ $product->description }}</h5>
+                    </div>
 
-                <div class="col-4 col-md-3 mt-md-3">
-                    <div class="row  mt-sm-3 row-cols-1">
-                        <div class=" col-sm-3">
-                            <button class="btn">
-                                <i class="fa-sharp fa fa-plus fs-2 "></i>
-                            </button>
-                        </div>
-                        <div class=" col-sm-1">
-                            <p class="fs-3 ">3</p>
-                        </div>
-                        <div class=" col-sm-3">
-                            <button class="btn">
-                                <i class="fa-sharp fa fa-minus fs-2 "></i>
-                            </button>
+                    <div class="col-4 col-md-3 mt-md-3">
+                        <div class="row mt-sm-3 row-cols-1">
+                            <div class="col-sm-3">
+                                <button class="btn" onclick="increment(event)" data-card="card{{ $product->id }}">
+                                    <i class="fa-sharp fa fa-plus fs-2 "></i>
+                                </button>
+                            </div>
+                            <div class="col-sm-1">
+                                <p class="fs-3" id="itemCount_card{{ $product->id }}">3</p>
+                            </div>
+                            <div class="col-sm-3">
+                                <button class="btn" onclick="decrement(event)" data-card="card{{ $product->id }}">
+                                    <i class="fa-sharp fa fa-minus fs-2 "></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-2  mt-3 mt-sm-4  ">
-                    <h5 class="fs-6 ">Cena 30€ s DPH</h5>
-
-                </div>
-                <div class="col-1 col-md-2">
-                    <button class="btn mt-4 mt-md-3">
-                        <img src="../images/delete_item.png" alt="" srcset="">
-                    </button>
-                </div>
-            </div>
-        </div>
-        <!-- zobrazenie produktu v kosiku-->
-        <div class="container border border-dark mt-5 kosik_container_product">
-            <div class="row ">
-                <div class="col-2 d-none d-sm-block ">
-                    <img src="../images/protein1.jpg" alt="" srcset="">
-                </div>
-                <div class="col-3 mt-sm-3">
-                    <h5 class=" fs-5">100% Whey protein...</h5>
-                    <h5 class="text-success fs-6">Skladom v predajni</h5>
-                </div>
-
-                <div class="col-4 col-md-3 mt-md-3">
-                    <div class="row  mt-sm-3 row-cols-1">
-                        <div class=" col-sm-3">
-                            <button class="btn">
-                                <i class="fa-sharp fa fa-plus fs-2 "></i>
-                            </button>
-                        </div>
-                        <div class=" col-sm-1">
-                            <p class="fs-3 ">3</p>
-                        </div>
-                        <div class=" col-sm-3">
-                            <button class="btn">
-                                <i class="fa-sharp fa fa-minus fs-2 "></i>
-                            </button>
-                        </div>
+                    <div class="col-2 mt-3 mt-sm-4 ">
+                        <h5 class="fs-6">Cena {{ $product->price }}€ s DPH</h5>
+                    </div>
+                    <div class="col-1 col-md-2">
+                        <button class="btn mt-4 mt-md-3">
+                            <img src="../images/delete_item.png" alt="" srcset="">
+                        </button>
                     </div>
                 </div>
-                <div class="col-2  mt-3 mt-sm-4  ">
-                    <h5 class="fs-6 ">Cena 30€ s DPH</h5>
-
-                </div>
-                <div class="col-1 col-md-2">
-                    <button class="btn mt-4 mt-md-3">
-                        <img src="../images/delete_item.png" alt="" srcset="">
-                    </button>
-                </div>
             </div>
-        </div>
+        @endforeach
+        <!-- zobrazenie produktu v kosiku-->
 
         <!-- tlacidla pre dalsie kroky a bonus kod-->
         <div class="container pb-3 mt-3">
@@ -204,6 +172,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script>
+        function increment(event) {
+            let card = event.target.closest("button").dataset.card;
+            let itemCountElement = document.getElementById(`itemCount_${card}`);
+            let count = parseInt(itemCountElement.innerText);
+            count += 1;
+            itemCountElement.innerText = count;
+        }
+    
+        function decrement(event) {
+            let card = event.target.closest("button").dataset.card;
+            let itemCountElement = document.getElementById(`itemCount_${card}`);
+            let count = parseInt(itemCountElement.innerText);
+            if (count > 0) {
+                count -= 1;
+            }
+            itemCountElement.innerText = count;
+        }
+    </script>
+        
+        
 </body>
 
 </html>

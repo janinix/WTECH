@@ -5,6 +5,8 @@ use App\Http\Controllers\LogRegConstroller;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\CreateItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BasketOverviewController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,9 +54,10 @@ Route::get('/kosik_zhrnutie', function () {
 Route::get('/kosik_doprava_platba', function () {
     return view('kosik_doprava_platba');
 });
-Route::get('/kosik_prehlad', function () {
-    return view('kosik_prehlad');
-});
+//Route::get('/kosik_prehlad', function () {
+//    return view('kosik_prehlad');
+//});
+Route::get('/kosik_prehlad', [BasketOverviewController::class, 'index']);
 Route::get('/product_detail', function () {
     return view('product_detail');
 });
