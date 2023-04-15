@@ -80,9 +80,6 @@
         </section>
 
         <!--
-        @php
-			$basket_items = DB::table('product')->select('name', 'price', 'description')->get();
-		@endphp
         @foreach ($basket_items as $product)
             <div class="container border border-dark mt-5 kosik_container_product">
                 <div class="row ">
