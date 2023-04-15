@@ -160,7 +160,7 @@
 
 		<div class="bg-light products_list container-fluid">
 			<!-- List produktov -->
-			
+
 			<div class="row">
 				@foreach($products as $product )
 					<div class="offset-1 col-10 offset-md-0 col-md-6 col-lg-4  mb-4">
@@ -169,13 +169,13 @@
 								@csrf
 								<button type="submit">
 									<img class="card-img-top" src= {{ $product->image1}} height="380px" alt="Product Image">
-								</button>		
+								</button>
 							</form>
-							
+
 							<div class="card-body d-flex justify-content-between align-items-center">
 								<div>
 									<h5 class="card-title">{{$product->name}}</h5>
-									<h6 class="card-subtitle mb-2 text-muted">$10.00</h6>
+									<h6 class="card-subtitle mb-2 text-muted">{{$product->price}}€</h6>
 								</div>
 								<button type="button" class="btn btn-danger">do košíka</button>
 							</div>

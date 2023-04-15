@@ -85,7 +85,6 @@
                   <img src="{{ $product->image3 }}" width="80%">
                 </div>
               @endif
-              
             </div>
 
           </section>
@@ -96,7 +95,6 @@
               @for($i = 0; $i < $product->rating; $i++)
                 <i class="fa-solid fa fa-star fs-2"></i>
             @endfor
-              
               <p>(298) </p>
             </div>
             <h1 class="text">
@@ -144,7 +142,6 @@
                     <option value="2">modrá</option>
                   </select>
                 @endif
-                
               </div>
               <div>
                 <p>množstvo:</p>
@@ -164,7 +161,7 @@
             </div>
 
             <h2>
-              29.99€
+                {{$product->price}}€
             </h2>
             <!--tlacidlo na pridanie do kosika-->
             <div class="add">
@@ -197,7 +194,7 @@
                   @csrf
                   <button type="submit">
                     <img class="card-img-top" src= {{ $random_product->image2}} height="90px" alt="Product Image">
-                  </button>		
+                  </button>
 							</form>
                 <h4>
                  {{$random_product->name}}
