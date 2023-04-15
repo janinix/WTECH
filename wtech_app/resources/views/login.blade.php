@@ -48,6 +48,16 @@
             </button>
         </div>
     @endif
+
+    @if($message = Session::get('sucessLogout'))
+        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
+            {{ $message }}
+            <button type="button" class="close float-end close_button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="container-fluid main_content">
         <div class="row">
             <!-- Lava cast stranky kde je carousel v ktotom sa premietaju vyhody clenstva -->
@@ -99,7 +109,7 @@
 
             </section>
 
-           
+
             <!-- sekcia formularu pre prihlasenie -->
             <section class="col-md-5 col-11  register_right text-center">
                 <h2>Prihlásenie tu</h2>
@@ -112,7 +122,7 @@
 							    <span class="text-danger">{{ $errors->first('username') }}</span>
 						    @endif
                         </div>
-                        
+
                         <div class="form-group mt-3 ">
                             <input type="password" name="password" class="form-control " placeholder="Heslo">
                             @if($errors->has('password'))

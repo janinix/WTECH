@@ -29,8 +29,8 @@ class LogRegConstroller extends Controller
     function admin_produkty(){
         return view('admin_produkty');
     }
-    
-    
+
+
 
     function validate_registration(Request $request)
     {
@@ -70,7 +70,7 @@ class LogRegConstroller extends Controller
             else {
                 return redirect('/')->with('successLog', 'Prihlásenie uspešné !');;
             }
-            
+
         }
         return redirect('login')->with('success', 'Zlé prihlasovacie údaje !');
     }
@@ -80,6 +80,6 @@ class LogRegConstroller extends Controller
 
         Auth::logout();
 
-        return Redirect('login');
+        return Redirect('login')->with('sucessLogout', 'Úspešne ste sa odhlásili!');
     }
 }

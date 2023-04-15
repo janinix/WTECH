@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ShoppingCartInfoDeliveryPayment;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogRegConstroller;
 use App\Http\Controllers\DeleteController;
@@ -66,6 +67,9 @@ Route::post('/kosik_zhrnutie', [BasketOverviewController::class, 'sumarise'])->n
 Route::get('/kosik_zhrnutie', function () {
     return view('kosik_zhrnutie');
 });
+
+Route::post('validate_info', [ShoppingCartInfoDeliveryPayment::class, 'validate_info'])->name('validate_info');
+
 Route::get('/kosik_doprava_platba', function () {
     return view('kosik_doprava_platba');
 });
