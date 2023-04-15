@@ -66,7 +66,7 @@
 					</thead>
 					
 					@php
-					$users = DB::table('users')->select('id', 'name', 'username', 'email')->paginate(1);
+					$users = DB::table('users')->select('id', 'name', 'username', 'email')->get();
 					@endphp
 					
 					@foreach ($users as $user)
