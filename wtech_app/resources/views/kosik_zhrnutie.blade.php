@@ -79,11 +79,12 @@
             </div>
         </section>
         <hr>
-        
+
         <section class="container mt-2">
             <div class="row">
                 <!-- sekcia pre vyplnenie udajov pre objednavku-->
                 <div class="col-10 col-sm-6">
+                    <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('validate_info') }}" method="POST">
                     <h5>Osobné údaje</h5>
                     <div class="div mb-2">
                         <div class="row">
@@ -91,7 +92,7 @@
                                 <p class="float-start">Meno a Priezvisko</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="name" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -101,7 +102,7 @@
                                 <p class="float-start">Email</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="email" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -111,7 +112,7 @@
                                 <p class="float-start">Tel. číslo</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="phone_number" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     <hr>
@@ -123,7 +124,7 @@
                                 <p class="float-start">Ulica</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="street" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -133,7 +134,7 @@
                                 <p class="float-start">Číslo domu</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="house_number" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -143,7 +144,7 @@
                                 <p class="float-start">Mesto</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="city" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -153,7 +154,7 @@
                                 <p class="float-start">PSČ</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="postal_code" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     </div>
@@ -163,10 +164,11 @@
                                 <p class="float-start">Štát</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                                <input type="text" name="country" class="form-control float-end" placeholder="" required>
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
                 <!-- pddelovacia ciara-->
                 <div class="col-1 hr_vertical d-none d-sm-block"></div>
@@ -215,7 +217,7 @@
                         <h5 class="float-start">Celkom k úhrade</h5>
                         <h5 class="float-end">67,50€</h5>
                     </div>
-                    
+
                     <!-- tlacidla pre dalsie kroky-->
                     <div class="col-12 text-center">
                         <button class="btn-dark rounded-3 mt-5" type="submit">
@@ -225,13 +227,12 @@
                     <div class="col-1 offset-11 mt-5">
                         <a href="kosik_doprava_platba" class="btn btn-primary float-sm-start">Späť</a>
                     </div>
-                    
+
                 </div>
-                    
             </div>
         </section>
 
-        
+
     </section>
     <!-- päta stranky-->
     <footer id="footer" class="mt-5  text-center ">
