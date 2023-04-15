@@ -38,27 +38,19 @@
 		@endphp
 	@elseif($message = Session::get('price_down'))
 		@php
-			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price')->orderBy('id')->paginate(6);
+			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price','asc')->orderBy('id', 'asc')->paginate(6);
 		@endphp
 	@elseif($message = Session::get('price_up'))
 		@php
-			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price', 'desc')->orderBy('id')->paginate(6);
+			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price', 'desc')->orderBy('id', 'asc')->paginate(6);
 		@endphp
 	@elseif($message = Session::get('vyhladavanie'))
 		@php
-			$products = DB::table('product')
-				->select('id', 'name', 'price', 'image1')
-				->where('category1', $message)
-				->orWhere('category2', $message)
-				->orWhere('category3', $message)
-				->paginate(6);
+			$products = DB::table('product')->select('id', 'name', 'price', 'image1')->where('category1', $message)->orWhere('category2', $message)->orWhere('category3', $message)->paginate(6);
 		@endphp
 	@elseif($message = Session::get('cost'))
 		@php
-			$products = DB::table('product')
-				->select('id', 'name', 'price', 'image1')
-				->where('price','<', $message)
-				->paginate(6);
+			$products = DB::table('product')->select('id', 'name', 'price', 'image1')->where('price','<', $message)->paginate(6);
 		@endphp
 	@elseif($message = Session::get('znacka'))
 		@php

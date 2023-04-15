@@ -56,23 +56,34 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">Fotka</th>
                             <th scope="col">Názov</th>
                             <th scope="col">Cena</th>
-                            <th scope="col">Opis</th>
                             <th scope="col">Akcie</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Produkt 1</td>
-                            <td>$10.00</td>
-                            <td>Product 1 opis</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm">Upraviť</button>
-                                <button class="btn btn-danger btn-sm">Vymazať</button>
-                            </td>
-                        </tr>
+                        
+                        @php
+                        $products = DB::table('product')->select('id', 'name', 'price','image2')->get();
+                        @endphp
+                        @foreach ($products as $product)
+                            <tr>
+								<th scope='row'>{{ $product->id }}</th>
+								<td><image src="{{ $product->image2 }}" width='40px'></image></td>
+								<td>{{ $product->name }}</td>
+								<td>{{ $product->price }}</td>
+								<td>
+									<form method='POST' action="{{ route('delete_product', $product->id) }}">
+										@csrf
+										@method('DELETE')
+										<input type='hidden' name='user' value='{{ json_encode($product) }}'>
+										<button type='submit' class='btn btn-danger btn-sm'>Delete</button>
+									</form>
+								</td>
+							</tr>
+                        @endforeach
+                        
                         <!-- More product rows can be added here -->
                     </tbody>
                 </table>
