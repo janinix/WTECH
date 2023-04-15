@@ -5,6 +5,8 @@ use App\Http\Controllers\LogRegConstroller;
 use App\Http\Controllers\DeleteController;
 use App\Http\Controllers\CreateItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\BasketOverviewController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,10 @@ use App\Http\Controllers\ProductController;
 Route::get('/', function () {
     return view('main_page');
 });
+Route::get('/main_page', function () {
+    return view('main_page');
+});
+
 Route::controller(LogRegConstroller::class)->group(function(){
     Route::get('login','index')->name('login');
     Route::get('register','register')->name('register');
@@ -50,6 +56,11 @@ Route::post('product_filter_znacka', [ProductController::class, 'product_filter_
 Route::post('price_up', [ProductController::class, 'price_up'])->name('price_up');
 Route::post('price_down', [ProductController::class, 'price_down'])->name('price_down');
 
+Route::get('/kosik_prehlad', [BasketOverviewController::class, 'index'])->name('index');
+Route::post('/kosik_doprava_platba', [BasketOverviewController::class, 'payement'])->name('payement');
+Route::post('/kosik_zhrnutie', [BasketOverviewController::class, 'sumarise'])->name('sumarise');
+
+
 
 Route::get('/kosik_zhrnutie', function () {
     return view('kosik_zhrnutie');
@@ -69,4 +80,3 @@ Route::get('/prehlad_produktov', function () {
 Route::get('/admin_produkty', function () {
     return view('admin_produkty');
 });
-

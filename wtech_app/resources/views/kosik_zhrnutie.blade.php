@@ -81,154 +81,144 @@
         <hr>
         
         <section class="container mt-2">
-            <div class="row">
-                <!-- sekcia pre vyplnenie udajov pre objednavku-->
-                <div class="col-10 col-sm-6">
-                    <h5>Osobné údaje</h5>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <p class="float-start">Meno a Priezvisko</p>
+            <form method="POST" action="{{ route('sumarise') }}">
+                @csrf
+                <div class="row">
+                    <!-- sekcia pre vyplnenie udajov pre objednavku-->
+                    <div class="col-10 col-sm-6">
+                        <h5>Osobné údaje</h5>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="float-start">Meno a Priezvisko</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
                             </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
+                        </div>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="float-start">Email</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="float-start">Tel. číslo</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
+                            </div>
+                        <hr>
+                        <h5>Fakturačná adresa</h5>
+                        </div>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="float-start">Ulica</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4 ">
+                                    <p class="float-start">Číslo domu</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="float-start">Mesto</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="float-start">PSČ</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="div mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="float-start">Štát</p>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" class="form-control float-end" placeholder="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <p class="float-start">Email</p>
+                
+                    <!-- pddelovacia ciara-->
+                    <div class="col-1 hr_vertical d-none d-sm-block"></div>
+                    <!-- sekcia pre zhrnutie nakupu -->
+                    <div class="col-10 col-sm-5">
+                        <h5 class="text-center">Zhrnutie objednávky</h5>
+                        
+                        @foreach($basket_items as $product)
+                            <div class="container">
+                                <div class="row mt-3">
+                                    <div class="col-5 offset-1">
+                                        <h6>{{ $product->name }}</h6>
+                                    </div>
+                                    <!-- vymazal som quantity lebo nemame zatial ...-->
+                                    <div class="col-3">
+                                        <h6>{{ $product->price }}€</h6>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
-                            </div>
+                            <hr>
+                        @endforeach
+                        
+                        @php
+                            $total = 0;
+                            if($basket_items) {
+                                foreach($basket_items as $item) {
+                                    $total += $item->price; // Add semicolon here
+                                }
+                            }
+                        @endphp
+                        <div>
+                            <h5 class="float-start">Celkom k úhrade</h5>
+                            <h5 class="float-end">{{ number_format($total, 2, ',', ' ') }}€</h5>
                         </div>
-                    </div>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <p class="float-start">Tel. číslo</p>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
-                            </div>
+                        
+                        
+                        <!-- tlacidla pre dalsie kroky-->
+                        <div class="col-12 text-center">
+                            <div class="col-12 text-center">
+                                <button class="btn-dark rounded-3 mt-5" type="submit">Odoslať objednávku s povinnosťou platby</button>
+                            </div>                            
                         </div>
-                    <hr>
-                    <h5>Fakturačná adresa</h5>
-                    </div>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <p class="float-start">Ulica</p>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
-                            </div>
+                        <div class="col-1 offset-11 mt-5">
+                            <a href="kosik_doprava_platba" class="btn btn-primary float-sm-start">Späť</a>
                         </div>
-                    </div>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4 ">
-                                <p class="float-start">Číslo domu</p>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <p class="float-start">Mesto</p>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <p class="float-start">PSČ</p>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="div mb-2">
-                        <div class="row">
-                            <div class="col-4">
-                                <p class="float-start">Štát</p>
-                            </div>
-                            <div class="col-8">
-                                <input type="text" class="form-control float-end" placeholder="">
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
-                <!-- pddelovacia ciara-->
-                <div class="col-1 hr_vertical d-none d-sm-block"></div>
-                <!-- sekcia pre zhrnutie nakupu -->
-                <div class="col-10 col-sm-5">
-                    <h5 class="text-center">Zhrnutie objednávky</h5>
-                    <div class="container ">
-                        <div class="row mt-3">
-                            <div class="col-5 offset-1">
-                                <h6>100% Whey Protein</h6>
-                            </div>
-                            <div class="col-3"><h6>1ks</h6></div>
-                            <div class="col-3"> <h6>30€</h6></div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="container ">
-                        <div class="row mt-3">
-                            <div class="col-5 offset-1">
-                                <h6>Creatin Tablety 100ks</h6>
-                            </div>
-                            <div class="col-3">
-                                <h6>1ks</h6>
-                            </div>
-                            <div class="col-3">
-                                <h6>15€</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="container ">
-                        <div class="row mt-3">
-                            <div class="col-5 offset-1">
-                                <h6>Fit Tyčinka Kokos</h6>
-                            </div>
-                            <div class="col-3">
-                                <h6>15ks</h6>
-                            </div>
-                            <div class="col-3">
-                                <h6>1,50€</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div>
-                        <h5 class="float-start">Celkom k úhrade</h5>
-                        <h5 class="float-end">67,50€</h5>
-                    </div>
-                    
-                    <!-- tlacidla pre dalsie kroky-->
-                    <div class="col-12 text-center">
-                        <button class="btn-dark rounded-3 mt-5" type="submit">
-                            <a class="btn text-light " href="/templates/main_page.html">Odoslať objednávku s povinnosťou platby</a>
-                        </button>
-                    </div>
-                    <div class="col-1 offset-11 mt-5">
-                        <a href="kosik_doprava_platba" class="btn btn-primary float-sm-start">Späť</a>
-                    </div>
-                    
-                </div>
-                    
-            </div>
+            </form>
         </section>
 
         
