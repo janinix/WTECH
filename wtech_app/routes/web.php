@@ -58,10 +58,6 @@ Route::post('price_up', [ProductController::class, 'price_up'])->name('price_up'
 Route::post('price_down', [ProductController::class, 'price_down'])->name('price_down');
 
 Route::get('/kosik_prehlad', [BasketOverviewController::class, 'index'])->name('index');
-Route::post('/kosik_doprava_platba', [BasketOverviewController::class, 'payement'])->name('payement');
-Route::post('/kosik_zhrnutie', [BasketOverviewController::class, 'sumarise'])->name('sumarise');
-
-
 
 Route::get('/kosik_zhrnutie', function () {
     return view('kosik_zhrnutie');

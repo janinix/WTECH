@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: 127.0.0.1
--- Čas generovania: So 15.Apr 2023, 17:25
+-- Čas generovania: So 15.Apr 2023, 21:24
 -- Verzia serveru: 10.4.28-MariaDB
 -- Verzia PHP: 8.1.17
 
@@ -24,14 +24,15 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Štruktúra tabuľky pre tabuľku `order_info`
+-- Štruktúra tabuľky pre tabuľku `order_infos`
 --
 
-CREATE TABLE `order_info` (
+CREATE TABLE `order_infos` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `shopping_card_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `phone_number` varchar(255) DEFAULT NULL,
   `street` varchar(255) DEFAULT NULL,
   `house_number` varchar(255) DEFAULT NULL,
@@ -39,8 +40,18 @@ CREATE TABLE `order_info` (
   `postal_code` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `delivery` varchar(255) DEFAULT NULL,
-  `payment` varchar(255) DEFAULT NULL
+  `payment` varchar(255) DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Sťahujem dáta pre tabuľku `order_infos`
+--
+
+INSERT INTO `order_infos` (`id`, `user_id`, `shopping_card_id`, `name`, `email`, `phone_number`, `street`, `house_number`, `city`, `postal_code`, `country`, `delivery`, `payment`, `updated_at`, `created_at`) VALUES
+(1, NULL, NULL, 'Miroslava Mäsiariková', 'miroslava.masiarikova@gmail.com', '0912345678', 'Višňové', '1', 'Štiavnik', '01355', 'Slovensko', NULL, NULL, '2023-04-15 17:20:36', '2023-04-15 17:20:36'),
+(2, NULL, NULL, 'Jozefina Nováková', 'jozka.novak@centrum.sk', '0921218015', 'Košická', '6', 'Žilina', '01001', 'Slovensko', NULL, NULL, '2023-04-15 17:21:49', '2023-04-15 17:21:49');
 
 -- --------------------------------------------------------
 
@@ -146,16 +157,17 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `email`, `updated_at`, `created_at`) VALUES
 (4, 'Ján Mareček', 'jano', '$2y$10$z2pID8qsYrRGRAfRr2PXfuoPyJYU8GX1NrOkrXjmzOkfdx9E4D0SG', 'janomarecek2002@gmail.com', '2023-04-07 12:46:29', '2023-04-07 12:46:29'),
 (5, 'admin', 'admin', '$2y$10$y2lT3Mj6OtF37lrf8Ii4f.GDFcYSGGr3asVizelWKcbKHu8psZaD2', 'admin@gmail.com', '2023-04-07 15:07:42', '2023-04-07 15:07:42'),
-(8, 'Miroslava Mäsiariková', 'mirus', '$2y$10$z94hiMl.FIBHd0v0fmb/2Og9WKXcS9Yu7AzBJ8WRZh.7RCTzdw2oi', 'miroslava.masiarikova@gmail.com', '2023-04-14 18:08:32', '2023-04-14 18:08:32');
+(8, 'Miroslava Mäsiariková', 'mirus', '$2y$10$z94hiMl.FIBHd0v0fmb/2Og9WKXcS9Yu7AzBJ8WRZh.7RCTzdw2oi', 'miroslava.masiarikova@gmail.com', '2023-04-14 18:08:32', '2023-04-14 18:08:32'),
+(9, 'Jozo Mrkva', 'jozo', '$2y$10$q/GF8aqK2dVK.qR3Xt4DbeTS5Kr.TVVV/r.1GR.OGKcdrJZZTDoOO', 'jozo@gmail.com', '2023-04-15 15:20:58', '2023-04-15 15:20:58');
 
 --
 -- Kľúče pre exportované tabuľky
 --
 
 --
--- Indexy pre tabuľku `order_info`
+-- Indexy pre tabuľku `order_infos`
 --
-ALTER TABLE `order_info`
+ALTER TABLE `order_infos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -193,10 +205,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT pre tabuľku `order_info`
+-- AUTO_INCREMENT pre tabuľku `order_infos`
 --
-ALTER TABLE `order_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `order_infos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pre tabuľku `product`
@@ -226,7 +238,7 @@ ALTER TABLE `shopping_history`
 -- AUTO_INCREMENT pre tabuľku `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

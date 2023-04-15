@@ -100,10 +100,11 @@
 
     <section class="container mt-2">
         <div class="row">
+            <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('validate_info') }}" method="POST">
+                @csrf
             <!-- sekcia pre vyplnenie udajov pre objednavku-->
             <div class="col-10 col-sm-6">
-                <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('validate_info') }}" method="POST">
-                    @csrf
+
                     <h5>Osobné údaje</h5>
                     <div class="div mb-2">
                         <div class="row">
@@ -111,7 +112,7 @@
                                 <p class="float-start">Meno a Priezvisko</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="name" class="form-control float-end" placeholder="" value="{{ auth()->check() ? auth()->user()->name : '' }}" required>
+                                <input type="text" name="name" class="form-control float-end" placeholder="" value="{{auth()->check() ? auth()->user()->name : ' ' }}" required>
                             </div>
                         </div>
                     </div>
@@ -121,7 +122,10 @@
                                 <p class="float-start">Email</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="email" class="form-control float-end" placeholder="" value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
+                                <input type="text" name="email" class="form-control float-end" placeholder="" value="{{auth()->check() ? auth()->user()->email : ' ' }}" required>
+                                @if($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -187,7 +191,6 @@
                             </div>
                         </div>
                     </div>
-                </form>
             </div>
             <!-- pddelovacia ciara-->
             <div class="col-1 hr_vertical d-none d-sm-block"></div>
@@ -239,15 +242,14 @@
 
                 <!-- tlacidla pre dalsie kroky-->
                 <div class="col-12 text-center">
-                    <button class="btn-dark rounded-3 mt-5" type="submit">
-                        <a class="btn text-light " href="/templates/main_page.html">Odoslať objednávku s povinnosťou platby</a>
-                    </button>
+                    <button  class="btn-dark btn text-light rounded-3 mt-5" type="submit">Odoslať objednávku s povinnosťou platby</button>
                 </div>
                 <div class="col-1 offset-11 mt-5">
                     <a href="kosik_doprava_platba" class="btn btn-primary float-sm-start">Späť</a>
                 </div>
 
             </div>
+            </form>
         </div>
     </section>
 
