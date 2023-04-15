@@ -6,6 +6,7 @@ body {
 button{
     width: 100%;
     border-radius: 10px;
+	border: 0;
 }
 .close_button{
     width: 40px;

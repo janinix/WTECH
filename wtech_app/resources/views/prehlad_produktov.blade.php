@@ -36,6 +36,15 @@
 		@php
 			$products = DB::table('product')->select('id', 'name','price','image1')->where('category1','potraviny')->paginate(6);
 		@endphp
+	@elseif($message = Session::get('vyhladavanie'))
+		@php
+			$products = DB::table('product')
+				->select('id', 'name', 'price', 'image1')
+				->where('category1', $message)
+				->orWhere('category2', $message)
+				->orWhere('category3', $message)
+				->paginate(6);
+		@endphp
 	@else
 		@php
 			$products = DB::table('product')->select('id', 'name','price','image1')->paginate(6);
@@ -132,18 +141,21 @@
 					</div>
 				</div>
 			</div>
-			<div class="row justify-content-center mt-4 mb-3 gy-2">
-				<div class="col-auto">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Hľadať...">
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-outline-secondary">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</button>
+			<form action="{{ route('product_vyhladavanie') }}" method="POST">
+				@csrf
+				<div class="row justify-content-center mt-4 mb-3 gy-2">
+					<div class="col-auto">
+						<div class="input-group">
+							<input type="text" class="form-control" name="search" placeholder="Hľadať...">
+							<div class="input-group-append">
+								<button type="submit" class="btn btn-outline-secondary">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 
 		<div class="bg-light products_list container-fluid">
