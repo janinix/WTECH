@@ -29,6 +29,28 @@ class ProductController extends Controller
         return redirect('prehlad_produktov')->with('vyhladavanie',$vyhladavanie);
     }
 
+    public function product_filter_cena(Request $request)
+    {
+        $cena = $request->input('cost');
+        return redirect('prehlad_produktov')->with('cost',$cena);
+    }
+
+    public function product_filter_znacka(Request $request)
+    {
+        $znacka = $request->input('znacka');
+        return redirect('prehlad_produktov')->with('znacka',$znacka);
+    }
+
+    public function price_down()
+    {
+        return redirect('prehlad_produktov')->with('price_down',"cena nadol");
+    }
+
+    public function price_up()
+    {
+        return redirect('prehlad_produktov')->with('price_up',"cena nahor");
+    }
+
     public function product_detail($product_id)
     {
         config(['globals.global_prod_id' => $product_id]);

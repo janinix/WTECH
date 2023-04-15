@@ -36,6 +36,14 @@
 		@php
 			$products = DB::table('product')->select('id', 'name','price','image1')->where('category1','potraviny')->paginate(6);
 		@endphp
+	@elseif($message = Session::get('price_down'))
+		@php
+			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price')->orderBy('id')->paginate(6);
+		@endphp
+	@elseif($message = Session::get('price_up'))
+		@php
+			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price', 'desc')->orderBy('id')->paginate(6);
+		@endphp
 	@elseif($message = Session::get('vyhladavanie'))
 		@php
 			$products = DB::table('product')
@@ -43,6 +51,20 @@
 				->where('category1', $message)
 				->orWhere('category2', $message)
 				->orWhere('category3', $message)
+				->paginate(6);
+		@endphp
+	@elseif($message = Session::get('cost'))
+		@php
+			$products = DB::table('product')
+				->select('id', 'name', 'price', 'image1')
+				->where('price','<', $message)
+				->paginate(6);
+		@endphp
+	@elseif($message = Session::get('znacka'))
+		@php
+			$products = DB::table('product')
+				->select('id', 'name', 'price', 'image1')
+				->where('category2', $message)
 				->paginate(6);
 		@endphp
 	@else
@@ -108,39 +130,54 @@
 
 	<!-- Táto sekcia je hlavná sekcia, obsahuje filtre a carty s produktami -->
 	<section class="filters bg-light container-fluid mt-3">
+		
+  </div>
 		<!-- Filtre -->
 		<div class="mb-5">
-			<div class="row justify-content-center mt-3 gy-2">
-				<div class="col-auto">
-					<label for="cost" class="mb-2"><strong>Cena</strong></label>
-					<input type="range" class="form-range" id="cost" name="cost" min="0" max="1000" step="10">
-				</div>
-			</div>
-			<div class="row justify-content-center mt-3 gy-2">
-				<div class="col-auto">
-					<label for="brand" class="mb-2"><strong>Kategória</strong></label>
-					<select class="form-select" id="brand" name="znacka">
-						<option value="w1">Whey</option>
-						<option value="w2">Beef</option>
-						<option value="we3">Vegan</option>
-					</select>
-				</div>
-			</div>
-			<div class="row justify-content-center mt-3 gy-2">
-				<div class="col-auto justify-content-center mt-3 gy-2 d-flex flex-column">
-					<label for="size" class="mb-2"><strong>Značka</strong></label>
-					<div class="btn-group" role="group" aria-label="Váha">
-						<input class="btn-check" type="radio" name="size" id="size-s" value="s" autocomplete="off">
-						<label class="btn btn-outline-secondary" for="size-s">Gymbeam</label>
-
-						<input class="btn-check" type="radio" name="size" id="size-m" value="m" autocomplete="off">
-						<label class="btn btn-outline-secondary" for="size-m">Biotech</label>
-
-						<input class="btn-check" type="radio" name="size" id="size-l" value="l" autocomplete="off">
-						<label class="btn btn-outline-secondary" for="size-l">GN</label>
+			<form action="{{ route('product_filter_cena') }}" method="POST">
+				@csrf
+				<div class="row justify-content-center mt-3 gy-2">
+					<div class="col-auto text-center">
+						<label  for="cost" class="mb-2"><strong>Cena</strong></label>
+						<input type="range" class="form-range" id="cost" name="cost" min="0" max="100" step="1">
+						<div class="row">
+							<div class="col-6 text-center">
+								<span id="cost-value"></span>
+							</div>
+							<div class="col-6">
+								<button type="submit" class="btn btn-outline-secondary">
+									<i class="fa fa-search" aria-hidden="true"></i>
+								</button>
+							</div>
+						</div>
+						
 					</div>
 				</div>
-			</div>
+			</form>
+			<form action="{{ route('product_filter_znacka') }}" method="POST">
+				@csrf
+				<div class="row justify-content-center mt-3 gy-2">
+					<div class="col-auto">
+					<div class="text-center">
+						<label for="znacka" class="mb-2"><strong>Značka</strong></label>
+					</div>
+					<div class="btn-group" role="group" aria-label="Váha">
+						<input class="btn-check" type="radio" name="znacka" id="gymbeam" value="Gymbeam" autocomplete="off">
+						<label class="btn btn-outline-secondary" for="gymbeam">Gymbeam</label>
+
+						<input class="btn-check" type="radio" name="znacka" id="biotech" value="Biotech" autocomplete="off">
+						<label class="btn btn-outline-secondary" for="biotech">Biotech</label>
+
+						<input class="btn-check" type="radio" name="znacka" id="gn" value="GN" autocomplete="off">
+						<label class="btn btn-outline-secondary" for="gn">GN</label>
+					</div>
+					</div>
+				</div>
+				<button type="submit" class="btn btn-outline-secondary col-2 offset-5">
+					<i class="fa fa-search" aria-hidden="true"></i>
+				</button>
+			</form>
+
 			<form action="{{ route('product_vyhladavanie') }}" method="POST">
 				@csrf
 				<div class="row justify-content-center mt-4 mb-3 gy-2">
@@ -156,6 +193,28 @@
 					</div>
 				</div>
 			</form>
+
+			<div class="row justify-content-center mt-4 mb-3 gy-2">
+				<div class="col-2">
+					<form action="{{ route('price_down') }}" method="POST">
+						@csrf
+						<input type="hidden" class="form-control" name="price_down" value="price_down">
+						<button type='submit' class="btn btn-outline-secondary">
+							Cena <i class="fa fa-arrow-down" aria-hidden="true"></i>
+						</button>
+					</form>
+				</div>
+				<div class="col-2">
+					<form action="{{ route('price_up') }}" method="POST">
+						@csrf
+						<input type="hidden" class="form-control" name="price_up" value="price_up">
+						<button type='submit' class="btn btn-outline-secondary">
+							Cena <i class="fa fa-arrow-up" aria-hidden="true"></i>
+						</button>
+					</form>
+				</div>
+			</div>
+			
 		</div>
 
 		<div class="bg-light products_list container-fluid">
@@ -215,7 +274,13 @@
 		</div>
 	</footer>
 
-
+	<script>
+		const costRange = document.querySelector('#cost');
+		const costValue = document.querySelector('#cost-value');
+		costRange.addEventListener('input', () => {
+			costValue.textContent = costRange.value;
+		});
+	</script>	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>

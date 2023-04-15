@@ -44,7 +44,11 @@ Route::post('product_oblecenie', [ProductController::class, 'product_oblecenie']
 Route::post('product_potraviny', [ProductController::class, 'product_potraviny'])->name('product_potraviny');
 Route::post('product_prislusenstvo', [ProductController::class, 'product_prislusenstvo'])->name('product_prislusenstvo');
 Route::post('product_vyhladavanie', [ProductController::class, 'product_vyhladavanie'])->name('product_vyhladavanie');
+Route::post('product_filter_cena', [ProductController::class, 'product_filter_cena'])->name('product_filter_cena');
 Route::post('/product_detail/{id}', [ProductController::class, 'product_detail'])->name('product_detail');
+Route::post('product_filter_znacka', [ProductController::class, 'product_filter_znacka'])->name('product_filter_znacka');
+Route::post('price_up', [ProductController::class, 'price_up'])->name('price_up');
+Route::post('price_down', [ProductController::class, 'price_down'])->name('price_down');
 
 
 Route::get('/kosik_zhrnutie', function () {
