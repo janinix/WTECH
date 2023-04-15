@@ -103,6 +103,7 @@
             <!-- sekcia pre vyplnenie udajov pre objednavku-->
             <div class="col-10 col-sm-6">
                 <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('validate_info') }}" method="POST">
+                    @csrf
                     <h5>Osobné údaje</h5>
                     <div class="div mb-2">
                         <div class="row">
@@ -110,7 +111,7 @@
                                 <p class="float-start">Meno a Priezvisko</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="name" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="name" class="form-control float-end" placeholder="" value="{{ auth()->check() ? auth()->user()->name : '' }}" required>
                             </div>
                         </div>
                     </div>
@@ -120,7 +121,7 @@
                                 <p class="float-start">Email</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="email" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="email" class="form-control float-end" placeholder="" value="{{ auth()->check() ? auth()->user()->email : '' }}" required>
                             </div>
                         </div>
                     </div>
