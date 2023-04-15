@@ -23,9 +23,16 @@ class ProductController extends Controller
     {
         return redirect('prehlad_produktov')->with('potraviny', 'Filter done');
     }
+    public function product_vyhladavanie(Request $request)
+    {
+        $vyhladavanie = $request->input('search');
+        return redirect('prehlad_produktov')->with('vyhladavanie',$vyhladavanie);
+    }
 
     public function product_detail($product_id)
     {
+        config(['globals.global_prod_id' => $product_id]);
+        
         return redirect('product_detail')->with('detail',$product_id);
     }
 
