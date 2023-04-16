@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Session;
 
 class BasketOverviewController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         //$cart = DB::table('shopping_cart')->select('id', 'user_id')->where('user_id','0');
         //$basket_items_db = DB::table('product')->select('name', 'price', 'description')->get();
@@ -45,6 +45,28 @@ class BasketOverviewController extends Controller
         // get values
             
         return redirect('main_page');
+    }
+
+    public function addProduct(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $product = Product::findOrFail($product_id);
+        
+        
+        // Add the product to database
+        // ...
+        // todo: this change.
+        DB::table('cart_items')->insert([
+            'product_id' => $product->id,
+            'quantity' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        
+
+
+        return redirect()->back()->with('success', 'Product added to the cart successfully!');
     }
 }
 

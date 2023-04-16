@@ -123,7 +123,7 @@
 	<!-- Táto sekcia je hlavná sekcia, obsahuje filtre a carty s produktami -->
 	<section class="filters bg-light container-fluid mt-3">
 		
-  </div>
+    </div>
 		<!-- Filtre -->
 		<div class="mb-5">
 			<form action="{{ route('product_filter_cena') }}" method="POST">
@@ -228,7 +228,12 @@
 									<h5 class="card-title">{{$product->name}}</h5>
 									<h6 class="card-subtitle mb-2 text-muted">{{$product->price}}€</h6>
 								</div>
-								<button type="button" class="btn btn-danger">do košíka</button>
+								<form action="{{ route('add_product') }}" method="POST">
+									@csrf
+									<input type="hidden" name="product_id" value="{{ $product->id }}">
+									<button type="submit" class="btn btn-danger">do košíka</button>
+								</form>
+								
 							</div>
 						</div>
 					</div>
