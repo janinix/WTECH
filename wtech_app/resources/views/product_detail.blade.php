@@ -165,7 +165,7 @@
             </h2>
             <!--tlacidlo na pridanie do kosika-->
             
-            <form class="add">
+            <form class="add" action="{{ route('add_product_detail') }}" method="POST">
                @csrf
               <input type="hidden" name="product_id" value="{{ $product->id }}">
               <input type="hidden" name="quantity" id="quantityInput" value="1">

@@ -68,7 +68,7 @@
                 ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
                 ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
                 ->where('shopping_cart_id', '=', $latest_cart_id)
-                ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'product.name', 'product.price', 'product.image1')
+                ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'shopping_cart_item.id', 'product.name', 'product.price', 'product.image1')
                 ->get();
 @endphp
 
@@ -145,9 +145,12 @@
 
                 </div>
                 <div class="col-1 col-md-2">
-                    <button class="btn mt-4 mt-md-3">
-                        <img src="../images/delete_item.png" alt="" srcset="">
-                    </button>
+                    <form method="POST" action="{{ route('product_delete', $item->id) }}"> <!-- shopping_cart_item.id -->
+                        @csrf
+                        <button type="submit" class="btn mt-4 mt-md-3">
+                            <img src="../images/delete_item.png" alt="" srcset="">
+                        </button>
+                    </form>                    
                 </div>
                 @endforeach
             </div>
@@ -210,6 +213,17 @@
             let count = parseInt(itemCountElement.innerText);
             count += 1;
             itemCountElement.innerText = count;
+            // Send an AJAX request to update the quantity in the database
+            fetch(/updatequantity/${card}, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    quantity: count
+                })
+            });
         }
 
         function decrement(event) {
@@ -220,6 +234,16 @@
                 count -= 1;
             }
             itemCountElement.innerText = count;
+            fetch(/update_quantity/${card}, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    quantity: count
+                })
+            });
         }
     </script>
 
