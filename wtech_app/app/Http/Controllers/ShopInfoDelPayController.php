@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ShoppingCartInfoDeliveryPayment extends Controller
+class ShopInfoDelPayController extends Controller
 {
     function validate_info(Request $request)
     {

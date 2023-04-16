@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ShoppingCartInfoDeliveryPayment;
+use App\Http\Controllers\ShopInfoDelPayController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogRegConstroller;
 use App\Http\Controllers\DeleteController;
@@ -64,8 +64,8 @@ Route::get('/kosik_zhrnutie', function () {
     return view('kosik_zhrnutie');
 });
 
-Route::post('validate_info', [ShoppingCartInfoDeliveryPayment::class, 'validate_info'])->name('validate_info');
-Route::post('options', [ShoppingCartInfoDeliveryPayment::class, 'options'])->name('options');
+Route::post('validate_info', [ShopInfoDelPayController::class, 'validate_info'])->name('validate_info');
+Route::post('options', [ShopInfoDelPayController::class, 'options'])->name('options');
 
 
 // add product to database -- basket
