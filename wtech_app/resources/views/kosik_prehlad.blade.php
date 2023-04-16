@@ -15,16 +15,17 @@
 </head>
 
 <body>
-    <!-- navigacia -->
-    <nav class="navbar navbar-light fw-bold navbar-expand-md">
-        <div class="container">
-            <a href="/" class="navbar-brand"><img src="images/logo_black.png" alt="" width="130" height=""></a>
-            <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
-                    aria-label="Expand navigation">
-                <span class="navbar-toggler-icon "><i class="fa fa-bars fs-1"></i></span>
-            </button>
-            <div class="collapse navbar-collapse text-center " id="nav">
-                <ul class="navbar-nav ms-auto links-font ">
+<!-- navigacia -->
+<nav class="navbar navbar-light fw-bold navbar-expand-md">
+    <div class="container">
+        <a href="/" class="navbar-brand"><img src="images/logo_black.png" alt="" width="130" height=""></a>
+        <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+                aria-label="Expand navigation">
+            <span class="navbar-toggler-icon "><i class="fa fa-bars fs-1"></i></span>
+        </button>
+        <div class="collapse navbar-collapse text-center " id="nav">
+            <ul class="navbar-nav ms-auto links-font ">
+                @guest
                     <li class="nav-item">
                         <a href="register" class="nav-link fs-2">Registrácia</a>
                     </li>
@@ -36,10 +37,37 @@
                             <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
                         </a>
                     </li>
-                </ul>
-            </div>
+                @else
+                    <li class="nav-item">
+                        <a href="#" class="nav-link fs-2">
+                            {{ Auth::user()->username }}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout " class="nav-link fs-2">
+                            Odhlásenie
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="kosik_prehlad" class="nav-link">
+                            <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                @endguest
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
+    @php
+        $data = DB::table('shopping_cart')
+                    ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
+                    ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
+                    ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'product.name', 'product.price', 'product.image1')
+                    ->get();
+        $total_price = 0;
+    @endphp
+
     <!-- sekcia pre zobrazenie casti kosika v ktorom sa zakarnik nachadza -->
     <section class="container bg-light ">
         <h1 class="text-center mb-5 mt-3">Nakupný košík</h1>
@@ -79,56 +107,15 @@
             </div>
         </section>
 
-        <!--
-        @foreach ($basket_items as $product)
-            <div class="container border border-dark mt-5 kosik_container_product">
-                <div class="row ">
-                    <div class="col-2 d-none d-sm-block ">
-                        <img src="{{ $product->image1 }}" alt="" srcset="">
-                    </div>
-                    <div class="col-3 mt-sm-3">
-                        <h5 class=" fs-5">{{ $product->name }}</h5>
-                    <h5 class="text-success fs-6">{{ $product->description }}</h5>
-                    </div>
-
-                    <div class="col-4 col-md-3 mt-md-3">
-                        <div class="row mt-sm-3 row-cols-1">
-                            <div class="col-sm-3">
-                                <button class="btn" onclick="increment(event)" data-card="card{{ $product->id }}">
-                                    <i class="fa-sharp fa fa-plus fs-2 "></i>
-                                </button>
-                            </div>
-                            <div class="col-sm-1">
-                                <p class="fs-3" id="itemCount_card{{ $product->id }}">3</p>
-                            </div>
-                            <div class="col-sm-3">
-                                <button class="btn" onclick="decrement(event)" data-card="card{{ $product->id }}">
-                                    <i class="fa-sharp fa fa-minus fs-2 "></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2 mt-3 mt-sm-4 ">
-                        <h5 class="fs-6">Cena {{ $product->price }}€ s DPH</h5>
-                    </div>
-                    <div class="col-1 col-md-2">
-                        <button class="btn mt-4 mt-md-3">
-                            <img src="../images/delete_item.png" alt="" srcset="">
-                        </button>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        -->
-
         <!-- zobrazenie produktu v kosiku-->
         <div class="container border border-dark mt-5 kosik_container_product">
             <div class="row ">
+                @foreach($data as $item)
                 <div class="col-2 d-none d-sm-block ">
-                    <img src="../images/protein1.jpg" alt="" srcset="">
+                    <img src="{{$item->image1}}" alt="" srcset="" width="50" height="50">
                 </div>
                 <div class="col-3 mt-sm-3">
-                    <h5 class=" fs-5">100% Whey protein...</h5>
+                    <h5 class=" fs-5">{{$item->name}}</h5>
                     <h5 class="text-success fs-6">Skladom v predajni</h5>
                 </div>
 
@@ -140,7 +127,7 @@
                             </button>
                         </div>
                         <div class=" col-sm-1">
-                            <p class="fs-3" id="itemCount_card1">3</p>
+                            <p class="fs-3" id="itemCount_card1">{{$item->quantity}}</p>
                         </div>
                         <div class=" col-sm-3">
                             <button class="btn" onclick="decrement(event)" data-card="card1">
@@ -150,7 +137,7 @@
                     </div>
                 </div>
                 <div class="col-2  mt-3 mt-sm-4  ">
-                    <h5 class="fs-6 ">Cena 30€ s DPH</h5>
+                    <h5 class="fs-6 ">Cena {{$item->price}}€ s DPH</h5>
 
                 </div>
                 <div class="col-1 col-md-2">
@@ -158,45 +145,7 @@
                         <img src="../images/delete_item.png" alt="" srcset="">
                     </button>
                 </div>
-            </div>
-        </div>
-        <!-- zobrazenie produktu v kosiku-->
-        <div class="container border border-dark mt-5 kosik_container_product">
-            <div class="row ">
-                <div class="col-2 d-none d-sm-block ">
-                    <img src="../images/protein1.jpg" alt="" srcset="">
-                </div>
-                <div class="col-3 mt-sm-3">
-                    <h5 class=" fs-5">100% Whey protein...</h5>
-                    <h5 class="text-success fs-6">Skladom v predajni</h5>
-                </div>
-
-                <div class="col-4 col-md-3 mt-md-3">
-                    <div class="row  mt-sm-3 row-cols-1">
-                        <div class=" col-sm-3">
-                            <button class="btn" onclick="increment(event)" data-card="card2">
-                                <i class="fa-sharp fa fa-plus fs-2 "></i>
-                            </button>
-                        </div>
-                        <div class=" col-sm-1">
-                            <p class="fs-3" id="itemCount_card2">3</p>
-                        </div>
-                        <div class=" col-sm-3">
-                            <button class="btn" onclick="decrement(event)" data-card="card2">
-                                <i class="fa-sharp fa fa-minus fs-2 "></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2  mt-3 mt-sm-4  ">
-                    <h5 class="fs-6 ">Cena 30€ s DPH</h5>
-
-                </div>
-                <div class="col-1 col-md-2">
-                    <button class="btn mt-4 mt-md-3">
-                        <img src="../images/delete_item.png" alt="" srcset="">
-                    </button>
-                </div>
+                @endforeach
             </div>
         </div>
 
@@ -258,7 +207,7 @@
             count += 1;
             itemCountElement.innerText = count;
         }
-    
+
         function decrement(event) {
             let card = event.target.closest("button").dataset.card;
             let itemCountElement = document.getElementById(`itemCount_${card}`);
@@ -269,8 +218,8 @@
             itemCountElement.innerText = count;
         }
     </script>
-        
-        
+
+
 </body>
 
 </html>
