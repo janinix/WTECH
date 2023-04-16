@@ -59,7 +59,7 @@
       @if($message = Session::get('detail'))
         @php
           $product = DB::table('product')->select('id', 'name','price','image1','image2','image3','rating','description','category2','category1')->where('id',$message)->first();
-          Cache::put('product', $product, 10 * 10);
+          Cache::put('product', $product, 60 * 60);
 		    @endphp
       @endif
       
@@ -146,14 +146,14 @@
               <div>
                 <p>množstvo:</p>
                 <!-- zadanie mnozstva-->
-                <div class="col-2  d-flex flex-wrap">
+                <div class="col-2 d-flex flex-wrap">
                   <div class="mnozstvo">
-                    <button class="amount">
-                      <i class="fa-sharp fa fa-plus fs-0 "></i>
+                    <button class="amount plus">
+                      <i class="fa-sharp fa fa-plus fs-0"></i>
                     </button>
-                    <span class="p-2">1</span>
-                    <button class="amount">
-                      <i class="fa-sharp fa fa-minus fs-0 "></i>
+                    <span class="p-2" id="quantitySpan">1</span>
+                    <button class="amount minus">
+                      <i class="fa-sharp fa fa-minus fs-0"></i>
                     </button>
                   </div>
                 </div>
@@ -164,11 +164,13 @@
                 {{$product->price}}€
             </h2>
             <!--tlacidlo na pridanie do kosika-->
-            <div class="add">
-              <a href="kosik_prehlad" class="btn">
-                Pridať do košíka
-              </a>
-            </div>
+            
+            <form class="add">
+               @csrf
+              <input type="hidden" name="product_id" value="{{ $product->id }}">
+              <input type="hidden" name="quantity" id="quantityInput" value="1">
+              <button type="submit" class="btn btn-primary">Pridať do košíka</button>
+            </form>
 
           </section>
 
@@ -190,7 +192,7 @@
           <div class="row">
             @foreach($random_products as $random_product)
               <div class="col-10  offset-1 offset-sm-0 col-sm-6 col-md-3">
-                <form method='POST' action="{{ route('product_detail', $random_product->id) }}">
+                <form method='POST' action="{{ route('product_detail', $random_product->id) }}" id='add_product_form'>
                   @csrf
                   <button type="submit">
                     <img class="card-img-top" src= {{ $random_product->image2}} height="90px" alt="Product Image">
@@ -330,7 +332,30 @@
           <small class="text-dark">&copy; Copyright 2023, FITShop</small>
         </div>
       </footer>
+    <script>
+      $('#add_product_form').submit(function() {
+        var quantity = $('#quantitySpan').text();
+        $('#quantityInput').val(quantity);
+      });
+    </script>
+    <script>
+      const plusButton = document.querySelector('.plus');
+      const minusButton = document.querySelector('.minus');
+      const valueSpan = document.querySelector('.p-2');
+      let value = 1;
 
+      plusButton.addEventListener('click', () => {
+        value++;
+        valueSpan.textContent = value;
+      });
+
+      minusButton.addEventListener('click', () => {
+        if (value > 1) {
+          value--;
+          valueSpan.textContent = value;
+        }
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>
 </html>
