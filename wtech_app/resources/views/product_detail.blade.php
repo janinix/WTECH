@@ -342,7 +342,7 @@
       const plusButton = document.querySelector('.plus');
       const minusButton = document.querySelector('.minus');
       const valueSpan = document.querySelector('.p-2');
-
+      const val=2;
       let value = 1;
 
       plusButton.addEventListener('click', () => {
