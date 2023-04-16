@@ -38,12 +38,32 @@
 		@endphp
 	@elseif($message = Session::get('price_down'))
 		@php
-			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price','asc')->orderBy('id', 'asc')->paginate(6);
+			echo $message;
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
 		@endphp
+		@if(in_array($message, $valid))
+			@php
+				$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price','asc')->where('category1',$message)->orderBy('id', 'asc')->paginate(6);
+			@endphp
+		@elseif($message=="cena_dole")
+			@php
+				$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price','asc')->orderBy('id', 'asc')->paginate(6);
+			@endphp
+		@endif
 	@elseif($message = Session::get('price_up'))
 		@php
-			$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price', 'desc')->orderBy('id', 'asc')->paginate(6);
+			echo $message;
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
 		@endphp
+		@if(in_array($message, $valid))
+			@php
+				$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price','desc')->where('category1',$message)->orderBy('id', 'asc')->paginate(6);
+			@endphp
+		@elseif($message=="cena_hore")
+			@php
+				$products = DB::table('product')->select('id', 'name','price','image1')->orderBy('price','desc')->orderBy('id', 'asc')->paginate(6);
+			@endphp
+		@endif
 	@elseif($message = Session::get('vyhladavanie'))
 		@php
 			$products = DB::table('product')->select('id', 'name', 'price', 'image1')->where('category1', $message)->orWhere('category2', $message)->orWhere('category3', $message)->paginate(6);
