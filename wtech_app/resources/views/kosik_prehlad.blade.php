@@ -81,8 +81,8 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-1 text-center">
-                <i class="fa fa-long-arrow-alt-right d-none d-md-block fs-1 mt-5"></i>
-                <i class="fa fa-long-arrow-alt-down d-block d-md-none fs-1 my-2"></i>
+                <i class="fa fa-long-arrow-right d-none d-md-block fs-1 mt-5"></i>
+                <i class="fa fa-long-arrow-down d-block d-md-none fs-1 my-2"></i>
             </div>
             <div class="col-7 col-md-3 col-lg-3">
                 <div class="container border border-dark text-center  kosik_container">
@@ -93,8 +93,8 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-1 text-center">
-                <i class="fa fa-long-arrow-alt-right d-none d-md-block fs-1 mt-5"></i>
-                <i class="fa fa-long-arrow-alt-down d-block d-md-none fs-1 my-2"></i>
+                <i class="fa fa-long-arrow-right d-none d-md-block fs-1 mt-5"></i>
+                <i class="fa fa-long-arrow-down d-block d-md-none fs-1 my-2"></i>
             </div>
             <div class="col-7 col-md-3 col-lg-3">
                 <div class="container border border-dark text-center kosik_container">
