@@ -65,6 +65,7 @@ Route::get('/kosik_zhrnutie', function () {
 });
 
 Route::post('validate_info', [ShoppingCartInfoDeliveryPayment::class, 'validate_info'])->name('validate_info');
+Route::post('options', [ShoppingCartInfoDeliveryPayment::class, 'options'])->name('options');
 
 Route::get('/kosik_doprava_platba', function () {
     return view('kosik_doprava_platba');

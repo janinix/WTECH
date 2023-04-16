@@ -49,6 +49,25 @@ class ShoppingCartInfoDeliveryPayment extends Controller
             'country'      =>  $data['country']
         ]);
 
-        return redirect('main_page')->with('successReg', 'Vaša objednávka bola odoslaná');
+        return redirect('main_page')->with('successOrder', 'Vaša objednávka bola odoslaná');
     }
+
+    public function options(Request $request){
+
+        $selected_delivery = $request->input('interest');
+        $selected_payment = $request->input('payment');
+        $card_number = null;
+        if ($selected_payment=== 'bank_ucet' && !empty($request->input('card_number'))) {
+            $card_number = $request->input('card_number');
+        }
+
+        Order_info::create([
+            'delivery'    =>  $selected_delivery,
+            'payment'     =>  $selected_payment,
+            'card_number' =>  $card_number
+        ]);
+
+        return redirect('kosik_zhrnutie');
+    }
+
 }

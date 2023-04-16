@@ -9,21 +9,18 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Order_info extends Model
+class Shopping_cart_item extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'name',
-        'email',
-        'phone_number',
-        'street',
-        'house_number',
-        'city',
-        'postal_code',
-        'country',
-        'delivery',
-        'payment',
-        'card_number'
+        'shopping_cart_id',
+        'product_id',
+        'quantity'
     ];
+
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
 }

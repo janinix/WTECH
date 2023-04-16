@@ -104,36 +104,40 @@
             </div>
         </div>
     </section>
+
+    <form action="{{ route('options') }}" method="POST">
+        @csrf
     <!-- casť pre vyber sposobu platby a dorucenia -->
     <h3 class="mt-4">Doručenie tovaru</h3>
     <div class="container border border-dark my-2">
         <div class="my-2">
-            <input type="checkbox" id="kurier" name="interest" value="kurier"  />
+            <input type="radio" id="kurier" name="interest" value="kurier"/>
             <label for="kurier">Doručenie kurierom(+2€)</label>
         </div>
         <div class="my-2">
-            <input type="checkbox" id="osobny_odber" name="interest" value="osobny_odber"  />
+            <input type="radio" id="osobny_odber" name="interest" value="osobny_odber" />
             <label for="osobny_odber">Osobný odber na adrese Staré Grunty 7</label>
         </div>
     </div>
     <h3 class="mt-4">Spôsob platby</h3>
     <div class="container border border-dark my-2">
         <div class="my-2">
-            <input type="checkbox" id="back_ucet" name="interest" value="back_ucet" data-bs-toggle="collapse" href="#collapse1"  />
+            <input type="radio" id="back_ucet" name="payment" value="bank_ucet" data-bs-toggle="collapse" href="#collapse1"/>
             <label for="back_ucet">Prevodom na účet</label>
             <div class="collapse" id="collapse1">
-                <input type="text" class="form-control" placeholder="Číslo karty">
+                <input type="text" name="card_number"  class="form-control" placeholder="Číslo karty">
             </div>
         </div>
         <div class="my-2">
-            <input type="checkbox" id="dobierka" name="interest" value="dobierka"  />
+            <input type="radio" id="dobierka" name="payment" value="dobierka"/>
             <label for="dobierka">Dobierka(+1€)</label>
         </div>
         <div class="my-2">
-            <input type="checkbox" id="hotovost" name="interest" value="hotovost" />
+            <input type="radio" id="hotovost" name="payment" value="hotovost"/>
             <label for="hotovost">V hotovosti pri osobnom odbere</label>
         </div>
     </div>
+
 
     <!-- tlacidla pre dalsie kroky-->
     <div class="container pb-3 mt-3">
@@ -142,12 +146,11 @@
                 <a href="kosik_prehlad" class="btn btn-primary float-sm-start">Späť</a>
             </div>
             <div class="col-6">
-                <a href="kosik_zhrnutie" class="btn btn-primary float-end">Pokračovať</a>
+                <button  class="btn btn-primary float-end" type="submit">Pokračovať</button>
             </div>
         </div>
-
-
     </div>
+    </form>
 
 </section>
 <!-- päta stranky-->

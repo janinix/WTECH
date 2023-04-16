@@ -57,6 +57,14 @@
         </div>
     </div>
 </nav>
+
+@php
+    $shopping_carts = DB::table('$shopping_cart')->select('id');
+    $shopping_cart_items = DB::table('$shopping_cart_item')->select('id', '$shopping_cart_id','product_id', 'quantity');
+    $products = DB::table('$product')->select('id', 'name','price');
+@endphp
+
+
 <!-- sekcia pre zobrazenie casti kosika v ktorom sa zakarnik nachadza -->
 <section class="container bg-light ">
     <h1 class="text-center mb-5 mt-3">Nakupný košík</h1>
@@ -100,11 +108,10 @@
 
     <section class="container mt-2">
         <div class="row">
-            <form class="col-10 offset-1 register_form d-inline-block" action="{{ route('validate_info') }}" method="POST">
-                @csrf
             <!-- sekcia pre vyplnenie udajov pre objednavku-->
             <div class="col-10 col-sm-6">
-
+                <form action="{{ route('validate_info') }}" method="POST">
+                    @csrf
                     <h5>Osobné údaje</h5>
                     <div class="div mb-2">
                         <div class="row">
@@ -191,65 +198,41 @@
                             </div>
                         </div>
                     </div>
+                    <!-- tlacidlo pre dalsie kroky-->
+                    <div class="col-12 mb-3 text-center">
+                        <button  class="btn-dark btn text-light rounded-3 mt-5" type="submit">Odoslať objednávku s povinnosťou platby</button>
+                    </div>
+                </form>
             </div>
             <!-- pddelovacia ciara-->
             <div class="col-1 hr_vertical d-none d-sm-block"></div>
             <!-- sekcia pre zhrnutie nakupu -->
             <div class="col-10 col-sm-5">
                 <h5 class="text-center">Zhrnutie objednávky</h5>
+{{--                @foreach($shopping_cart_items as $shopping_cart_item)--}}
                 <div class="container ">
                     <div class="row mt-3">
                         <div class="col-5 offset-1">
-                            <h6>100% Whey Protein</h6>
+                            <h6>meno</h6>
                         </div>
-                        <div class="col-3"><h6>1ks</h6></div>
-                        <div class="col-3"> <h6>30€</h6></div>
+                        <div class="col-3"><h6>5 ks</h6></div>
+                        <div class="col-3"> <h6>1 €</h6></div>
                     </div>
                 </div>
                 <hr>
-                <div class="container ">
-                    <div class="row mt-3">
-                        <div class="col-5 offset-1">
-                            <h6>Creatin Tablety 100ks</h6>
-                        </div>
-                        <div class="col-3">
-                            <h6>1ks</h6>
-                        </div>
-                        <div class="col-3">
-                            <h6>15€</h6>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="container ">
-                    <div class="row mt-3">
-                        <div class="col-5 offset-1">
-                            <h6>Fit Tyčinka Kokos</h6>
-                        </div>
-                        <div class="col-3">
-                            <h6>15ks</h6>
-                        </div>
-                        <div class="col-3">
-                            <h6>1,50€</h6>
-                        </div>
-                    </div>
-                </div>
+{{--                @endforeach--}}
                 <hr>
                 <div>
                     <h5 class="float-start">Celkom k úhrade</h5>
                     <h5 class="float-end">67,50€</h5>
                 </div>
 
-                <!-- tlacidla pre dalsie kroky-->
-                <div class="col-12 text-center">
-                    <button  class="btn-dark btn text-light rounded-3 mt-5" type="submit">Odoslať objednávku s povinnosťou platby</button>
-                </div>
-                <div class="col-1 offset-11 mt-5">
+                <!-- tlacidlo pre dalsie kroky-->
+                <div class="col-1 mt-5">
                     <a href="kosik_doprava_platba" class="btn btn-primary float-sm-start">Späť</a>
                 </div>
 
             </div>
-            </form>
         </div>
     </section>
 

@@ -67,6 +67,14 @@
             </button>
         </div>
     @endif
+    @if($message = Session::get('successOrder'))
+        <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
+            {{ $message }}
+            <button type="button" class="close float-end close_button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <section class="container categories justify-content-around">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
             <div class="col-3 text-center mb-2 mb-lg-8">
@@ -93,7 +101,7 @@
                     <button type="submit" class="nav-link nav-links text-uppercase">potraviny</button>
                 </form>
             </div>
-            
+
         </div>
     </section>
 
@@ -168,7 +176,7 @@
                                     @csrf
                                     <button type="submit">
                                         <img class="card-img-top" src= {{ $best_product->image1}}  alt="Product Image">
-                                    </button>		
+                                    </button>
                                 </form>
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold">{{$best_product->name}}</h5>
