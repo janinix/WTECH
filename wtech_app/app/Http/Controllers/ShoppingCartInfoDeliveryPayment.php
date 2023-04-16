@@ -24,6 +24,8 @@ class ShoppingCartInfoDeliveryPayment extends Controller
 
         $data = $request->all();
 
+        $order_info = Order_info::latest()->first();
+
         if(Auth::check()){
             $user = Auth::user();
             $name = $user->name;
@@ -38,7 +40,7 @@ class ShoppingCartInfoDeliveryPayment extends Controller
             $email = $data['email'];
         }
 
-        Order_info::create([
+        $order_info->update([
             'name'         =>  $name,
             'email'        =>  $email,
             'phone_number' =>  $data['phone_number'],
