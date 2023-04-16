@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hostiteľ: 127.0.0.1
--- Čas generovania: So 15.Apr 2023, 21:24
+-- Čas generovania: Sun 16.Apr 2023, 12:22
 -- Verzia serveru: 10.4.28-MariaDB
 -- Verzia PHP: 8.1.17
 
@@ -41,6 +41,7 @@ CREATE TABLE `order_infos` (
   `country` varchar(255) DEFAULT NULL,
   `delivery` varchar(255) DEFAULT NULL,
   `payment` varchar(255) DEFAULT NULL,
+  `card_number` varchar(255) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -49,9 +50,9 @@ CREATE TABLE `order_infos` (
 -- Sťahujem dáta pre tabuľku `order_infos`
 --
 
-INSERT INTO `order_infos` (`id`, `user_id`, `shopping_card_id`, `name`, `email`, `phone_number`, `street`, `house_number`, `city`, `postal_code`, `country`, `delivery`, `payment`, `updated_at`, `created_at`) VALUES
-(1, NULL, NULL, 'Miroslava Mäsiariková', 'miroslava.masiarikova@gmail.com', '0912345678', 'Višňové', '1', 'Štiavnik', '01355', 'Slovensko', NULL, NULL, '2023-04-15 17:20:36', '2023-04-15 17:20:36'),
-(2, NULL, NULL, 'Jozefina Nováková', 'jozka.novak@centrum.sk', '0921218015', 'Košická', '6', 'Žilina', '01001', 'Slovensko', NULL, NULL, '2023-04-15 17:21:49', '2023-04-15 17:21:49');
+INSERT INTO `order_infos` (`id`, `user_id`, `shopping_card_id`, `name`, `email`, `phone_number`, `street`, `house_number`, `city`, `postal_code`, `country`, `delivery`, `payment`, `card_number`, `updated_at`, `created_at`) VALUES
+(16, NULL, NULL, 'Miroslava Mäsiariková', 'miroslava.masiarikova@gmail.com', '09157866354', 'Štiavnik', '1', 'Štiavnik', '01355', 'Slovensko', 'kurier', 'bank_ucet', 'SK65465465145145635651', '2023-04-16 08:17:44', '2023-04-16 08:17:23'),
+(17, NULL, NULL, 'Jozefína Nováková', 'jozka.novak@centrum.sk', '091166565473', 'Ružová', '5', 'Bratislava', '81101', 'Slovensko', 'osobny_odber', 'dobierka', NULL, '2023-04-16 08:20:45', '2023-04-16 08:19:58');
 
 -- --------------------------------------------------------
 
@@ -208,7 +209,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pre tabuľku `order_infos`
 --
 ALTER TABLE `order_infos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pre tabuľku `product`
