@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order_info;
-use App\Models\Shopping_cart;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
