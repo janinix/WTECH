@@ -59,9 +59,12 @@
 </nav>
 
 @php
-    $shopping_carts = DB::table('$shopping_cart')->select('id');
-    $shopping_cart_items = DB::table('$shopping_cart_item')->select('id', '$shopping_cart_id','product_id', 'quantity');
-    $products = DB::table('$product')->select('id', 'name','price');
+    $data = DB::table('shopping_cart')
+                ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
+                ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
+                ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'product.name', 'product.price')
+                ->get();
+    $total_price = 0;
 @endphp
 
 
@@ -209,22 +212,27 @@
             <!-- sekcia pre zhrnutie nakupu -->
             <div class="col-10 col-sm-5">
                 <h5 class="text-center">Zhrnutie objednávky</h5>
-{{--                @foreach($shopping_cart_items as $shopping_cart_item)--}}
+                @foreach($data as $item)
                 <div class="container ">
                     <div class="row mt-3">
                         <div class="col-5 offset-1">
-                            <h6>meno</h6>
+                            <h6>{{$item->name}}</h6>
                         </div>
-                        <div class="col-3"><h6>5 ks</h6></div>
-                        <div class="col-3"> <h6>1 €</h6></div>
+                        <div class="col-3"><h6>{{$item->quantity}}ks</h6></div>
+                        <div class="col-3"> <h6>{{$item->price}}€</h6></div>
                     </div>
                 </div>
                 <hr>
-{{--                @endforeach--}}
+
+                @php
+                    $total_price += $item->quantity * $item->price;
+                @endphp
+
+                @endforeach
                 <hr>
                 <div>
                     <h5 class="float-start">Celkom k úhrade</h5>
-                    <h5 class="float-end">67,50€</h5>
+                    <h5 class="float-end">{{$total_price}}€</h5>
                 </div>
 
                 <!-- tlacidlo pre dalsie kroky-->
