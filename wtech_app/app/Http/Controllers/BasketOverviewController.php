@@ -68,5 +68,47 @@ class BasketOverviewController extends Controller
 
         return redirect()->back()->with('success', 'Product added to the cart successfully!');
     }
+
+    public function addProductDetail(Request $request)
+    {
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity');
+
+        //return $quantity;
+        /*
+        // Add the product to database
+        // ...
+        DB::table('shopping_cart_item')->insert([
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+            'shopping_cart_id' => 1, // toto treba ako globalnu pre usera
+        ]);
+        */
+        return redirect('/prehlad_produktov');
+    }
+
+    public function updateQuantity(Request $request, $id)
+    {
+        $quantity = $request->input('quantity');
+
+        /*
+        // Update the quantity in the database
+        $product = DB::table('shopping_cart')
+        ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
+        ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
+        ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'product.name', 'product.price', 'product.image1')
+        ->where('product.id', $id)->update(['quantity' => $quantity]);
+        */
+        return response()->json(['success' => true]);
+    }
+
+    public function productDelete($id)
+    {
+        // Delete the item from the database
+        DB::table('shopping_cart_item')->where('id', $id)->delete();
+
+        // Redirect back to the page
+        return redirect()->back();
+    }
 }
 
