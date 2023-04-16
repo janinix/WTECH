@@ -14,6 +14,8 @@ class Order_info extends Model
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
+        'user_id',
+        'shopping_card_id',
         'name',
         'email',
         'phone_number',

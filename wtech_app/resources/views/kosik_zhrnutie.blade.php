@@ -59,9 +59,14 @@
 </nav>
 
 @php
+    $latest_cart_id = DB::table('shopping_cart')
+                      ->orderByDesc('id')
+                      ->value('id');
+
     $data = DB::table('shopping_cart')
                 ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
                 ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
+                ->where('shopping_cart_id', '=', $latest_cart_id)
                 ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'product.name', 'product.price')
                 ->get();
     $total_price = 0;

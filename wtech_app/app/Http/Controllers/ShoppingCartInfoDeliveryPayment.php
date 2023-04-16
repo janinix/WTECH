@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order_info;
+use App\Models\Shopping_cart;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ShoppingCartInfoDeliveryPayment extends Controller
 {
@@ -24,10 +26,15 @@ class ShoppingCartInfoDeliveryPayment extends Controller
 
         $data = $request->all();
 
+        $shopping_card_id = DB::table('shopping_cart')
+                            ->orderByDesc('id')
+                            ->value('id');
+
         $order_info = Order_info::latest()->first();
 
         if(Auth::check()){
             $user = Auth::user();
+            $user_id = $user->id;
             $name = $user->name;
             $email = $user->email;
         }else{
@@ -36,11 +43,14 @@ class ShoppingCartInfoDeliveryPayment extends Controller
                 'email'        =>   'required|email|unique:users'
             ]);
 
+            $user_id = null;
             $name=  $data['name'];
             $email = $data['email'];
         }
 
         $order_info->update([
+            'user_id'      =>  $user_id,
+            'shopping_card_id' => $shopping_card_id,
             'name'         =>  $name,
             'email'        =>  $email,
             'phone_number' =>  $data['phone_number'],
