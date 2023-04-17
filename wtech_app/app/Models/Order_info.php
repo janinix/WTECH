@@ -15,7 +15,7 @@ class Order_info extends Model
 
     protected $fillable = [
         'user_id',
-        'shopping_card_id',
+//        'shopping_card_id',
         'name',
         'email',
         'phone_number',

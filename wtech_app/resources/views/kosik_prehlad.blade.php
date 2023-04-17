@@ -67,7 +67,7 @@
     $data = DB::table('shopping_cart')
                 ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
                 ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
-                ->where('shopping_cart_id', '=', $latest_cart_id)
+//                ->where('shopping_cart_id', '=', $latest_cart_id)
                 ->select('shopping_cart_item.quantity', 'shopping_cart_item.id', 'product.name', 'product.price', 'product.image1')
                 ->get();
 @endphp
@@ -129,13 +129,13 @@
                         <!--updatuje dobre ale zrejme neposiela do POST novú hodnotu ?-->
                         <input type="hidden" name="quantity" id="quantity_{{$item->id}}" value="{{$item->quantity}}">
                         <div class="row  mt-sm-3 row-cols-1">
-                        
+
                             <div class=" col-sm-3">
                                 <button type="submit" class="btn" onclick="increment(event)" data-card="{{$item->id}}">
                                     <i class="fa-sharp fa fa-plus fs-2 "></i>
                                 </button>
                             </div>
-                            
+
                             <div class=" col-sm-1">
                                 <p class="fs-3" id="itemCount_{{$item->id}}">{{$item->quantity}}</p>
                             </div>
@@ -144,11 +144,11 @@
                                     <i class="fa-sharp fa fa-minus fs-2 "></i>
                                 </button>
                             </div>
-                        
+
                         </div>
                     </form>
                 </div>
-                
+
                 <div class="col-2  mt-3 mt-sm-4  ">
                     <h5 class="fs-6 ">Cena {{$item->price}}€ s DPH</h5>
 
@@ -159,7 +159,7 @@
                         <button type="submit" class="btn mt-4 mt-md-3">
                             <img src="../images/delete_item.png" alt="" srcset="">
                         </button>
-                    </form>                    
+                    </form>
                 </div>
                 @endforeach
             </div>
