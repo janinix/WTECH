@@ -22,7 +22,7 @@ class BasketOverviewController extends Controller
         //$product = Product::findOrFail($product_id);
         session()->put('shopping_cart_id', '1');
         $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
-        
+
         // Add the product to database
         // todo: shopping_cart_id
         //Session->get();
@@ -43,26 +43,26 @@ class BasketOverviewController extends Controller
 
         session()->put('shopping_cart_id', '1');
         $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
-        
+
 
         // Add the product to database
         // ...
-        
+
         DB::table('shopping_cart_item')->insert([
             'shopping_cart_id' => $shopping_cart_id,
             'product_id' => $product_id,
             'quantity' => $quantity,
         ]);
-        
+
         //return $request->product_id;
 
         return redirect('/prehlad_produktov');
     }
 
     public function updateQuantity(Request $request, $id)
-    {   
+    {
         $quantity = $request->input('quantity');
-        
+
         // update in database
         $affectedRows = DB::table('shopping_cart_item')
         ->join('shopping_cart', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
@@ -70,9 +70,9 @@ class BasketOverviewController extends Controller
         ->where('product.id', $id)
         ->update(['shopping_cart_item.quantity' => $quantity]);
 
-        
+
         //return $quantity;
-        
+
         return redirect()->back();
     }
 
