@@ -51,7 +51,7 @@ class ProductController extends Controller
     {
         $main_category = Cache::get('main_category');
         if ($main_category!=NULL) {
-            Cache::forget('main_category');
+            
             return redirect('prehlad_produktov')->with('price_down',$main_category);
         }
         else {
@@ -65,7 +65,7 @@ class ProductController extends Controller
     {
         $main_category = Cache::get('main_category');
         if ($main_category!=NULL) {
-            Cache::forget('main_category');
+            
             return redirect('prehlad_produktov')->with('price_up',$main_category);
         }
         else {
