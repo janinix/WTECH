@@ -23,47 +23,19 @@ class BasketOverviewController extends Controller
         //return view('kosik_prehlad', compact('basket_items'));
     }
 
-    public function payement(Request $request)
-    {
-        // get values
-        $deliveryMethod = $request->input('delivery_method');
-        $paymentMethod = $request->input('payment_method');
-
-        // Store selected values in the session
-        $request->session()->put('delivery_method', $request->input('delivery_method'));
-        $request->session()->put('payment_method', $request->input('payment_method'));
-
-        $basket_items = DB::table('product')->select('name', 'price', 'description')->get();
-
-        return view('kosik_zhrnutie')->with('basket_items', $basket_items);
-        //return redirect()->route('kosik_zhrnutie')->with('basket_items', $basket_items);
-        //return redirect('kosik_zhrnutie', compact('basket_items'));
-    }
-
-    public function sumarise(Request $request)
-    {
-        // get values
-            
-        return redirect('main_page');
-    }
-
     public function addProduct(Request $request)
     {
         $product_id = $request->input('product_id');
-        $product = Product::findOrFail($product_id);
+        //$product = Product::findOrFail($product_id);
         
         
         // Add the product to database
-        // ...
-        // todo: this change.
-        DB::table('cart_items')->insert([
-            'product_id' => $product->id,
+        // todo: shopping_cart_id
+        DB::table('shopping_cart_item')->insert([
+            'shopping_cart_id' => 1,
+            'product_id' => $product_id,
             'quantity' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        
+        ]);      
 
 
         return redirect()->back()->with('success', 'Product added to the cart successfully!');
@@ -74,32 +46,50 @@ class BasketOverviewController extends Controller
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
 
-        //return $quantity;
-        /*
         // Add the product to database
         // ...
+        
         DB::table('shopping_cart_item')->insert([
+            'shopping_cart_id' => 1,
             'product_id' => $product_id,
             'quantity' => $quantity,
-            'shopping_cart_id' => 1, // toto treba ako globalnu pre usera
         ]);
-        */
+        
+        //return $request->product_id;        
+
         return redirect('/prehlad_produktov');
     }
 
     public function updateQuantity(Request $request, $id)
-    {
+    {   
         $quantity = $request->input('quantity');
-
+        
+        // update in database
         /*
-        // Update the quantity in the database
         $product = DB::table('shopping_cart')
         ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
         ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
         ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'product.name', 'product.price', 'product.image1')
-        ->where('product.id', $id)->update(['quantity' => $quantity]);
+        ->where('product.id', $id)->update(['shopping_cart_item.quantity' => $quantity]);
         */
-        return response()->json(['success' => true]);
+        $affectedRows = DB::table('shopping_cart_item')
+        ->join('shopping_cart', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
+        ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
+        ->where('product.id', $id)
+        ->update(['shopping_cart_item.quantity' => $quantity]);
+
+        /*
+        $shopping_cart_item_id = $request->input('shopping_cart_item_id');
+
+        // update in database
+        $affectedRows = DB::table('shopping_cart_item')
+            ->where('id', $shopping_cart_item_id)
+            ->update(['quantity' => $quantity]);
+        */
+        
+            //return $quantity;
+        
+        return redirect()->back();
     }
 
     public function productDelete($id)
@@ -107,7 +97,9 @@ class BasketOverviewController extends Controller
         // Delete the item from the database
         DB::table('shopping_cart_item')->where('id', $id)->delete();
 
-        // Redirect back to the page
+        //return $id;
+
+        // Redirect back to the page, autoreload...
         return redirect()->back();
     }
 }

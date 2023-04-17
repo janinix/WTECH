@@ -71,11 +71,11 @@ Route::post('options', [ShopInfoDelPayController::class, 'options'])->name('opti
 // add product to database -- basket
 Route::post('/add_product', [BasketOverviewController::class, 'addProduct'])->name('add_product');
 
-Route::post('/prehlad_produktov', [BasketOverviewController::class, 'addProductDetail'])->name('add_product_detail');
+Route::post('/add_product_detail', [BasketOverviewController::class, 'addProductDetail'])->name('add_product_detail');
 // route to update quantity from prehlad_produktov + - change in cart
-Route::put('/update_quantity/{id}', [BasketOverviewController::class, 'updateQuantity'])->name('update_quantity');
+Route::post('/update_quantity/{id}}', [BasketOverviewController::class, 'updateQuantity'])->name('update_quantity');
 // product_delete from prehlad_produktov
-Route::post('product_delete', [BasketOverviewController::class, 'productDelete'])->name('product_delete');
+Route::post('product_delete/{id}', [BasketOverviewController::class, 'productDelete'])->name('product_delete');
 
 
 

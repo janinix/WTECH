@@ -124,22 +124,31 @@
                 </div>
 
                 <div class="col-4 col-md-3 mt-md-3">
-                    <div class="row  mt-sm-3 row-cols-1">
-                        <div class=" col-sm-3">
-                            <button class="btn" onclick="increment(event)" data-card="card1">
-                                <i class="fa-sharp fa fa-plus fs-2 "></i>
-                            </button>
+                    <form method="POST" action="{{ route('update_quantity', $item->id) }}">
+                        @csrf
+                        <!--updatuje dobre ale zrejme neposiela do POST novú hodnotu ?-->
+                        <input type="hidden" name="quantity" id="quantity_{{$item->id}}" value="{{$item->quantity}}">
+                        <div class="row  mt-sm-3 row-cols-1">
+                        
+                            <div class=" col-sm-3">
+                                <button type="submit" class="btn" onclick="increment(event)" data-card="{{$item->id}}">
+                                    <i class="fa-sharp fa fa-plus fs-2 "></i>
+                                </button>
+                            </div>
+                            
+                            <div class=" col-sm-1">
+                                <p class="fs-3" id="itemCount_{{$item->id}}">{{$item->quantity}}</p>
+                            </div>
+                            <div class=" col-sm-3">
+                                <button class="btn" type="submit" onclick="decrement(event)" data-card="{{$item->id}}">
+                                    <i class="fa-sharp fa fa-minus fs-2 "></i>
+                                </button>
+                            </div>
+                        
                         </div>
-                        <div class=" col-sm-1">
-                            <p class="fs-3" id="itemCount_card1">{{$item->quantity}}</p>
-                        </div>
-                        <div class=" col-sm-3">
-                            <button class="btn" onclick="decrement(event)" data-card="card1">
-                                <i class="fa-sharp fa fa-minus fs-2 "></i>
-                            </button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
+                
                 <div class="col-2  mt-3 mt-sm-4  ">
                     <h5 class="fs-6 ">Cena {{$item->price}}€ s DPH</h5>
 
@@ -168,8 +177,6 @@
                     <a href="kosik_doprava_platba" class="btn btn-primary float-end">Pokračovať</a>
                 </div>
             </div>
-
-
         </div>
 
     </section>
@@ -213,17 +220,7 @@
             let count = parseInt(itemCountElement.innerText);
             count += 1;
             itemCountElement.innerText = count;
-            // Send an AJAX request to update the quantity in the database
-            fetch(/updatequantity/${card}, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({
-                    quantity: count
-                })
-            });
+            document.getElementById(`quantity_${card}`).value = count;
         }
 
         function decrement(event) {
@@ -234,16 +231,7 @@
                 count -= 1;
             }
             itemCountElement.innerText = count;
-            fetch(/update_quantity/${card}, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                body: JSON.stringify({
-                    quantity: count
-                })
-            });
+            document.getElementById(`quantity_${card}`).value = count;
         }
     </script>
 
