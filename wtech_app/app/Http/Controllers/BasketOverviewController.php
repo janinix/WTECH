@@ -16,6 +16,7 @@ class BasketOverviewController extends Controller
         //return view('kosik_prehlad', compact('basket_items'));
     }
 
+    // from prehlad_produktov, quantity is only 1
     public function addProduct(Request $request)
     {
         $product_id = $request->input('product_id');
@@ -36,6 +37,7 @@ class BasketOverviewController extends Controller
         return redirect()->back()->with('success', 'Product added to the cart successfully!');
     }
 
+    // from prehlad_produktov, quantity is set by user 
     public function addProductDetail(Request $request)
     {
         $product_id = $request->input('product_id');
@@ -67,10 +69,10 @@ class BasketOverviewController extends Controller
         $affectedRows = DB::table('shopping_cart_item')
         ->join('shopping_cart', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
         ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
-        ->where('product.id', $id)
+        ->where('shopping_cart_item.shopping_cart_id', $id)
         ->update(['shopping_cart_item.quantity' => $quantity]);
 
-        
+        // quantity predava dobre
         //return $quantity;
         
         return redirect()->back();
@@ -79,7 +81,7 @@ class BasketOverviewController extends Controller
     public function productDelete($id)
     {
         // Delete the item from the database
-        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
+        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // 1 is default value if not set
         DB::table('shopping_cart_item')->where('id', $id)->where('shopping_cart_id', $shopping_cart_id)->delete();
 
         //return $id;
