@@ -32,18 +32,21 @@ class ProductController extends Controller
     public function product_vyhladavanie(Request $request)
     {
         $vyhladavanie = $request->input('search');
+        Cache::forget('main_category');
         return redirect('prehlad_produktov')->with('vyhladavanie',$vyhladavanie);
     }
 
     public function product_filter_cena(Request $request)
     {
         $cena = $request->input('cost');
+        Cache::forget('main_category');
         return redirect('prehlad_produktov')->with('cost',$cena);
     }
 
     public function product_filter_znacka(Request $request)
     {
         $znacka = $request->input('znacka');
+        Cache::forget('main_category');
         return redirect('prehlad_produktov')->with('znacka',$znacka);
     }
 
@@ -51,7 +54,7 @@ class ProductController extends Controller
     {
         $main_category = Cache::get('main_category');
         if ($main_category!=NULL) {
-            Cache::forget('main_category');
+            
             return redirect('prehlad_produktov')->with('price_down',$main_category);
         }
         else {
@@ -65,7 +68,7 @@ class ProductController extends Controller
     {
         $main_category = Cache::get('main_category');
         if ($main_category!=NULL) {
-            Cache::forget('main_category');
+            
             return redirect('prehlad_produktov')->with('price_up',$main_category);
         }
         else {
