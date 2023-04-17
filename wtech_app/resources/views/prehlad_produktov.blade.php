@@ -38,8 +38,8 @@
 		@endphp
 	@elseif($message = Session::get('price_down'))
 		@php
-			echo $message;
-			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
+
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'oblecenie'];
 		@endphp
 		@if(in_array($message, $valid))
 			@php
@@ -52,8 +52,8 @@
 		@endif
 	@elseif($message = Session::get('price_up'))
 		@php
-			
-			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
+
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'oblecenie'];
 		@endphp
 		@if(in_array($message, $valid))
 			@php
@@ -142,7 +142,7 @@
 
 	<!-- Táto sekcia je hlavná sekcia, obsahuje filtre a carty s produktami -->
 	<section class="filters bg-light container-fluid mt-3">
-		
+
     </div>
 		<!-- Filtre -->
 		<div class="mb-5">
@@ -162,7 +162,7 @@
 								</button>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 			</form>
@@ -226,7 +226,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 		</div>
 
 		<div class="bg-light products_list container-fluid">
@@ -253,7 +253,7 @@
 									<input type="hidden" name="product_id" value="{{ $product->id }}">
 									<button type="submit" class="btn btn-danger">do košíka</button>
 								</form>
-								
+
 							</div>
 						</div>
 					</div>
@@ -297,7 +297,7 @@
 		costRange.addEventListener('input', () => {
 			costValue.textContent = costRange.value;
 		});
-	</script>	
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>
