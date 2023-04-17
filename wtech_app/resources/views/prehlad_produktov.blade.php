@@ -52,7 +52,7 @@
 		@endif
 	@elseif($message = Session::get('price_up'))
 		@php
-			echo $message;
+			
 			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
 		@endphp
 		@if(in_array($message, $valid))
