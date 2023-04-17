@@ -65,8 +65,30 @@ button{
     background: #f7f7f7;
 }
 
+@media screen and (max-width: 1000px) {
+    .category_link{
+        font-size: 15px;
+    }
+}
+@media screen and (max-width: 775px) {
+    .category_link{
+        font-size: 10px;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .bestsellers{
         flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .category_link{
+        font-size: 8px;
+    }
+}
+@media screen and (max-width: 420px) {
+    .category_link{
+        font-size: 7px;
     }
 }

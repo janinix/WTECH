@@ -77,28 +77,28 @@
     @endif
     <section class="container categories justify-content-around">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-            <div class="col-3 text-center mb-2 mb-lg-8">
+            <div class="col-3 text-center mb-2 ">
                 <form action="{{ route('product_vyziva') }}" method="POST">
                     @csrf
-                    <button type="submit" class="nav-link nav-links text-uppercase">športová výživa</button>
+                    <button type="submit" class="nav-link nav-links text-uppercase category_link">športová výživa</button>
                 </form>
             </div>
-            <div class="col-3 text-center mb-2 mb-lg-8">
+            <div class="col-3 text-center mb-2 ">
                 <form action="{{ route('product_oblecenie') }}" method="POST">
                     @csrf
-                    <button type="submit" class="nav-link nav-links text-uppercase">športová oblečenie</button>
+                    <button type="submit" class="nav-link nav-links text-uppercase category_link">športová oblečenie</button>
                 </form>
             </div>
-            <div class="col-3 text-center mb-2 mb-lg-8">
+            <div class="col-3 text-center mb-2 ">
                 <form action="{{ route('product_prislusenstvo') }}" method="POST">
                     @csrf
-                    <button type="submit" class="nav-link nav-links text-uppercase">prislušenstvo</button>
+                    <button type="submit" class="nav-link nav-links text-uppercase category_link">prislušenstvo</button>
                 </form>
             </div>
-            <div class="col-3 text-center mb-2 mb-lg-8">
+            <div class="col-3 text-center mb-2 ">
                 <form action="{{ route('product_potraviny') }}" method="POST">
                     @csrf
-                    <button type="submit" class="nav-link nav-links text-uppercase">potraviny</button>
+                    <button type="submit" class="nav-link nav-links text-uppercase category_link">potraviny</button>
                 </form>
             </div>
 
