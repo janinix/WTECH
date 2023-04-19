@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Hash;
+use Illuminate\Support\Facades\DB;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -50,6 +51,29 @@ class LogRegConstroller extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
+        // create new shopping cart for user if not exists
+        /*
+        $users_id = DB::table('users')->select('username')->where('username', $credentials['username'])->get();
+        $users_cart_id = -1;
+        $users_cart_id = DB::table('shopping_cart')->select('id')->where('user_id', $users_id)->get();
+        // new user, sotre on a session as currently active shopping_cart_id or module ?
+        if($users_cart_id == -1) {
+            // create a new one
+            DB::table('shopping_cart')->insert([
+                'user_id' => $users_id,
+                'date' => now(),
+            ]);
+            $latest_cart_id = DB::table('shopping_cart')
+                                ->orderByDesc('id')
+                                ->value('id');
+            session()->put('shopping_cart_id', $latest_cart_id);
+        }
+        else {
+            session()->put('shopping_cart_id', $users_cart_id);
+        }
+        */
+        // TODO: create a default shopping_cart on first attempt to laod main page if not exists with id = 1
+
         return redirect('login')->with('successReg', 'Registrácia úspešná');
     }
 
@@ -68,6 +92,29 @@ class LogRegConstroller extends Controller
                 return redirect('admin_pouzivatelia');
             }
             else {
+                // create new shopping cart for user if not exists
+                /*
+                $users_id = DB::table('users')->select('username')->where('username', $credentials['username'])->get();
+                $users_cart_id = -1;
+                $users_cart_id = DB::table('shopping_cart')->select('id')->where('user_id', $users_id)->get();
+                // new user, sotre on a session as currently active shopping_cart_id or module ?
+                if($users_cart_id == -1) {
+                    // create a new one
+                    DB::table('shopping_cart')->insert([
+                        'user_id' => $users_id,
+                        'date' => now(),
+                    ]);
+                    $latest_cart_id = DB::table('shopping_cart')
+                                        ->orderByDesc('id')
+                                        ->value('id');
+                    session()->put('shopping_cart_id', $latest_cart_id);
+                }
+                else {
+                    session()->put('shopping_cart_id', $users_cart_id);
+                }
+                */
+                // TODO: create a default shopping_cart on first attempt to laod main page if not exists with id = 1
+
                 return redirect('/')->with('successLog', 'Prihlásenie uspešné !');;
             }
 

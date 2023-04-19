@@ -20,11 +20,11 @@ class BasketOverviewController extends Controller
     {
         $product_id = $request->input('product_id');
         //$product = Product::findOrFail($product_id);
+        // Comment this when shopping_cart_id resolved ---
         session()->put('shopping_cart_id', '1');
-        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
 
-        // todo: shopping_cart_id
 
+        $shopping_cart_id = session()->get('shopping_cart_id');
         DB::table('shopping_cart_item')->insert([
             'shopping_cart_id' => $shopping_cart_id,
             'product_id' => $product_id,
