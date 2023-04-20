@@ -67,7 +67,7 @@
     $data = DB::table('shopping_cart')
                 ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
                 ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
-//                ->where('shopping_cart_id', '=', $latest_cart_id)
+                ->where('shopping_cart_id', '=', session()->get('shopping_cart_id')) // for specific cart
                 ->select('shopping_cart_item.quantity', 'shopping_cart_item.id', 'product.name', 'product.price', 'product.image1')
                 ->get();
 @endphp
@@ -126,7 +126,6 @@
                 <div class="col-4 col-md-3 mt-md-3">
                     <form method="POST" action="{{ route('update_quantity', $item->id) }}">
                         @csrf
-                        <!--updatuje dobre ale zrejme neposiela do POST novú hodnotu ?-->
                         <input type="hidden" name="quantity" id="quantity_{{$item->id}}" value="{{$item->quantity}}">
                         <div class="row  mt-sm-3 row-cols-1">
 

@@ -347,12 +347,16 @@
       plusButton.addEventListener('click', () => {
         value++;
         valueSpan.textContent = value;
+        // this causes actual change to input
+        document.getElementById(`quantityInput`).value = value;
       });
 
       minusButton.addEventListener('click', () => {
         if (value > 1) {
           value--;
           valueSpan.textContent = value;
+          // this causes actual change to input
+          document.getElementById(`quantityInput`).value = value;
         }
       });
     </script>
