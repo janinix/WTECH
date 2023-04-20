@@ -122,6 +122,24 @@ class LogRegConstroller extends Controller
         return redirect('login')->with('success', 'Zlé prihlasovacie údaje !');
     }
 
+    // it is controproductive to create whole new controler for main page with just one function ...
+    function setDefaultShoppingCart(){
+        // is there any cart ?
+        $count = DB::table('shopping_cart')->count();
+
+        if($count == 0) {
+            // create a new one
+            DB::table('shopping_cart')->insert([
+                'user_id' => 0, // it is for no user, default one
+                'date' => now(),
+            ]);
+            session()->put('shopping_cart_id', '1');    // first one will have id=1
+        }        
+
+        // back to main_page
+        return Redirect('/');
+    }
+
     function logout(){
         Session::flush();
 

@@ -69,20 +69,27 @@
                         @endphp
                         @foreach ($products as $product)
                             <tr>
-								<th scope='row'>{{ $product->id }}</th>
-								<td><image src="{{ $product->image2 }}" width='40px'></image></td>
-								<td>{{ $product->name }}</td>
-								<td>{{ $product->price }}</td>
-								<td>
-									<form method='POST' action="{{ route('delete_product', $product->id) }}">
-										@csrf
-										@method('DELETE')
-										<input type='hidden' name='user' value='{{ json_encode($product) }}'>
-										<button type='submit' class='btn btn-danger btn-sm'>Delete</button>
-									</form>
-								</td>
-							</tr>
+                                <th scope='row'>{{ $product->id }}</th>
+                                <td><image src="{{ $product->image2 }}" width='40px'></image></td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>
+                                    <form method='POST' action="{{ route('delete_product', $product->id) }}" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type='hidden' name='user' value='{{ json_encode($product) }}'>
+                                        <button type='submit' class='btn btn-danger btn-sm'>Delete</button>
+                                    </form>
+                                    <form method='GET' action="{{ route('edit_product', $product->id) }}" style="display: inline;">
+                                        @csrf
+                                        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#addProductForm"
+                                        aria-expanded="false" aria-controls="addProductForm">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
+
+
                         
                         <!-- More product rows can be added here -->
                     </tbody>
@@ -93,7 +100,11 @@
                 aria-expanded="false" aria-controls="addProductForm">
                 Pridaj nový produkt
             </button>
-
+             @php
+                if(session()->get('admin_updating_product') == TRUE) {
+                    // TODO: split to 2 routes
+                }
+             @endphp
             <div class="collapse mt-4 bg-light" id="addProductForm">
                 <form method="POST" action="{{ route('create_item') }}">
                     @csrf
