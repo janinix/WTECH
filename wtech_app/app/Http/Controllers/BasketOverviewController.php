@@ -49,7 +49,7 @@ class BasketOverviewController extends Controller
             'product_id' => $product_id,
             'quantity' => $quantity,
         ]);
-        
+
         //return $quantity;
         return redirect('/prehlad_produktov');
     }
@@ -64,7 +64,7 @@ class BasketOverviewController extends Controller
         ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
         ->where('shopping_cart_item.id', $id)
         ->update(['shopping_cart_item.quantity' => $quantity]);
-        
+
         //return $id;
         return redirect()->back();
     }
