@@ -14,31 +14,49 @@
     <link rel="stylesheet" href="css/footer.css">
   </head>
   <body>
-      <!-- navigacia -->
-      <nav class="navbar navbar-light fw-bold navbar-expand-md">
-        <div class="container">
-            <a href="/" class="navbar-brand"><img src="images/logo_black.png" alt="" width="130" height=""></a>
-            <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
-                    aria-label="Expand navigation">
-                <span class="navbar-toggler-icon "><i class="fa fa-bars fs-1"></i></span>
-            </button>
-            <div class="collapse navbar-collapse text-center " id="nav">
-                <ul class="navbar-nav ms-auto links-font ">
-                    <li class="nav-item">
-                        <a href="register" class="nav-link fs-2">Registrácia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login" class="nav-link fs-2">Prihlásenie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="kosik_prehlad" class="nav-link">
-                            <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+  <!-- navigacia -->
+  <nav class="navbar navbar-light fw-bold navbar-expand-md">
+      <div class="container">
+          <a href="/" class="navbar-brand"><img src="images/logo_black.png" alt="" width="130" height=""></a>
+          <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
+                  aria-label="Expand navigation">
+              <span class="navbar-toggler-icon "><i class="fa fa-bars fs-1"></i></span>
+          </button>
+          <div class="collapse navbar-collapse text-center " id="nav">
+              <ul class="navbar-nav ms-auto links-font ">
+                  @guest
+                      <li class="nav-item">
+                          <a href="register" class="nav-link fs-2">Registrácia</a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="login" class="nav-link fs-2">Prihlásenie</a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="kosik_prehlad" class="nav-link">
+                              <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                  @else
+                      <li class="nav-item">
+                          <a href="#" class="nav-link fs-2">
+                              {{ Auth::user()->username }}
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="logout " class="nav-link fs-2">
+                              Odhlásenie
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="kosik_prehlad" class="nav-link">
+                              <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                          </a>
+                      </li>
+                  @endguest
+              </ul>
+          </div>
+      </div>
+  </nav>
         <!--kategórie-->
         <div class="container justify-content-around">
           <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
@@ -62,11 +80,11 @@
           Cache::put('product', $product, 60 * 60);
 		    @endphp
       @endif
-      
+
       @php
         $product = Cache::get('product');
       @endphp
-      
+
       <section class="main_product">
         <div class="row">
           <!-- lava cast - obrazky-->
@@ -164,7 +182,7 @@
                 {{$product->price}}€
             </h2>
             <!--tlacidlo na pridanie do kosika-->
-            
+
             <form class="add" action="{{ route('add_product_detail') }}" method="POST">
                @csrf
               <input type="hidden" name="product_id" value="{{ $product->id }}">

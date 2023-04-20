@@ -25,7 +25,7 @@ class ShopInfoDelPayController extends Controller
 
         $data = $request->all();
 
-        $shopping_card_id = DB::table('shopping_cart')
+        $shopping_cart_id = DB::table('shopping_cart')
                             ->orderByDesc('id')
                             ->value('id');
 
@@ -51,7 +51,7 @@ class ShopInfoDelPayController extends Controller
 
         $order_info->update([
             'user_id'      =>  $user_id,
-            'shopping_card_id' =>  $shopping_card_id,
+            'shopping_card_id' =>  $shopping_cart_id,
             'name'         =>  $name,
             'email'        =>  $email,
             'phone_number' =>  $data['phone_number'],
@@ -62,7 +62,7 @@ class ShopInfoDelPayController extends Controller
             'country'      =>  $data['country']
         ]);
 
-        $new_cart_id = $shopping_card_id + 1;
+        $new_cart_id = $shopping_cart_id + 1;
 
         DB::table('shopping_cart')->insert([
             'id' => $new_cart_id

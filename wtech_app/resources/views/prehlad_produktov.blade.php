@@ -84,8 +84,8 @@
 			$products = DB::table('product')->select('id', 'name','price','image1')->paginate(6);
 		@endphp
 	@endif
-	<!-- základná navigácia -->
-	<nav class="navbar navbar-light fw-bold navbar-expand-md">
+    <!-- navigacia -->
+    <nav class="navbar navbar-light fw-bold navbar-expand-md">
         <div class="container">
             <a href="/" class="navbar-brand"><img src="images/logo_black.png" alt="" width="130" height=""></a>
             <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
@@ -94,17 +94,35 @@
             </button>
             <div class="collapse navbar-collapse text-center " id="nav">
                 <ul class="navbar-nav ms-auto links-font ">
-                    <li class="nav-item">
-                        <a href="register" class="nav-link fs-2">Registrácia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login" class="nav-link fs-2">Prihlásenie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="kosik_prehlad" class="nav-link">
-                            <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
-                        </a>
-                    </li>
+                    @guest
+                        <li class="nav-item">
+                            <a href="register" class="nav-link fs-2">Registrácia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="login" class="nav-link fs-2">Prihlásenie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="kosik_prehlad" class="nav-link">
+                                <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-2">
+                                {{ Auth::user()->username }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="logout " class="nav-link fs-2">
+                                Odhlásenie
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="kosik_prehlad" class="nav-link">
+                                <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    @endguest
                 </ul>
             </div>
         </div>
