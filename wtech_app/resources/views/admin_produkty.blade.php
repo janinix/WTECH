@@ -104,6 +104,10 @@
                 if(session()->get('admin_updating_product') == TRUE) {
                     // TODO: split to 2 routes
                 }
+
+                session()->put('admin_updating_product', FALSE);
+                
+
              @endphp
             <div class="collapse mt-4 bg-light" id="addProductForm">
                 <form method="POST" action="{{ route('create_item') }}">
