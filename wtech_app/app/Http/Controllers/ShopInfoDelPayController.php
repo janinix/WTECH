@@ -79,9 +79,15 @@ class ShopInfoDelPayController extends Controller
 
     public function options(Request $request){
 
-        $selected_delivery = $request->input('interest');
-        $selected_payment = $request->input('payment');
+        $data = $request->validate([
+            'interest' => 'required',
+            'payment' => 'required',
+        ]);
+
+        $selected_delivery = $data['interest'];
+        $selected_payment = $data['payment'];
         $card_number = null;
+
         if ($selected_payment=== 'bank_ucet' && !empty($request->input('card_number'))) {
             $card_number = $request->input('card_number');
         }

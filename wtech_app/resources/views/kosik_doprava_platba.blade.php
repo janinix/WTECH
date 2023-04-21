@@ -138,6 +138,12 @@
         </div>
     </div>
 
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert" id="myAlert">
+                Vyberte spôsob doručenia a platby!
+            </div>
+        @endif
+
 
     <!-- tlacidla pre dalsie kroky-->
     <div class="container pb-3 mt-3">
