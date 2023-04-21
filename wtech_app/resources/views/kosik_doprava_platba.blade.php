@@ -107,7 +107,14 @@
 
     <form action="{{ route('options') }}" method="POST">
         @csrf
-    <!-- casť pre vyber sposobu platby a dorucenia -->
+
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert" id="myAlert">
+                Vyberte spôsob doručenia a platby!
+            </div>
+        @endif
+
+        <!-- casť pre vyber sposobu platby a dorucenia -->
     <h3 class="mt-4">Doručenie tovaru</h3>
     <div class="container border border-dark my-2">
         <div class="my-2">
@@ -137,13 +144,6 @@
             <label for="hotovost">V hotovosti pri osobnom odbere</label>
         </div>
     </div>
-
-        @if ($errors->any())
-            <div class="alert alert-danger" role="alert" id="myAlert">
-                Vyberte spôsob doručenia a platby!
-            </div>
-        @endif
-
 
     <!-- tlacidla pre dalsie kroky-->
     <div class="container pb-3 mt-3">

@@ -111,9 +111,15 @@
             </div>
         </section>
 
+
         <!-- zobrazenie produktu v kosiku-->
         <div class="container border border-dark mt-5 kosik_container_product">
             <div class="row ">
+
+                @if($data->isEmpty())
+                    <p>Váš košík je prázdny!</p>
+                @endif
+
                 @foreach($data as $item)
                 <div class="col-2 d-none d-sm-block mt-4">
                     <img src="{{$item->image1}}" alt="" srcset="" width="50" height="50">
