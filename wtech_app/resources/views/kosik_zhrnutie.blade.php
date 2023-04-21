@@ -127,7 +127,10 @@
                                 <p class="float-start">Meno a Priezvisko</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="name" class="form-control float-end" placeholder="" value="{{auth()->check() ? auth()->user()->name : ' ' }}" required>
+                                <input type="text" name="name" class="form-control float-end" placeholder="" value="{{auth()->check() ? auth()->user()->name : ' ' }}">
+                                @if($errors->has('name'))
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -137,7 +140,7 @@
                                 <p class="float-start">Email</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="email" class="form-control float-end" placeholder="" value="{{auth()->check() ? auth()->user()->email : ' ' }}" required>
+                                <input type="text" name="email" class="form-control float-end" placeholder="" value="{{auth()->check() ? auth()->user()->email : ' ' }}">
                                 @if($errors->has('email'))
                                     <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
@@ -150,7 +153,10 @@
                                 <p class="float-start">Tel. číslo</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="phone_number" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="phone_number" class="form-control float-end" placeholder="">
+                                @if($errors->has('phone_number'))
+                                    <span class="text-danger">{{ $errors->first('phone_number') }}</span>
+                                @endif
                             </div>
                         </div>
                         <hr>
@@ -162,7 +168,10 @@
                                 <p class="float-start">Ulica</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="street" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="street" class="form-control float-end" placeholder="">
+                                @if($errors->has('street'))
+                                    <span class="text-danger">{{ $errors->first('street') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -172,7 +181,10 @@
                                 <p class="float-start">Číslo domu</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="house_number" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="house_number" class="form-control float-end" placeholder="">
+                                @if($errors->has('house_number'))
+                                    <span class="text-danger">{{ $errors->first('house_number') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -182,7 +194,10 @@
                                 <p class="float-start">Mesto</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="city" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="city" class="form-control float-end" placeholder="">
+                                @if($errors->has('city'))
+                                    <span class="text-danger">{{ $errors->first('city') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -192,7 +207,10 @@
                                 <p class="float-start">PSČ</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="postal_code" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="postal_code" class="form-control float-end" placeholder="">
+                                @if($errors->has('postal_code'))
+                                    <span class="text-danger">{{ $errors->first('postal_code') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -202,7 +220,10 @@
                                 <p class="float-start">Štát</p>
                             </div>
                             <div class="col-8">
-                                <input type="text" name="country" class="form-control float-end" placeholder="" required>
+                                <input type="text" name="country" class="form-control float-end" placeholder="">
+                                @if($errors->has('country'))
+                                    <span class="text-danger">{{ $errors->first('country') }}</span>
+                                @endif
                             </div>
                         </div>
                     </div>

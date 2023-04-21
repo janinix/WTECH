@@ -15,6 +15,8 @@ class ShopInfoDelPayController extends Controller
     function validate_info(Request $request)
     {
         $request->validate([
+            'name'         =>   'required',
+            'email'        =>   'required',
             'phone_number' =>   'required',
             'street'       =>   'required',
             'house_number' =>   'required',
