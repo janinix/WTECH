@@ -20,12 +20,11 @@ class BasketOverviewController extends Controller
     {
         $product_id = $request->input('product_id');
         //$product = Product::findOrFail($product_id);
+        // Comment this when shopping_cart_id resolved ---
         session()->put('shopping_cart_id', '1');
-        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
-        
-        // Add the product to database
-        // todo: shopping_cart_id
-        //Session->get();
+
+
+        $shopping_cart_id = session()->get('shopping_cart_id');
         DB::table('shopping_cart_item')->insert([
             'shopping_cart_id' => $shopping_cart_id,
             'product_id' => $product_id,
@@ -43,48 +42,39 @@ class BasketOverviewController extends Controller
 
         session()->put('shopping_cart_id', '1');
         $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
-        
 
-        // Add the product to database
-        // ...
-        
+
         DB::table('shopping_cart_item')->insert([
             'shopping_cart_id' => $shopping_cart_id,
             'product_id' => $product_id,
             'quantity' => $quantity,
         ]);
-        
-        //return $request->product_id;
 
+        //return $quantity;
         return redirect('/prehlad_produktov');
     }
 
     public function updateQuantity(Request $request, $id)
-    {   
+    {
         $quantity = $request->input('quantity');
-        
-        // update in database
+
+        // no need to do where shoping_cart_id bc. we have id in item
         $affectedRows = DB::table('shopping_cart_item')
         ->join('shopping_cart', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')
         ->join('product', 'product.id', '=', 'shopping_cart_item.product_id')
-        ->where('product.id', $id)
+        ->where('shopping_cart_item.id', $id)
         ->update(['shopping_cart_item.quantity' => $quantity]);
 
-        
-        //return $quantity;
-        
+        //return $id;
         return redirect()->back();
     }
 
     public function productDelete($id)
     {
         // Delete the item from the database
-        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
+        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // 1 is default value if not set
         DB::table('shopping_cart_item')->where('id', $id)->where('shopping_cart_id', $shopping_cart_id)->delete();
 
-        //return $id;
-
-        // Redirect back to the page, autoreload...
         return redirect()->back();
     }
 }

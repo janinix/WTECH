@@ -33,6 +33,9 @@ Route::get('/main_page', function () {
     return view('main_page');
 });
 
+//Route::get('main_page', [LogRegConstroller::class, 'setDefaultShoppingCart'])->name('setDefaultShoppingCart');
+//Route::get('/', [LogRegConstroller::class, 'setDefaultShoppingCart'])->name('setDefaultShoppingCart');
+
 Route::controller(LogRegConstroller::class)->group(function(){
     Route::get('login','index')->name('login');
     Route::get('register','register')->name('register');
@@ -44,6 +47,7 @@ Route::controller(LogRegConstroller::class)->group(function(){
 
 Route::delete('delete_user/{user_id}', [DeleteController::class, 'delete_user'])->name('delete_user');
 Route::delete('delete_product/{product_id}', [DeleteController::class, 'delete_product'])->name('delete_product');
+Route::delete('edit_product/{product_id}', [DeleteController::class, 'edit_product'])->name('edit_product');
 
 Route::post('create_item', [CreateItemController::class, 'create_item'])->name('create_item');
 

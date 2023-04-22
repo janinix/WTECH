@@ -107,12 +107,19 @@
 
     <form action="{{ route('options') }}" method="POST">
         @csrf
-    <!-- casť pre vyber sposobu platby a dorucenia -->
+
+        @if ($errors->any())
+            <div class="alert alert-danger" role="alert" id="myAlert">
+                Vyberte spôsob doručenia a platby!
+            </div>
+        @endif
+
+        <!-- casť pre vyber sposobu platby a dorucenia -->
     <h3 class="mt-4">Doručenie tovaru</h3>
     <div class="container border border-dark my-2">
         <div class="my-2">
             <input type="radio" id="kurier" name="interest" value="kurier"/>
-            <label for="kurier">Doručenie kurierom(+2€)</label>
+            <label for="kurier">Doručenie kurierom</label>
         </div>
         <div class="my-2">
             <input type="radio" id="osobny_odber" name="interest" value="osobny_odber" />
@@ -130,14 +137,13 @@
         </div>
         <div class="my-2">
             <input type="radio" id="dobierka" name="payment" value="dobierka"/>
-            <label for="dobierka">Dobierka(+1€)</label>
+            <label for="dobierka">Dobierka</label>
         </div>
         <div class="my-2">
             <input type="radio" id="hotovost" name="payment" value="hotovost"/>
             <label for="hotovost">V hotovosti pri osobnom odbere</label>
         </div>
     </div>
-
 
     <!-- tlacidla pre dalsie kroky-->
     <div class="container pb-3 mt-3">

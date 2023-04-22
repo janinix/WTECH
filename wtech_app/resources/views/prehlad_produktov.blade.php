@@ -38,7 +38,8 @@
 		@endphp
 	@elseif($message = Session::get('price_down'))
 		@php
-			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
+
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'oblecenie'];
 		@endphp
 		@if(in_array($message, $valid))
 			@php
@@ -51,7 +52,7 @@
 		@endif
 	@elseif($message = Session::get('price_up'))
 		@php
-			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'oblecenie'];
 		@endphp
 		@if(in_array($message, $valid))
 			@php
@@ -68,7 +69,7 @@
 		@endphp
 	@elseif($message = Session::get('cost'))
 		@php
-			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'oblecenie'];
 			$cena = session('cost');
 			$main_category = session('main_category');
 		@endphp
@@ -93,8 +94,8 @@
 			$products = DB::table('product')->select('id', 'name','price','image1')->paginate(6);
 		@endphp
 	@endif
-	<!-- základná navigácia -->
-	<nav class="navbar navbar-light fw-bold navbar-expand-md">
+    <!-- navigacia -->
+    <nav class="navbar navbar-light fw-bold navbar-expand-md">
         <div class="container">
             <a href="/" class="navbar-brand"><img src="images/logo_black.png" alt="" width="130" height=""></a>
             <button class="navbar-toggler " data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav"
@@ -103,17 +104,35 @@
             </button>
             <div class="collapse navbar-collapse text-center " id="nav">
                 <ul class="navbar-nav ms-auto links-font ">
-                    <li class="nav-item">
-                        <a href="register" class="nav-link fs-2">Registrácia</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login" class="nav-link fs-2">Prihlásenie</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="kosik_prehlad" class="nav-link">
-                            <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
-                        </a>
-                    </li>
+                    @guest
+                        <li class="nav-item">
+                            <a href="register" class="nav-link fs-2">Registrácia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="login" class="nav-link fs-2">Prihlásenie</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="kosik_prehlad" class="nav-link">
+                                <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="#" class="nav-link fs-2">
+                                {{ Auth::user()->username }}
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="logout " class="nav-link fs-2">
+                                Odhlásenie
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="kosik_prehlad" class="nav-link">
+                                <i class="fa fa-shopping-cart fs-1" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    @endguest
                 </ul>
             </div>
         </div>
@@ -151,7 +170,7 @@
 
 	<!-- Táto sekcia je hlavná sekcia, obsahuje filtre a carty s produktami -->
 	<section class="filters bg-light container-fluid mt-3">
-		
+
     </div>
 		<!-- Filtre -->
 		<div class="mb-5">
@@ -171,7 +190,7 @@
 								</button>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 			</form>
@@ -235,7 +254,7 @@
 					</form>
 				</div>
 			</div>
-			
+
 		</div>
 
 		<div class="bg-light products_list container-fluid">
@@ -262,7 +281,7 @@
 									<input type="hidden" name="product_id" value="{{ $product->id }}">
 									<button type="submit" class="btn btn-danger">do košíka</button>
 								</form>
-								
+
 							</div>
 						</div>
 					</div>
@@ -306,7 +325,7 @@
 		costRange.addEventListener('input', () => {
 			costValue.textContent = costRange.value;
 		});
-	</script>	
+	</script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
 		crossorigin="anonymous"></script>

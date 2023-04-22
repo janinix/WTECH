@@ -15,6 +15,8 @@ class ShopInfoDelPayController extends Controller
     function validate_info(Request $request)
     {
         $request->validate([
+            'name'         =>   'required',
+            'email'        =>   'required',
             'phone_number' =>   'required',
             'street'       =>   'required',
             'house_number' =>   'required',
@@ -25,9 +27,11 @@ class ShopInfoDelPayController extends Controller
 
         $data = $request->all();
 
-//        $shopping_card_id = DB::table('shopping_cart')
-//                            ->orderByDesc('id')
-//                            ->value('id');
+        $shopping_cart_id = DB::table('shopping_cart')
+                            ->orderByDesc('id')
+                            ->value('id');
+
+//        $new_cart_id = $shopping_card_id + 1;
 
         $order_info = Order_info::latest()->first();
 
@@ -49,7 +53,7 @@ class ShopInfoDelPayController extends Controller
 
         $order_info->update([
             'user_id'      =>  $user_id,
-//            'shopping_card_id' => $shopping_card_id,
+            'shopping_card_id' =>  $shopping_cart_id,
             'name'         =>  $name,
             'email'        =>  $email,
             'phone_number' =>  $data['phone_number'],
@@ -60,14 +64,30 @@ class ShopInfoDelPayController extends Controller
             'country'      =>  $data['country']
         ]);
 
+        $new_cart_id = $shopping_cart_id + 1;
+
+        DB::table('shopping_cart')->insert([
+            'id' => $new_cart_id
+        ]);
+
+//        DB::table('shopping_cart')
+//            ->where('id', $shopping_card_id)
+//            ->update(['id' => $new_cart_id]);
+
         return redirect('main_page')->with('successOrder', 'Vaša objednávka bola odoslaná');
     }
 
     public function options(Request $request){
 
-        $selected_delivery = $request->input('interest');
-        $selected_payment = $request->input('payment');
+        $data = $request->validate([
+            'interest' => 'required',
+            'payment' => 'required',
+        ]);
+
+        $selected_delivery = $data['interest'];
+        $selected_payment = $data['payment'];
         $card_number = null;
+
         if ($selected_payment=== 'bank_ucet' && !empty($request->input('card_number'))) {
             $card_number = $request->input('card_number');
         }
