@@ -38,7 +38,6 @@
 		@endphp
 	@elseif($message = Session::get('price_down'))
 		@php
-			echo $message;
 			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
 		@endphp
 		@if(in_array($message, $valid))
@@ -52,7 +51,6 @@
 		@endif
 	@elseif($message = Session::get('price_up'))
 		@php
-			
 			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
 		@endphp
 		@if(in_array($message, $valid))
@@ -70,8 +68,19 @@
 		@endphp
 	@elseif($message = Session::get('cost'))
 		@php
-			$products = DB::table('product')->select('id', 'name', 'price', 'image1')->where('price','<', $message)->paginate(6);
+			$valid = ['vyziva', 'prislusenstvo', 'potraviny', 'pomocky'];
+			$cena = session('cost');
+			$main_category = session('main_category');
 		@endphp
+		@if(in_array($main_category, $valid))
+			@php
+				$products = DB::table('product')->select('id', 'name', 'price', 'image1')->where('price','<', $cena)->where('category1', $main_category)->paginate(6);
+			@endphp
+		@elseif($main_category=="basic")
+			@php
+				$products = DB::table('product')->select('id', 'name', 'price', 'image1')->where('price','<', $cena)->paginate(6);
+			@endphp
+		@endif
 	@elseif($message = Session::get('znacka'))
 		@php
 			$products = DB::table('product')

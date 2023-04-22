@@ -38,9 +38,16 @@ class ProductController extends Controller
 
     public function product_filter_cena(Request $request)
     {
+        $main_category = Cache::get('main_category');
         $cena = $request->input('cost');
-        Cache::forget('main_category');
-        return redirect('prehlad_produktov')->with('cost',$cena);
+        if ($main_category!=NULL) {
+            return redirect('prehlad_produktov')->with('cost', $cena)->with('main_category', $main_category);
+        }
+        else {
+            Cache::forget('main_category');
+            return redirect('prehlad_produktov')->with('cost',$cena)->with('main_category', "basic");
+        }
+        
     }
 
     public function product_filter_znacka(Request $request)
@@ -54,7 +61,6 @@ class ProductController extends Controller
     {
         $main_category = Cache::get('main_category');
         if ($main_category!=NULL) {
-            
             return redirect('prehlad_produktov')->with('price_down',$main_category);
         }
         else {
