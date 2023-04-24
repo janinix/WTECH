@@ -51,6 +51,7 @@ class ShopInfoDelPayController extends Controller
             $email = $data['email'];
         }
 
+
         $order_info->update([
             'user_id'      =>  $user_id,
             'shopping_card_id' =>  $shopping_cart_id,
@@ -66,15 +67,27 @@ class ShopInfoDelPayController extends Controller
 
         $new_cart_id = $shopping_cart_id + 1;
 
-        DB::table('shopping_cart')->insert([
-            'id' => $new_cart_id
-        ]);
+        if ($request->has('save_order')) {
+            DB::table('shopping_history')->insert([
+                'user_id' => $user_id,
+                'shopping_cart_id' => $shopping_cart_id
+            ]);
 
-//        DB::table('shopping_cart')
-//            ->where('id', $shopping_card_id)
-//            ->update(['id' => $new_cart_id]);
+            return redirect('main_page')->with('successOrder', 'Vaša objednávka bola uložená');
+        }
 
-        return redirect('main_page')->with('successOrder', 'Vaša objednávka bola odoslaná');
+        if ($request->has('submit_order')) {
+            DB::table('shopping_cart')->insert([
+                'id' => $new_cart_id
+            ]);
+            return redirect('main_page')->with('successOrder', 'Vaša objednávka bola odoslaná');
+        }
+
+//        DB::table('shopping_cart')->insert([
+//            'id' => $new_cart_id
+//        ]);
+
+//        return redirect('main_page')->with('successOrder', 'Vaša objednávka bola odoslaná');
     }
 
     public function options(Request $request){
