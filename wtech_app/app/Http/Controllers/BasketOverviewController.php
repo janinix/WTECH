@@ -40,9 +40,7 @@ class BasketOverviewController extends Controller
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
 
-        session()->put('shopping_cart_id', '1');
-        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // default value
-
+        $shopping_cart_id = session()->get('shopping_cart_id');
 
         DB::table('shopping_cart_item')->insert([
             'shopping_cart_id' => $shopping_cart_id,
@@ -72,7 +70,7 @@ class BasketOverviewController extends Controller
     public function productDelete($id)
     {
         // Delete the item from the database
-        $shopping_cart_id = session()->get('shopping_cart_id', '1'); // 1 is default value if not set
+        $shopping_cart_id = session()->get('shopping_cart_id');
         DB::table('shopping_cart_item')->where('id', $id)->where('shopping_cart_id', $shopping_cart_id)->delete();
 
         return redirect()->back();
