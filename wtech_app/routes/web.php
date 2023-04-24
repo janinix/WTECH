@@ -47,9 +47,12 @@ Route::controller(LogRegConstroller::class)->group(function(){
 
 Route::delete('delete_user/{user_id}', [DeleteController::class, 'delete_user'])->name('delete_user');
 Route::delete('delete_product/{product_id}', [DeleteController::class, 'delete_product'])->name('delete_product');
-Route::delete('edit_product/{product_id}', [DeleteController::class, 'edit_product'])->name('edit_product');
+Route::get('edit_product/{product_id}', [DeleteController::class, 'edit_product'])->name('edit_product');
+Route::post('edit_product_save', [DeleteController::class, 'edit_product_save'])->name('edit_product_save');
+
 
 Route::post('create_item', [CreateItemController::class, 'create_item'])->name('create_item');
+
 
 Route::post('product_vyziva', [ProductController::class, 'product_vyziva'])->name('product_vyziva');
 Route::post('product_oblecenie', [ProductController::class, 'product_oblecenie'])->name('product_oblecenie');

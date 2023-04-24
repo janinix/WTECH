@@ -26,34 +26,34 @@ class DeleteController extends Controller
         // set updating pproduct flag
         session()->put('admin_updating_product', TRUE);
 
-        $product_to_update = DB::table('products')->where('id', $product_id)->get();        
+        $product_to_update = DB::table('product')->where('id', $product_id)->first();        
         session()->put('product_to_update', $product_to_update);
 
+        // to expand area
+        session()->flash('show_expanded_area', true);
 
         return redirect('admin_produkty');
     }
 
-    public function edit_product_save(Request $request, $product_id) {
+    public function edit_product_save(Request $request) {
         // update product in db
 
-        DB::table('products')->where('id', $product_id)
-        ->update([
-            'name' => $request->name,
-            'price' => $request->price,
-            'rating' => $request->rating,
-            'image1' => $request->image1,
-            'image2' => $request->image2,
-            'image3' => $request->image3,
-            'description' => $request->description,
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'price' => 'required|numeric',
+            'rating' => 'required|integer',
+            'category1' => 'required|max:255',
+            'category2' => 'required|max:255',
+            'category3' => 'max:255',
+            'category4' => 'max:255',
+            'description' => 'required',
+            'image1' => 'required|max:255',
+            'image2' => 'required|max:255',
+            'image3' => 'max:255',
+        ]);
 
-            // TODO: finish this
-            'image2' => $request->image1,
-            'image2' => $request->image1,
-            // Add more columns as needed.
-        ]); 
-
-        /*
-        'name' => $validatedData['name'],
+        DB::table('product')->update([
+            'name' => $validatedData['name'],
             'price' => $validatedData['price'],
             'rating' => $validatedData['rating'],
             'category1' => $validatedData['category1'],
@@ -64,9 +64,8 @@ class DeleteController extends Controller
             'image1' => $validatedData['image1'],
             'image2' => $validatedData['image2'],
             'image3' => $validatedData['image3'],
-        */
+        ]);
 
-     
         return redirect('admin_produkty');
     }
 }
