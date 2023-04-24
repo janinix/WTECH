@@ -82,7 +82,7 @@
                                     </form>
                                     <form method='GET' action="{{ route('edit_product', $product->id) }}" style="display: inline;">
                                         @csrf
-                                        <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#addProductForm"
+                                        <button class="btn btn-success" type="submit" data-bs-toggle="collapse" data-bs-target="#addProductForm"
                                         aria-expanded="false" aria-controls="addProductForm">Update</button>
                                     </form>
                                 </td>
@@ -100,89 +100,151 @@
                 aria-expanded="false" aria-controls="addProductForm">
                 Pridaj nový produkt
             </button>
-             @php
-                if(session()->get('admin_updating_product') == TRUE) {
-                    // TODO: split to 2 routes
-                }
-
+            @if(session()->get('admin_updating_product') == TRUE)
+                @php
                 session()->put('admin_updating_product', FALSE);
-                
+                $product_to_update = session()->get('product_to_update');
+                $show_expanded_area = session('show_expanded_area', false);
+                @endphp
 
-             @endphp
-            <div class="collapse mt-4 bg-light" id="addProductForm">
-                <form method="POST" action="{{ route('create_item') }}">
-                    @csrf
+                <div class="collapse mt-4 bg-light @if($show_expanded_area) show @endif" id="addProductForm">
+                    <form method="POST" action="{{ route('edit_product_save') }}">
+                        @csrf
 
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" value="{{ $product_to_update->name }}" class="form-control" required>
+                        </div>
+                        
 
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="number" name="price" id="price" class="form-control" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" id="price" value="{{$product_to_update->price}}" class="form-control" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="rating">Rating</label>
-                        <input type="number" name="rating" id="rating" class="form-control" placeholder="Max 5" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <input type="number" name="rating" id="rating" value="{{ $product_to_update->rating }}" class="form-control" placeholder="Max 5" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="category1">Category 1</label>
-                        <input type="text" name="category1" id="category1" class="form-control" placeholder="Typ na e-shope" required>
-                    </div>
+                        <div class="form-group">
+                            <label for="category1">Category 1</label>
+                            <input type="text" name="category1" id="category1" value="{{ $product_to_update->category1 }}" class="form-control" placeholder="Typ na e-shope" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="category2">Category 2</label>
-                        <input type="text" name="category2" id="category2" class="form-control" placeholder="Značka">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="category3">Category 3</label>
-                        <input type="text" name="category3" id="category3" class="form-control" placeholder="Typ">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="category3">Category 4</label>
-                        <input type="text" name="category4" id="category4" class="form-control" placeholder="Ľubovolné">
-                    </div>
+                        <div class="form-group">
+                            <label for="category2">Category 2</label>
+                            <input type="text" name="category2" id="category2" value="{{ $product_to_update->category2 }}" class="form-control" placeholder="Značka">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category3">Category 3</label>
+                            <input type="text" name="category3" id="category3" value="{{ $product_to_update->category3 }}" class="form-control" placeholder="Typ">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category3">Category 4</label>
+                            <input type="text" name="category4" id="category4" value="{{ $product_to_update->category4 }}" class="form-control" placeholder="Ľubovolné">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea name="description" id="description" class="form-control"  required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="image1">Image1</label>
-                        <input type="text" name="image1" id="image1" class="form-control" placeholder="../images/nazov_foto.png" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="image2">Image2</label>
-                        <input type="text" name="image2" id="image" class="form-control" placeholder="../images/nazov_foto.png" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="image3">Image3</label>
-                        <input type="text" name="image3" id="image3" class="form-control" placeholder="../images/nazov_foto.png" >
-                    </div>
-                    <!--
-                    <div class="form-group">
-                        <label for="image1">Image 1</label>
-                        <input type="file" name="image1" id="image1" class="form-control-file">
-                    </div>
-                    <div class="form-group">
-                        <label for="image2">Image 2</label>
-                        <input type="file" name="image2" id="image2" class="form-control-file">
-                    </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" value="{{ $product_to_update->description }}" class="form-control"  required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="image1">Image1</label>
+                            <input type="text" name="image1" id="image1" value="{{ $product_to_update->image1 }}" class="form-control" placeholder="../images/nazov_foto.png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image2">Image2</label>
+                            <input type="text" name="image2" id="image" value="{{ $product_to_update->image2 }}" class="form-control" placeholder="../images/nazov_foto.png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image3">Image3</label>
+                            <input type="text" name="image3" id="image3" value="{{ $product_to_update->image3 }}" class="form-control" placeholder="../images/nazov_foto.png" >
+                        </div>
+                        <!--
+                        <div class="form-group">
+                            <label for="image1">Image 1</label>
+                            <input type="file" name="image1" id="image1" class="form-control-file">
+                        </div>
+                        <div class="form-group">
+                            <label for="image2">Image 2</label>
+                            <input type="file" name="image2" id="image2" class="form-control-file">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="image3">Image 3</label>
-                        <input type="file" name="image3" id="image3" class="form-control-file">
-                    </div>
-                    -->
+                        <div class="form-group">
+                            <label for="image3">Image 3</label>
+                            <input type="file" name="image3" id="image3" class="form-control-file">
+                        </div>
+                        -->
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            @else
+                <div class="collapse mt-4 bg-light" id="addProductForm">
+                    <form method="POST" action="{{ route('create_item') }}">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" name="price" id="price" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rating">Rating</label>
+                            <input type="number" name="rating" id="rating" class="form-control" placeholder="Max 5" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category1">Category 1</label>
+                            <input type="text" name="category1" id="category1" class="form-control" placeholder="Typ na e-shope" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category2">Category 2</label>
+                            <input type="text" name="category2" id="category2" class="form-control" placeholder="Značka">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category3">Category 3</label>
+                            <input type="text" name="category3" id="category3" class="form-control" placeholder="Typ">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="category3">Category 4</label>
+                            <input type="text" name="category4" id="category4" class="form-control" placeholder="Ľubovolné">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea name="description" id="description" class="form-control"  required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="image1">Image1</label>
+                            <input type="text" name="image1" id="image1" class="form-control" placeholder="../images/nazov_foto.png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image2">Image2</label>
+                            <input type="text" name="image2" id="image" class="form-control" placeholder="../images/nazov_foto.png" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image3">Image3</label>
+                            <input type="text" name="image3" id="image3" class="form-control" placeholder="../images/nazov_foto.png" >
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            @endif
+            @php
+            session()->put('show_expanded_area', FALSE);
+            @endphp
         </div>
 
     </section>
