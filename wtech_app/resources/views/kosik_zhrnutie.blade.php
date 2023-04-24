@@ -228,6 +228,15 @@
                         </div>
                     </div>
                     <!-- tlacidlo pre dalsie kroky-->
+
+{{--                    tu by som to spravila dajak uz v controllery ze if zmackne toto tak nech ulozi udaje do order info + aj do order_info--}}
+{{--                    a prehodi ma na main_page, else nech sa vykona objednavka a prehodi ma na main page--}}
+{{--                    ptm tam musis zas checkovat pri objednavke ze ci udaje vpisuje alebo je user prihlaseny a udaje sa beru z databazy lebo ich ma ulozene--}}
+                    <div class="col-12 mb-1 text-center">
+                        <input type="checkbox" id="order" name="save_order" value="order">
+                        <label for="order">Nakupim neskôr. Prajem si uložiť objednávku!</label>
+                    </div>
+
                     <div class="col-12 mb-3 text-center">
                         <button  class="btn-dark btn text-light rounded-3 mt-5" type="submit">Odoslať objednávku s povinnosťou platby</button>
                     </div>
