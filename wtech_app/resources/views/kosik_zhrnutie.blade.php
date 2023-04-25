@@ -70,6 +70,15 @@
                 ->select('shopping_cart.id', 'shopping_cart_item.quantity', 'product.name', 'product.price')
                 ->get();
     $total_price = 0;
+
+    $user = Auth::user();
+
+    $options = DB::table('shopping_history')
+                ->join('user', 'user.id', '=', 'shopping_history.user_id')
+                ->join('shopping_cart', 'shopping_cart.id', '=', 'shopping_history.shopping_cart_id')
+//                where aktualne id usera sa rovna id usera z tabulky
+                ->where('user', '=', 'shopping_history.user_id')
+                ->select()
 @endphp
 
 

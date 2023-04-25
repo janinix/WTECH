@@ -116,6 +116,16 @@
 
         <!-- casť pre vyber sposobu platby a dorucenia -->
     <h3 class="mt-4">Doručenie tovaru</h3>
+        @if(Auth::check())
+            <div class="container border border-dark my-2">
+                @foreach()
+                <div class="my-2">
+                    <input type="radio" id="kurier" name="interest" value="kurier"/>
+                    <label for="kurier">Doručenie kurierom</label>
+                </div>
+                @endforeach
+            </div>
+        @else
     <div class="container border border-dark my-2">
         <div class="my-2">
             <input type="radio" id="kurier" name="interest" value="kurier"/>
@@ -126,6 +136,7 @@
             <label for="osobny_odber">Osobný odber na adrese Staré Grunty 7</label>
         </div>
     </div>
+        @endif
     <h3 class="mt-4">Spôsob platby</h3>
     <div class="container border border-dark my-2">
         <div class="my-2">
