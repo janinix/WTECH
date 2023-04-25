@@ -223,13 +223,42 @@ a {
     font-size: 20px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
     .row, .col1{
         flex-direction: column;
+        align-items: center;
+    }
+
+    .col2{
+        text-align: center;
+    }
+
+    .options{
+        justify-content: center;
     }
 
     .main_product{
         overflow: hidden;
+    }
+
+    .row2{
+        flex-direction: column;
+        margin: 0;
+    }
+
+}
+@media screen and (max-width: 400px) {
+    .row, .col1{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main_product{
+        overflow: hidden;
+    }
+
+    .col2{
+        text-align: left;
     }
 
     .row2{
