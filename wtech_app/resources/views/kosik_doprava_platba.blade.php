@@ -58,6 +58,22 @@
     </div>
 </nav>
 
+@php
+    if (Auth::check()){
+    $user= Auth::id();
+
+    $options = DB::table('shopping_history')
+                ->join('users', 'users.id', '=', 'shopping_history.user_id')
+                ->join('shopping_cart', 'shopping_cart.id', '=', 'shopping_history.shopping_cart_id')
+                ->join('order_infos', 'order_infos.shopping_card_id', '=', 'shopping_cart.id')
+                ->where('shopping_history.user_id', '=', $user)
+                ->select('order_infos.delivery', 'order_infos.payment', 'order_infos.card_number')
+                ->get();
+    }
+
+@endphp
+
+
 @if($message = Session::get('successLog'))
     <div class="alert alert-success alert-dismissible" role="alert" id="myAlert">
         {{ $message }}
@@ -116,16 +132,16 @@
 
         <!-- casť pre vyber sposobu platby a dorucenia -->
     <h3 class="mt-4">Doručenie tovaru</h3>
-        @if(Auth::check())
-            <div class="container border border-dark my-2">
-                @foreach()
-                <div class="my-2">
-                    <input type="radio" id="kurier" name="interest" value="kurier"/>
-                    <label for="kurier">Doručenie kurierom</label>
-                </div>
-                @endforeach
-            </div>
-        @else
+{{--        @if(Auth::check() && $options)--}}
+{{--            <div class="container border border-dark my-2">--}}
+{{--                @foreach($options as $option)--}}
+{{--                <div class="my-2">--}}
+{{--                    <input type="radio" id="{{$option->delivery}}" name="interest" value="{{$option->delivery}}"/>--}}
+{{--                    <label for="{{$option->delivery}}">{{$option->delivery}}</label>--}}
+{{--                </div>--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        @else--}}
     <div class="container border border-dark my-2">
         <div class="my-2">
             <input type="radio" id="kurier" name="interest" value="kurier"/>
@@ -136,11 +152,32 @@
             <label for="osobny_odber">Osobný odber na adrese Staré Grunty 7</label>
         </div>
     </div>
-        @endif
-    <h3 class="mt-4">Spôsob platby</h3>
+{{--        @endif--}}
+
+        <h3 class="mt-4">Spôsob platby</h3>
+{{--        @if(Auth::check() && $options)--}}
+{{--            <div class="container border border-dark my-2">--}}
+{{--                @foreach($options as $option)--}}
+{{--                @if($option->payment === 'bank_ucet')--}}
+{{--                    <div class="my-2">--}}
+{{--                    <input type="radio" id="{{$option->payment}}" name="payment" value="{{$option->payment}}" data-bs-toggle="collapse" href="#collapse1"/>--}}
+{{--                    <label for="back_ucet">{{$option->payment}}</label>--}}
+{{--                    <div class="collapse" id="collapse1">--}}
+{{--                        <input type="text" name="card_number"  class="form-control" placeholder="Číslo karty" value="{{$option->card_number}}">--}}
+{{--                    </div>--}}
+{{--                 @else--}}
+{{--                </div>--}}
+{{--                    <div class="my-2">--}}
+{{--                        <input type="radio" id="{{$option->payment}}" name="payment" value="{{$option->payment}}"/>--}}
+{{--                        <label for="{{$option->payment}}">{{$option->payment}}</label>--}}
+{{--                    </div>--}}
+{{--                 @endif--}}
+{{--                @endforeach--}}
+{{--            </div>--}}
+{{--        @else--}}
     <div class="container border border-dark my-2">
         <div class="my-2">
-            <input type="radio" id="back_ucet" name="payment" value="bank_ucet" data-bs-toggle="collapse" href="#collapse1"/>
+            <input type="radio" id="bank_ucet" name="payment" value="bank_ucet" data-bs-toggle="collapse" href="#collapse1"/>
             <label for="back_ucet">Prevodom na účet</label>
             <div class="collapse" id="collapse1">
                 <input type="text" name="card_number"  class="form-control" placeholder="Číslo karty">
@@ -155,6 +192,7 @@
             <label for="hotovost">V hotovosti pri osobnom odbere</label>
         </div>
     </div>
+{{--        @endif--}}
 
     <!-- tlacidla pre dalsie kroky-->
     <div class="container pb-3 mt-3">

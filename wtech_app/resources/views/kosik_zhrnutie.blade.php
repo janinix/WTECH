@@ -71,14 +71,18 @@
                 ->get();
     $total_price = 0;
 
-    $user = Auth::user();
+    if (Auth::check()){
+        $user= Auth::id();
 
-    $options = DB::table('shopping_history')
-                ->join('user', 'user.id', '=', 'shopping_history.user_id')
+        $options = DB::table('shopping_history')
+                ->join('users', 'users.id', '=', 'shopping_history.user_id')
                 ->join('shopping_cart', 'shopping_cart.id', '=', 'shopping_history.shopping_cart_id')
-//                where aktualne id usera sa rovna id usera z tabulky
-                ->where('user', '=', 'shopping_history.user_id')
-                ->select()
+                ->join('order_infos', 'order_infos.shopping_card_id', '=', 'shopping_cart.id')
+                ->where('shopping_history.user_id', '=', $user)
+                ->select('order_infos.phone_number', 'order_infos.street', 'order_infos.house_number', 'order_infos.city', 'order_infos.postal_code', 'order_infos.country')
+                ->get();
+    }
+
 @endphp
 
 
