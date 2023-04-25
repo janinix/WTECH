@@ -240,6 +240,88 @@
                             </div>
                         </div>
                     </div>
+{{--                    @foreach($options as $option)--}}
+{{--                        <div class="div mb-2">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-4">--}}
+{{--                                    <p class="float-start">Tel. číslo</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-8">--}}
+{{--                                    <input type="text" name="phone_number" class="form-control float-end" placeholder="" value="{{$option ? $option->phone_number : ' '}}">--}}
+{{--                                    @if($errors->has('phone_number'))--}}
+{{--                                        <span class="text-danger">{{ $errors->first('phone_number') }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <hr>--}}
+{{--                            <h5>Fakturačná adresa</h5>--}}
+{{--                        </div>--}}
+{{--                        <div class="div mb-2">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-4">--}}
+{{--                                    <p class="float-start">Ulica</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-8">--}}
+{{--                                    <input type="text" name="street" class="form-control float-end" placeholder="" value="{{$option ? $option->street : ' '}}">--}}
+{{--                                    @if($errors->has('street'))--}}
+{{--                                        <span class="text-danger">{{ $errors->first('street') }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="div mb-2">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-4 ">--}}
+{{--                                    <p class="float-start">Číslo domu</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-8">--}}
+{{--                                    <input type="text" name="house_number" class="form-control float-end" placeholder="" value="{{$option ? $option->house_number : ' '}}">--}}
+{{--                                    @if($errors->has('house_number'))--}}
+{{--                                        <span class="text-danger">{{ $errors->first('house_number') }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="div mb-2">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-4">--}}
+{{--                                    <p class="float-start">Mesto</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-8">--}}
+{{--                                    <input type="text" name="city" class="form-control float-end" placeholder="" value="{{$option ? $option->city : ' '}}">--}}
+{{--                                    @if($errors->has('city'))--}}
+{{--                                        <span class="text-danger">{{ $errors->first('city') }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="div mb-2">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-4">--}}
+{{--                                    <p class="float-start">PSČ</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-8">--}}
+{{--                                    <input type="text" name="postal_code" class="form-control float-end" placeholder="" value="{{$option ? $option->postal_code : ' '}}">--}}
+{{--                                    @if($errors->has('postal_code'))--}}
+{{--                                        <span class="text-danger">{{ $errors->first('postal_code') }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="div mb-2">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-4">--}}
+{{--                                    <p class="float-start">Štát</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="col-8">--}}
+{{--                                    <input type="text" name="country" class="form-control float-end" placeholder="" value="{{$option ? $option->country : ' '}}">--}}
+{{--                                    @if($errors->has('country'))--}}
+{{--                                        <span class="text-danger">{{ $errors->first('country') }}</span>--}}
+{{--                                    @endif--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
                     <!-- tlacidlo pre dalsie kroky-->
 
 {{--                    ptm tam musis zas checkovat pri objednavke (prehlad, doprava aj zhrnutie) ze ci udaje vpisuje alebo je user prihlaseny a udaje sa beru z databazy lebo ich ma ulozene--}}
