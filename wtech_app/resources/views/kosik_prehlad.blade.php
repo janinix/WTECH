@@ -63,6 +63,7 @@
     $latest_cart_id = DB::table('shopping_cart')
                       ->orderByDesc('id')
                       ->value('id');
+    $latest_cart_id = session()->get('shopping_cart_id');
 
     $data = DB::table('shopping_cart')
                 ->join('shopping_cart_item', 'shopping_cart.id', '=', 'shopping_cart_item.shopping_cart_id')

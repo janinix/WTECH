@@ -42,6 +42,10 @@ class BasketOverviewController extends Controller
 
         $shopping_cart_id = session()->get('shopping_cart_id');
 
+
+
+        //return $shopping_cart_id;
+
         DB::table('shopping_cart_item')->insert([
             'shopping_cart_id' => $shopping_cart_id,
             'product_id' => $product_id,
@@ -50,6 +54,35 @@ class BasketOverviewController extends Controller
 
         //return $quantity;
         return redirect('/prehlad_produktov');
+    }
+
+    public function default_cart_check()
+    {
+        $shopping_cart_id = session()->get('shopping_cart_id');
+
+        // check if it is already in database:
+        $count = DB::table('shopping_cart')->count();
+
+        if($count == 0) {
+            // create a new one
+            DB::table('shopping_cart')->insert([
+                'user_id' => 0, // it is for no user, default one
+                'date' => now(),
+            ]);
+            session()->put('shopping_cart_id', '1');    // first one will have id=1
+        }
+        else {
+            // set shoping_cart_id to 1 as default, 
+            if($shopping_cart_id == -1 || $shopping_cart_id == 0 || $shopping_cart_id == null) {
+                $shopping_cart_id = 1;
+                session()->put('shopping_cart_id', '1');   
+            }
+        }
+
+
+        //return $shopping_cart_id;
+
+        return view('/main_page');
     }
 
     public function updateQuantity(Request $request, $id)

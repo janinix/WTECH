@@ -26,12 +26,8 @@ use App\Http\Controllers\BasketOverviewController;
 
 
 //route::get('/',[HomeController::class,"main_page"]);
-Route::get('/', function () {
-    return view('main_page');
-});
-Route::get('/main_page', function () {
-    return view('main_page');
-});
+Route::get('/', [BasketOverviewController::class, 'default_cart_check'])->name('default_cart_check');
+Route::get('/main_page', [BasketOverviewController::class, 'default_cart_check'])->name('default_cart_check');
 
 //Route::get('main_page', [LogRegConstroller::class, 'setDefaultShoppingCart'])->name('setDefaultShoppingCart');
 //Route::get('/', [LogRegConstroller::class, 'setDefaultShoppingCart'])->name('setDefaultShoppingCart');
