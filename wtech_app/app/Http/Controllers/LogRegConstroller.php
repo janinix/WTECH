@@ -51,21 +51,6 @@ class LogRegConstroller extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        // create new shopping cart for user if not exists
-        $user_id = DB::table('users')
-                            ->orderByDesc('id')
-                            ->value('id');
-        // create a new one
-        DB::table('shopping_cart')->insert([
-            'user_id' => $user_id,
-            'date' => now(),
-        ]);
-        // set cart_id to session to use it everywhere
-        $latest_cart_id = DB::table('shopping_cart')
-                            ->orderByDesc('id')
-                            ->value('id');
-        session()->put('shopping_cart_id', $latest_cart_id);
-
         return redirect('login')->with('successReg', 'Registrácia úspešná');
     }
 
@@ -80,35 +65,11 @@ class LogRegConstroller extends Controller
         // TODO: prihlasovanie mi nefunguje pozrite sa na to...
         if(Auth::attempt($credentials))
         {
-            //return "jhaskfdh";
-
             // do not sert card_it for admin
             if($credentials['username']=='admin' and $credentials['password']=='admin1'){
                 return redirect('admin_pouzivatelia');
             }
             else {
-                // create new shopping cart for user if not exists for specific user
-                $users_id = DB::table('users')->select('id', 'username')->where('username', $credentials['username'])->first();
-                $users_cart_id = -1;
-                $users_cart_id = DB::table('shopping_cart')->select('id', 'user_id')->where('user_id', $users_id->id)->first();
-                // new user, sotre on a session as currently active shopping_cart_id or module ?
-                if($users_cart_id->id == -1 || $users_cart_id->id == null) {
-                    // create a new one
-                    DB::table('shopping_cart')->insert([
-                        'user_id' => $users_id,
-                        'date' => now(),
-                    ]);
-                    $latest_cart_id = DB::table('shopping_cart')
-                                        ->orderByDesc('id')
-                                        ->value('id');
-                    session()->put('shopping_cart_id', $latest_cart_id->id);
-                }
-                else {
-                    session()->put('shopping_cart_id', $users_cart_id->id);
-                }
-
-                //return $users_cart_id->id;
-                
                 return redirect('/')->with('successLog', 'Prihlásenie uspešné !');
             }
 

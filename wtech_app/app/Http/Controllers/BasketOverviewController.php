@@ -21,12 +21,13 @@ class BasketOverviewController extends Controller
         $product_id = $request->input('product_id');
         //$product = Product::findOrFail($product_id);
         // Comment this when shopping_cart_id resolved ---
-        session()->put('shopping_cart_id', '1');
+        $latest_cart_id = DB::table('shopping_cart')
+                      ->orderByDesc('id')
+                      ->value('id');
+        session()->put('shopping_cart_id', $latest_cart_id);
 
-
-        $shopping_cart_id = session()->get('shopping_cart_id');
         DB::table('shopping_cart_item')->insert([
-            'shopping_cart_id' => $shopping_cart_id,
+            'shopping_cart_id' => $latest_cart_id,
             'product_id' => $product_id,
             'quantity' => 1,
         ]);
@@ -40,19 +41,19 @@ class BasketOverviewController extends Controller
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
 
-        $shopping_cart_id = session()->get('shopping_cart_id');
-
-
-
-        //return $shopping_cart_id;
+        $latest_cart_id = DB::table('shopping_cart')
+                      ->orderByDesc('id')
+                      ->value('id');
+        session()->put('shopping_cart_id', $latest_cart_id);
 
         DB::table('shopping_cart_item')->insert([
-            'shopping_cart_id' => $shopping_cart_id,
+            'shopping_cart_id' => $latest_cart_id,
             'product_id' => $product_id,
             'quantity' => $quantity,
         ]);
 
-        //return $quantity;
+        //LOG($quantity);
+
         return redirect('/prehlad_produktov');
     }
 
@@ -66,7 +67,7 @@ class BasketOverviewController extends Controller
         if($count == 0) {
             // create a new one
             DB::table('shopping_cart')->insert([
-                'user_id' => 0, // it is for no user, default one
+                'user_id' => null, // it is for no user, default set to null
                 'date' => now(),
             ]);
             session()->put('shopping_cart_id', '1');    // first one will have id=1
@@ -79,9 +80,8 @@ class BasketOverviewController extends Controller
             }
         }
 
-
-        //return $shopping_cart_id;
-
+        //LOG($count);
+        
         return view('/main_page');
     }
 
