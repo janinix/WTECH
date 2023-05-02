@@ -60,11 +60,11 @@ class LogRegConstroller extends Controller
             'user_id' => $user_id,
             'date' => now(),
         ]);
+        // set cart_id to session to use it everywhere
         $latest_cart_id = DB::table('shopping_cart')
                             ->orderByDesc('id')
                             ->value('id');
         session()->put('shopping_cart_id', $latest_cart_id);
-    
 
         return redirect('login')->with('successReg', 'Registrácia úspešná');
     }
@@ -82,12 +82,12 @@ class LogRegConstroller extends Controller
         {
             //return "jhaskfdh";
 
+            // do not sert card_it for admin
             if($credentials['username']=='admin' and $credentials['password']=='admin1'){
                 return redirect('admin_pouzivatelia');
             }
             else {
-                // create new shopping cart for user if not exists
-                
+                // create new shopping cart for user if not exists for specific user
                 $users_id = DB::table('users')->select('id', 'username')->where('username', $credentials['username'])->first();
                 $users_cart_id = -1;
                 $users_cart_id = DB::table('shopping_cart')->select('id', 'user_id')->where('user_id', $users_id->id)->first();
@@ -114,24 +114,6 @@ class LogRegConstroller extends Controller
 
         }
         return redirect('login')->with('success', 'Zlé prihlasovacie údaje !');
-    }
-
-    // it is controproductive to create whole new controler for main page with just one function ...
-    function setDefaultShoppingCart(){
-        // is there any cart ?
-        $count = DB::table('shopping_cart')->count();
-
-        if($count == 0) {
-            // create a new one
-            DB::table('shopping_cart')->insert([
-                'user_id' => 0, // it is for no user, default one
-                'date' => now(),
-            ]);
-            session()->put('shopping_cart_id', '1');    // first one will have id=1
-        }        
-
-        // back to main_page
-        return Redirect('/');
     }
 
     function logout(){
