@@ -70,9 +70,23 @@ class LogRegConstroller extends Controller
                 return redirect('admin_pouzivatelia');
             }
             else {
+                // set cart_id for user if only saved his order, also to know that he did it.
+                $user_id = DB::table('users')->select('id', 'username')->where('username', $credentials['username'])->first();
+                $users_cart_id = -1;
+                $users_cart_id = DB::table('shopping_history')->select('id', 'user_id')->where('user_id', $user_id)->first();
+                
+                session()->put('shopping_cart_id', $users_cart_id->id);
+                $latest_cart_id = DB::table('shopping_cart')
+                      ->orderByDesc('id')
+                      ->value('id');
+                if($latest_cart_id == $users_cart_id->id) {
+                    session()->put('from_history', TRUE);
+                }
+                else {
+                    session()->put('from_history', FALSE);
+                }
                 return redirect('/')->with('successLog', 'Prihlásenie uspešné !');
             }
-
         }
         return redirect('login')->with('success', 'Zlé prihlasovacie údaje !');
     }

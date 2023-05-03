@@ -65,6 +65,19 @@ class ShopInfoDelPayController extends Controller
             'country'      =>  $data['country']
         ]);
 
+        // TODO: dorobiť
+        // toto ešte update v shipping_cart
+    
+        //'date' => now(),
+        //'user_id' => $user_id
+
+        // prenositelnost - vymazat z historie, nastaviť cart_id pre vloženie objednavky
+        if(session()->get('from_history') == TRUE) {
+            $latest_cart_id = session()->get('shopping_cart_id');
+            // uistime sa do buducnosti ze je FALSE
+            session()->put('from_history', FALSE);
+        }
+
         $new_cart_id = $shopping_cart_id + 1;
 
         if ($request->has('save_order')) {
@@ -78,10 +91,10 @@ class ShopInfoDelPayController extends Controller
 
         if ($request->has('submit_order')) {
             DB::table('shopping_cart')->insert([
-                'id' => $new_cart_id
+                'id' => $new_cart_id,
             ]);
             return redirect('main_page')->with('successOrder', 'Vaša objednávka bola odoslaná');
-        }
+        }    
 
 //        DB::table('shopping_cart')->insert([
 //            'id' => $new_cart_id

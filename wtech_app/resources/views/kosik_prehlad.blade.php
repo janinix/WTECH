@@ -63,6 +63,10 @@
     $latest_cart_id = DB::table('shopping_cart')
                       ->orderByDesc('id')
                       ->value('id');
+    // if from history - saved order -> set correct user's cart_id
+    if(session()->get('from_history') == TRUE) {
+        $latest_cart_id = session()->get('shopping_cart_id');
+    }
     //$latest_cart_id = session()->get('shopping_cart_id');
 
     $data = DB::table('shopping_cart')
