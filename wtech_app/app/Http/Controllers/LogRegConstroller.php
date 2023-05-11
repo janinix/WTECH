@@ -69,6 +69,7 @@ class LogRegConstroller extends Controller
             if($credentials['username']=='admin' and $credentials['password']=='admin1'){
                 return redirect('admin_pouzivatelia');
             }
+            /*
             else {
                 // set cart_id for user if only saved his order, also to know that he did it.
                 $user_id = DB::table('users')->select('id', 'username')->where('username', $credentials['username'])->first();
@@ -85,6 +86,10 @@ class LogRegConstroller extends Controller
                 else {
                     session()->put('from_history', FALSE);
                 }
+                return redirect('/')->with('successLog', 'Prihlásenie uspešné !');
+            }
+            */
+            else {
                 return redirect('/')->with('successLog', 'Prihlásenie uspešné !');
             }
         }
